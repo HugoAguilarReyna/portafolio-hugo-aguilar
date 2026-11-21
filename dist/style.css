@@ -1708,6 +1708,44 @@ body.demo-ampliado .demo-body { margin-top: 0; }
 .demo-host .mk-brand { max-width: 100%; min-width: 0; }
 .demo-host .mk-brand-chip { white-space: normal; }
 
+/* ============ ESTADO SELECCIONADO DEL TABLERO ATLAS VIAL ============
+   El segmentado de la ficha (`.at-segmentado`) pinta su botón activo con la
+   paleta oscura que el tablero añade por su cuenta (`--control-active:#374151`
+   y texto blanco): sobre la ficha clara, el elemento seleccionado se lee como
+   un bloque oscuro ajeno a la página. El resto de controles del mismo tablero
+   (`.at-nav-btn.is-activa`, `.at-btn--zona.is-activo`, `.at-dist-fila.is-activa`,
+   `.at-barra-fila.is-activa`) sí conservan el estado claro de su diseño —fondo
+   `--at-ctrl-on-bg`, borde `--at-ctrl-on-border` y texto `--at-primary`—, así
+   que aquí se reutiliza esa misma paleta en vez de inventar otra.
+
+   El alcance es el mínimo necesario: solo el estado activo del segmentado
+   montado en la ficha (`.demo-host`, tanto en la vista normal como ampliada) y
+   nunca una regla general de botones; los segmentos inactivos, los filtros y el
+   resto del tablero no cambian. Los selectores pesan más que los del bundle
+   compilado (`dashboards/atlas-vial/app.css`, que se inyecta después en
+   `head`), de modo que ganan por especificidad y no por orden de carga. No se
+   redefinen `--control-active` / `--control-active-text`: son variables
+   compartidas con otros controles y el `outline` de foco del tablero las usa,
+   así que al dejarlas intactas el foco sigue viéndose como hasta ahora.
+
+   Con cápsula deslizante (`[data-con-capsula]`, el modo actual) el relleno lo
+   dibuja `.at-seg-capsula` y el borde se añade con un `box-shadow` interior,
+   que no altera la métrica del control; sin cápsula, el propio botón recibe
+   fondo, borde y texto. */
+.demo-host .at-segmentado[data-con-capsula] .at-seg.is-activa,
+.demo-host .at-segmentado:not([data-con-capsula]) .at-seg.is-activa {
+  color: var(--at-primary, #3458f5);
+  font-weight: 600;
+}
+.demo-host .at-segmentado:not([data-con-capsula]) .at-seg.is-activa {
+  background: var(--at-ctrl-on-bg, #fff);
+  border-color: var(--at-ctrl-on-border, #3458f5);
+}
+.demo-host .at-segmentado[data-con-capsula] .at-seg-capsula {
+  background: var(--at-ctrl-on-bg, #fff);
+  box-shadow: inset 0 0 0 1px var(--at-ctrl-on-border, #3458f5);
+}
+
 /* ============ BLOQUE TÉCNICO DE LA DEMO ============
    Solo aparece en las fichas que declaran `demoTecnica`. Cierra la ficha a todo
    el ancho, con la misma retícula que la tabla de tecnologías. */
