@@ -9,6 +9,7 @@
     "serve": "python -m http.server 8000 --directory dist",
     "verificar:externo": "node tools/verificar-fichas.mjs",
     "verificar:config": "node tools/verificar-config-produccion.mjs",
+    "verificar:limites": "node tools/verificar-limites-ia.mjs",
     "verificar:produccion": "node tools/verificar-produccion.mjs",
     "verificar:real": "node tools/ejecutar-verificacion.mjs --api-real"
   },

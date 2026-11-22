@@ -70,9 +70,72 @@ el('run-button').addEventListener('click',runInvestigation);el('approve-button')
   const AVISOS = {
     404: 'El run ya no existe en el servicio; vuelve a iniciar la investigación.',
     422: 'El plan propuesto no es aplicable a este incidente.',
+    429: 'Se alcanzó el límite temporal de consultas de IA.',
     502: 'El proveedor no devolvió una recomendación válida. No se muestra nada.',
     503: 'La consulta a OpenAI no está configurada en este despliegue.',
   };
+
+  /* `Retry-After` (segundos o fecha HTTP) y cuerpo JSON del error. */
+  function leerRetryAfter(res) {
+    const valor = res.headers.get('Retry-After');
+    if (!valor) return null;
+    const segundos = Number(valor);
+    if (Number.isFinite(segundos) && segundos >= 0) return Math.ceil(segundos);
+    const fecha = Date.parse(valor);
+    if (Number.isNaN(fecha)) return null;
+    return Math.max(0, Math.ceil((fecha - Date.now()) / 1000));
+  }
+
+  function detalleError(datos) {
+    const crudo = datos && (datos.detail ?? datos.mensaje ?? datos.message);
+    if (typeof crudo === 'string' && crudo.trim()) return crudo.trim();
+    if (crudo && typeof crudo.detail === 'string') return crudo.detail;
+    return '';
+  }
+
+  function formatearEspera(segundos) {
+    const total = Math.max(0, Math.ceil(segundos));
+    if (total < 60) return `${total} ${total === 1 ? 'segundo' : 'segundos'}`;
+    const minutos = Math.floor(total / 60);
+    const resto = total % 60;
+    if (!resto) return `${minutos} ${minutos === 1 ? 'minuto' : 'minutos'}`;
+    return `${minutos} min ${resto} s`;
+  }
+
+  let limiteHasta = 0;
+  let temporizadorLimite = null;
+
+  function segundosDeLimite() {
+    return Math.max(0, Math.ceil((limiteHasta - Date.now()) / 1000));
+  }
+
+  function detenerTemporizadorLimite() {
+    if (temporizadorLimite) {
+      clearInterval(temporizadorLimite);
+      temporizadorLimite = null;
+    }
+  }
+
+  function bloquearPorLimite(segundos) {
+    const espera = Number.isFinite(segundos) && segundos > 0 ? Math.ceil(segundos) : 0;
+    limiteHasta = Date.now() + espera * 1000;
+    detenerTemporizadorLimite();
+    if (!espera) return;
+    const refrescar = () => {
+      const restante = segundosDeLimite();
+      if (restante > 0) {
+        boton.disabled = true;
+        boton.textContent = 'Reintenta en ' + formatearEspera(restante);
+        return;
+      }
+      detenerTemporizadorLimite();
+      limiteHasta = 0;
+      boton.textContent = '◈ Consultar OpenAI';
+      boton.disabled = !SERVER_RUNS.get('run_id');
+    };
+    temporizadorLimite = setInterval(refrescar, 1000);
+    refrescar();
+  }
 
   function reiniciarConsulta() {
     const resultado = el('llm-result');
@@ -84,7 +147,7 @@ el('run-button').addEventListener('click',runInvestigation);el('approve-button')
   }
 
   function habilitarConsulta() {
-    if (!SERVER_RUNS.get('run_id')) return;
+    if (!SERVER_RUNS.get('run_id') || segundosDeLimite() > 0) return;
     boton.disabled = false;
     const nota = el('llm-note');
     if (nota) nota.textContent = 'Run conectado a la API. La consulta es una segunda opinión: puede generar cargos y no aprueba ni ejecuta nada.';
@@ -129,6 +192,20 @@ el('run-button').addEventListener('click',runInvestigation);el('approve-button')
       });
       const datos = await res.json().catch(() => null);
       if (!res.ok || !datos) {
+        if (res.status === 429) {
+          const segundos = leerRetryAfter(res);
+          const detalle = detalleError(datos) || AVISOS[429];
+          const espera = segundos > 0
+            ? ` Reintenta en ${formatearEspera(segundos)}.`
+            : ' El proveedor no indicó cuánto esperar; inténtalo de nuevo más tarde.';
+          const nota = el('llm-note');
+          if (nota) {
+            nota.textContent = `Límite de IA alcanzado. ${detalle}${espera} La consulta no se ejecutó y no se modificó nada.`;
+          }
+          showToast(`Límite de IA alcanzado.${espera}`);
+          bloquearPorLimite(segundos);
+          return;
+        }
         showToast(AVISOS[res.status] || 'No se pudo completar la consulta.');
         return;
       }
@@ -137,8 +214,14 @@ el('run-button').addEventListener('click',runInvestigation);el('approve-button')
     } catch (error) {
       showToast('La consulta falló; no se modificó nada.');
     } finally {
-      boton.textContent = etiqueta;
-      boton.disabled = !SERVER_RUNS.get('run_id');
+      const restante = segundosDeLimite();
+      if (restante > 0) {
+        boton.disabled = true;
+        boton.textContent = 'Reintenta en ' + formatearEspera(restante);
+      } else {
+        boton.textContent = etiqueta;
+        boton.disabled = !SERVER_RUNS.get('run_id');
+      }
     }
   }
 

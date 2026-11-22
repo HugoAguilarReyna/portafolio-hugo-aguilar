@@ -82,6 +82,35 @@ function localRetrieve(question) {
   };
 }
 
+class ApiError extends Error {
+  constructor(message, status, retryAfter = null) {
+    super(message);
+    this.name = 'ApiError';
+    this.status = status;
+    this.retryAfter = retryAfter;
+  }
+}
+
+/* `Retry-After` puede venir en segundos o como fecha HTTP. Se normaliza a
+   segundos; si no se puede interpretar, se devuelve null (sin espera conocida). */
+function parseRetryAfter(value) {
+  if (!value) return null;
+  const segundos = Number(value);
+  if (Number.isFinite(segundos) && segundos >= 0) return Math.ceil(segundos);
+  const fecha = Date.parse(value);
+  if (Number.isNaN(fecha)) return null;
+  return Math.max(0, Math.ceil((fecha - Date.now()) / 1000));
+}
+
+function formatearEspera(segundos) {
+  const total = Math.max(0, Math.ceil(segundos));
+  if (total < 60) return `${total} ${total === 1 ? 'segundo' : 'segundos'}`;
+  const minutos = Math.floor(total / 60);
+  const resto = total % 60;
+  if (!resto) return `${minutos} ${minutos === 1 ? 'minuto' : 'minutos'}`;
+  return `${minutos} min ${resto} s`;
+}
+
 async function fetchJson(url, options = {}, timeoutMs = 6500) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
@@ -92,7 +121,20 @@ async function fetchJson(url, options = {}, timeoutMs = 6500) {
       signal: controller.signal,
       headers: { Accept: 'application/json', ...(options.headers || {}) }
     });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!response.ok) {
+      let detalle = `HTTP ${response.status}`;
+      try {
+        const cuerpo = await response.json();
+        const texto = cuerpo && (cuerpo.detail || cuerpo.mensaje || cuerpo.message);
+        if (typeof texto === 'string' && texto.trim()) detalle = texto.trim();
+        else if (texto && typeof texto.detail === 'string') detalle = texto.detail;
+      } catch { /* respuesta sin JSON */ }
+      throw new ApiError(
+        detalle,
+        response.status,
+        parseRetryAfter(response.headers.get('Retry-After'))
+      );
+    }
     return await response.json();
   } finally {
     clearTimeout(timer);
@@ -304,6 +346,81 @@ function renderAnswer(result, source) {
   }
 }
 
+/* Límite temporal de IA (HTTP 429). Mientras dura, la consulta al modelo se
+   salta y se responde con el corpus local; el botón se bloquea solo si la
+   espera es corta, para no dejar inservible la búsqueda local durante horas. */
+let limiteIa = { hasta: 0, detalle: '', bloquear: false };
+let temporizadorLimite = null;
+let etiquetaAsk = null;
+
+function segundosDeLimiteIa() {
+  return Math.max(0, Math.ceil((limiteIa.hasta - Date.now()) / 1000));
+}
+
+function detenerTemporizadorLimite() {
+  if (temporizadorLimite) {
+    clearInterval(temporizadorLimite);
+    temporizadorLimite = null;
+  }
+}
+
+function restaurarBotonAsk() {
+  const boton = $('#ask');
+  if (!boton) return;
+  if (etiquetaAsk === null) etiquetaAsk = boton.innerHTML;
+  boton.innerHTML = etiquetaAsk;
+}
+
+function aplicarLimiteIa(segundos, detalle) {
+  const espera = Number.isFinite(segundos) && segundos > 0 ? Math.ceil(segundos) : 0;
+  limiteIa = {
+    hasta: Date.now() + espera * 1000,
+    detalle: detalle || '',
+    bloquear: espera > 0 && espera <= 120
+  };
+  detenerTemporizadorLimite();
+  const boton = $('#ask');
+  if (limiteIa.bloquear && boton) etiquetaAsk = boton.innerHTML;
+
+  const refrescar = () => {
+    const restante = segundosDeLimiteIa();
+    const apiStatus = $('#api-status');
+    if (restante > 0) {
+      const esperaTexto = `Reintenta en ${formatearEspera(restante)}`;
+      if (apiStatus) {
+        apiStatus.textContent = `Límite temporal de IA alcanzado. ${limiteIa.detalle ? limiteIa.detalle + ' ' : ''}${esperaTexto}; mientras tanto se responde con el corpus local.`;
+        apiStatus.className = 'api-status is-local';
+      }
+      if (limiteIa.bloquear && boton) {
+        boton.disabled = true;
+        boton.textContent = esperaTexto;
+      }
+      return;
+    }
+    detenerTemporizadorLimite();
+    if (espera === 0) {
+      if (apiStatus) {
+        apiStatus.textContent = `Límite de IA alcanzado. ${limiteIa.detalle ? limiteIa.detalle + ' ' : ''}El proveedor no indicó cuánto esperar; se responde con el corpus local.`;
+        apiStatus.className = 'api-status is-local';
+      }
+      return;
+    }
+    limiteIa = { hasta: 0, detalle: '', bloquear: false };
+    if (boton) {
+      boton.disabled = false;
+      restaurarBotonAsk();
+    }
+    if (apiStatus) {
+      apiStatus.textContent = 'El límite temporal de IA terminó; la consulta al modelo vuelve a estar disponible.';
+      apiStatus.className = 'api-status is-local';
+    }
+    if (api.available) checkApi();
+  };
+
+  if (espera > 0) temporizadorLimite = setInterval(refrescar, 1000);
+  refrescar();
+}
+
 async function ask(question) {
   const clean = String(question || '').trim();
   if (clean.length < 3) {
@@ -326,24 +443,46 @@ async function ask(question) {
   try {
     let result = null;
     let source = 'local';
+    let limiteAplicado = false;
     const apiDisponibleAlConsultar = api.available;
-    if (apiDisponibleAlConsultar) {
+    const limiteBloqueaApi = segundosDeLimiteIa() > 0;
+    if (apiDisponibleAlConsultar && !limiteBloqueaApi) {
       try {
         result = await fetchJson(apiUrl(`/query?question=${encodeURIComponent(clean)}`), {}, 30000);
         source = 'api';
-      } catch {
+      } catch (error) {
         result = null;
+        if (error instanceof ApiError && error.status === 429) {
+          limiteAplicado = true;
+          aplicarLimiteIa(error.retryAfter, error.message);
+        } else {
+          const apiStatus = $('#api-status');
+          if (apiStatus) {
+            apiStatus.textContent = 'La consulta al backend no respondió; se usó el corpus local.';
+            apiStatus.className = 'api-status is-local';
+          }
+        }
       }
     }
-    if (!result) {
-      const apiStatus = $('#api-status');
-      if (apiDisponibleAlConsultar && apiStatus) {
-        apiStatus.textContent = 'La consulta al backend no respondió; se usó el corpus local.';
-        apiStatus.className = 'api-status is-local';
-      }
-      result = localRetrieve(clean);
-    }
+    if (!result) result = localRetrieve(clean);
     renderAnswer(result, source);
+    if (limiteAplicado || segundosDeLimiteIa() > 0) {
+      const restante = segundosDeLimiteIa();
+      const espera = restante > 0
+        ? `La consulta al modelo vuelve a estar disponible en ${formatearEspera(restante)}.`
+        : 'El proveedor no indicó cuánto esperar; inténtalo de nuevo más tarde.';
+      if (status) {
+        status.className = 'status-pill is-error';
+        status.innerHTML = '<i aria-hidden="true"></i> LÍMITE DE IA · CORPUS LOCAL';
+      }
+      const modo = $('#retrieval-mode');
+      if (modo) modo.textContent = 'CORPUS LOCAL · LÍMITE DE IA';
+      const nota = document.createElement('p');
+      nota.className = 'mode-note';
+      nota.textContent = `Se alcanzó el límite temporal de IA. ${limiteIa.detalle} La respuesta de arriba proviene del corpus local. ${espera}`;
+      const contenido = $('#answer-content');
+      if (contenido) contenido.append(nota);
+    }
   } catch (error) {
     const content = $('#answer-content');
     if (content) {
@@ -355,7 +494,7 @@ async function ask(question) {
       status.innerHTML = '<i aria-hidden="true"></i> ERROR DE CORPUS';
     }
   } finally {
-    if (button) button.disabled = false;
+    if (button) button.disabled = limiteIa.bloquear && segundosDeLimiteIa() > 0;
   }
 }
 

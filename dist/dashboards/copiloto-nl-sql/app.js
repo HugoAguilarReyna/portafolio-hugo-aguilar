@@ -60,11 +60,32 @@ let api = { available: false, health: null };
 let drawVersion = 0;
 
 class ApiError extends Error {
-  constructor(message, status) {
+  constructor(message, status, retryAfter = null) {
     super(message);
     this.name = 'ApiError';
     this.status = status;
+    this.retryAfter = retryAfter;
   }
+}
+
+/* `Retry-After` puede venir en segundos o como fecha HTTP. Se normaliza a
+   segundos; si no se puede interpretar, se devuelve null (sin espera conocida). */
+function parseRetryAfter(value) {
+  if (!value) return null;
+  const segundos = Number(value);
+  if (Number.isFinite(segundos) && segundos >= 0) return Math.ceil(segundos);
+  const fecha = Date.parse(value);
+  if (Number.isNaN(fecha)) return null;
+  return Math.max(0, Math.ceil((fecha - Date.now()) / 1000));
+}
+
+function formatearEspera(segundos) {
+  const total = Math.max(0, Math.ceil(segundos));
+  if (total < 60) return `${total} ${total === 1 ? 'segundo' : 'segundos'}`;
+  const minutos = Math.floor(total / 60);
+  const resto = total % 60;
+  if (!resto) return `${minutos} ${minutos === 1 ? 'minuto' : 'minutos'}`;
+  return `${minutos} min ${resto} s`;
 }
 
 const fmt = new Intl.NumberFormat('es-MX', {
@@ -218,9 +239,15 @@ async function fetchJson(url, options = {}, timeoutMs = 6500) {
       let detail = `HTTP ${response.status}`;
       try {
         const body = await response.json();
-        if (body && body.detail) detail = body.detail;
+        const texto = body && (body.detail || body.mensaje || body.message);
+        if (typeof texto === 'string' && texto.trim()) detail = texto.trim();
+        else if (texto && typeof texto.detail === 'string') detail = texto.detail;
       } catch { /* respuesta sin JSON */ }
-      throw new ApiError(detail, response.status);
+      throw new ApiError(
+        detail,
+        response.status,
+        parseRetryAfter(response.headers.get('Retry-After'))
+      );
     }
     return await response.json();
   } finally {
@@ -738,6 +765,81 @@ async function runLocal(question, note) {
   };
 }
 
+/* Límite temporal de IA (HTTP 429). Mientras dura, la consulta al modelo se
+   salta y se responde con el snapshot local; el botón se bloquea solo si la
+   espera es corta, para no dejar inservible la demo local durante horas. */
+let limiteIa = { hasta: 0, detalle: '', bloquear: false };
+let temporizadorLimite = null;
+let etiquetaRun = null;
+
+function segundosDeLimiteIa() {
+  return Math.max(0, Math.ceil((limiteIa.hasta - Date.now()) / 1000));
+}
+
+function detenerTemporizadorLimite() {
+  if (temporizadorLimite) {
+    clearInterval(temporizadorLimite);
+    temporizadorLimite = null;
+  }
+}
+
+function restaurarBotonRun() {
+  const boton = $('#run');
+  if (!boton) return;
+  if (etiquetaRun === null) etiquetaRun = boton.innerHTML;
+  boton.innerHTML = etiquetaRun;
+}
+
+function aplicarLimiteIa(segundos, detalle) {
+  const espera = Number.isFinite(segundos) && segundos > 0 ? Math.ceil(segundos) : 0;
+  limiteIa = {
+    hasta: Date.now() + espera * 1000,
+    detalle: detalle || '',
+    bloquear: espera > 0 && espera <= 120
+  };
+  detenerTemporizadorLimite();
+  const boton = $('#run');
+  if (limiteIa.bloquear && boton) etiquetaRun = boton.innerHTML;
+
+  const refrescar = () => {
+    const restante = segundosDeLimiteIa();
+    const status = $('#api-status');
+    if (restante > 0) {
+      const esperaTexto = `Reintenta en ${formatearEspera(restante)}`;
+      if (status) {
+        status.textContent = `Límite temporal de IA alcanzado. ${limiteIa.detalle ? limiteIa.detalle + ' ' : ''}${esperaTexto}; mientras tanto se responde con el snapshot local.`;
+        status.className = 'api-status is-local';
+      }
+      if (limiteIa.bloquear && boton) {
+        boton.disabled = true;
+        boton.textContent = esperaTexto;
+      }
+      return;
+    }
+    detenerTemporizadorLimite();
+    if (espera === 0) {
+      if (status) {
+        status.textContent = `Límite de IA alcanzado. ${limiteIa.detalle ? limiteIa.detalle + ' ' : ''}El proveedor no indicó cuánto esperar; se responde con el snapshot local.`;
+        status.className = 'api-status is-local';
+      }
+      return;
+    }
+    limiteIa = { hasta: 0, detalle: '', bloquear: false };
+    if (boton) {
+      boton.disabled = false;
+      restaurarBotonRun();
+    }
+    if (status) {
+      status.textContent = 'El límite temporal de IA terminó; la consulta al modelo vuelve a estar disponible.';
+      status.className = 'api-status is-local';
+    }
+    if (api.available) checkApi();
+  };
+
+  if (espera > 0) temporizadorLimite = setInterval(refrescar, 1000);
+  refrescar();
+}
+
 async function run(question) {
   const clean = String(question || '').trim();
   if (clean.length < 5) {
@@ -763,7 +865,8 @@ async function run(question) {
       showResult(await runLocal(clean, 'modo local forzado con ?local=1'), 'local');
       return;
     }
-    if (api.available) {
+    const limpioLimite = segundosDeLimiteIa() === 0;
+    if (api.available && limpioLimite) {
       try {
         const result = await fetchJson(
           apiUrl(`/query?question=${encodeURIComponent(clean)}`),
@@ -777,18 +880,34 @@ async function run(question) {
           showError(error.message);
           return;
         }
+        if (error instanceof ApiError && error.status === 429) {
+          aplicarLimiteIa(error.retryAfter, error.message);
+          const restante = segundosDeLimiteIa();
+          const espera = restante > 0
+            ? ` La consulta al modelo vuelve a estar disponible en ${formatearEspera(restante)}.`
+            : ' El proveedor no indicó cuánto esperar; inténtalo de nuevo más tarde.';
+          const aviso = `Se alcanzó el límite temporal de IA. ${error.message}${espera} La respuesta de abajo proviene del snapshot local. `;
+          showResult(await runLocal(clean, 'snapshot local; límite temporal de IA'), 'local');
+          const resumen = $('#summary');
+          if (resumen) resumen.textContent = aviso + resumen.textContent;
+          const pill = $('#mode');
+          if (pill) pill.textContent = 'LÍMITE DE IA · MODO LOCAL';
+          return;
+        }
         const status = $('#api-status');
         if (status) {
           status.textContent = 'La API no respondió; se usó el snapshot local.';
           status.className = 'api-status is-local';
         }
       }
+    } else if (!limpioLimite) {
+      aplicarLimiteIa(segundosDeLimiteIa(), limiteIa.detalle);
     }
     showResult(await runLocal(clean, 'snapshot local; API no disponible'), 'local');
   } catch (error) {
     showError(error.message || 'No se pudo interpretar la pregunta.');
   } finally {
-    if (button) button.disabled = false;
+    if (button) button.disabled = limiteIa.bloquear && segundosDeLimiteIa() > 0;
   }
 }
 
