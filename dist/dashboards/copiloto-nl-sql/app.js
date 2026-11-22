@@ -15,8 +15,16 @@ const FORCE_LOCAL = params.get('local') === '1';
 const API_BASE = (() => {
   const override = params.get('api');
   if (override !== null) return override.replace(/\/+$/, '');
-  if (location.port === '8010' || location.port === '8001') return '';
-  return 'http://127.0.0.1:8010';
+  // Producción: mismo origen (`/api`, que el nginx del sitio reenvía al backend).
+  // Desarrollo: el backend local, salvo que la propia página la sirva el API.
+  if (
+    (location.hostname === '127.0.0.1' || location.hostname === 'localhost') &&
+    location.port !== '8010' &&
+    location.port !== '8001'
+  ) {
+    return 'http://127.0.0.1:8010';
+  }
+  return '';
 })();
 
 const METRIC_META = {
