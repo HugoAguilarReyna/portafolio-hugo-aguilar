@@ -38,6 +38,12 @@ services:
       MONGODB_DB: ${MONGODB_DB:-hugo_portfolio}
       ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-}
       LOG_LEVEL: ${LOG_LEVEL:-info}
+      # Consulta consultiva opcional (Chat Completions compatible con OpenAI).
+      # Solo este servicio las recibe: `web` sirve estáticos y no las necesita.
+      # Sin las tres, la ruta de análisis responde 503 y la demo sigue igual.
+      LLM_BASE_URL: ${LLM_BASE_URL:-}
+      LLM_MODEL: ${LLM_MODEL:-}
+      LLM_API_KEY: ${LLM_API_KEY:-}
     expose:
       - "8000"
     healthcheck:
