@@ -18,6 +18,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
+      - name: Contraste de controles seleccionados y colisiones entre tableros
+        run: node tools/verificar-contraste-controles.mjs
       - name: Fichas, navegación, fallo de red, vacío y reintento
         run: npm run verificar
 
