@@ -294,7 +294,7 @@ antes de abrir una demo:
 | **Demos autocontenidas** | `retailops-unified`, `orbita-orbital-intelligence`, `kilometro-cero-logistics`, `ripple-room-supply-chain`, `dockmind-demand-planning`, `vidas-en-transito`, `gaza-humanitarian-observatory` | Servidor de archivos. Datos, estilos y lógica viajan dentro del artefacto. |
 | **Tableros que requieren la API** | Banca múltiple, Atlas vial, Marketing y clientes, Pulso comercial (Walmex) | `portfolio-api` en ejecución y MongoDB con los datos importados. |
 | **Servicios de dominio** | `nl2sql-economic-copilot`, `banxico-evidence-briefing`, `data-incident-commander` | `pip install -e .` en su repositorio; no usan la API HTTP. |
-| **Entrenamiento y actualización de datos** | `demand-forecasting-m5`, `customer-growth-intelligence`, `dockmind-demand-planning` | CSV externos (M5, Complete Journey, Criteo), MongoDB y, en M5, Unix. |
+| **Entrenamiento y actualización de datos** | `demand-forecasting-m5`, `customer-growth-intelligence`, `dockmind-demand-planning` | CSV externos (M5, Complete Journey, Criteo), MongoDB local para el flujo completo; M5 incluye un recorrido pequeño sin MongoDB. |
 
 ### Configuración de la API
 
@@ -375,3 +375,17 @@ La prueba de portada (`tools/verificar-destacados.mjs`) forma parte de
 `npm run verificar` y comprueba tres casos, enlaces, navegación y ancho de 390 px.
 El diagnóstico piloto de recuperación, con sus fallos publicados, vive en
 `banxico-evidence-briefing/research`; no debe confundirse con sus pruebas unitarias.
+
+
+## Integración de las fases F1, F2 y F3 ya publicadas
+
+Esta corrección parte de `portfolio-api` en `f7b5099` y del sitio en `abdce09`.
+Se conservan las cuotas compartidas por IP y globales, los 51 casos de NL-to-SQL,
+los 32 de Banxico y el agente de Incident Commander con herramientas de solo
+lectura, presupuesto y máximo de pasos. El evaluador simulado de citas de F2 se
+adapta al contrato literal de esta corrección. No se ejecutan proveedores reales.
+
+Las interfaces conservan sus recorridos. El endpoint `/agent` no se presenta como
+una reparación autónoma: la evaluación del backend usa un doble simulado y no
+modifica el flujo de aprobación ni despacha acciones externas. El código de las
+tres capacidades recientes se enlaza a la API canónica desde las fichas.
