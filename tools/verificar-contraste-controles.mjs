@@ -18,10 +18,12 @@ try {
    for(const state of ['normal','hover','focus']) {
     if(state==='hover') await button.hover();
     if(state==='focus') await button.focus();
+    // Medir el estado final, una vez terminada la transición de color del control.
+    await page.waitForTimeout(300);
     const c=await button.evaluate(el=>{const s=getComputedStyle(el);return {text:s.color,background:s.backgroundColor};});
     const a=luminance(rgb(c.text)),b=luminance(rgb(c.background));
     const ratio=(Math.max(a,b)+.05)/(Math.min(a,b)+.05);
-    assert.ok(rgb(c.background)[3]!==0,'La superficie seleccionada debe ser explícita');
+    assert.ok(rgb(c.background)[3]!==0,`Superficie transparente: ${root} ${state} ${width}px ${JSON.stringify(c)}`);
     assert.ok(ratio>=4.5,`${root} ${state} ${width}px: contraste ${ratio.toFixed(2)}:1`);
     checked++;
    }
