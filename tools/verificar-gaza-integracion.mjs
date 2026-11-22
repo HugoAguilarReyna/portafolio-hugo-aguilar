@@ -194,10 +194,10 @@ if (!fallos.length) {
 /* ------------------------------------------------- 3. contrato analítico */
 const pestanas = await marco.locator('nav [role="tab"]').allTextContents();
 const nombres = pestanas.map((t) => t.trim());
+if (nombres.includes("Cada punto, una vida")) fallo("la demo pública incluye una pestaña nominal");
 const esperadas = [
   "Impacto humano",
   "Edades y prensa",
-  "Cada punto, una vida",
   "Lesiones",
   "Mapas y cronología",
   "Sitios y trayectorias",
@@ -206,9 +206,9 @@ const esperadas = [
   "Archivo completo",
   "Diseño y referencias",
 ];
-if (nombres.length !== 11) fallo(`el observatorio muestra ${nombres.length} pestañas (se esperaban 11)`);
+if (nombres.length !== 10) fallo(`el observatorio muestra ${nombres.length} pestañas (se esperaban 10)`);
 for (const esperada of esperadas) if (!nombres.includes(esperada)) fallo(`falta la pestaña «${esperada}»`);
-if (!fallos.length) ok(`observatorio: once pestañas con «Cada punto, una vida», «Acceso y respuesta» y «Sitios y trayectorias»`);
+if (!fallos.length) ok(`observatorio: diez pestañas agregadas, sin extensión nominal`);
 
 const heroe = await frame.evaluate(() => document.querySelector("main > header")?.innerText.replace(/\s+/g, " ") ?? "");
 if (!/Reportes: 10 nov 2026/.test(heroe) || !/OMS: may 2026/.test(heroe)) {

@@ -41,7 +41,7 @@ jobs:
       - name: Descargar la API (${{ env.API_REF }})
         uses: actions/checkout@v4
         with:
-          repository: Dev-HugoAguilar/portfolio-api
+          repository: HugoAguilarReyna/portfolio-api
           ref: ${{ env.API_REF }}
           path: api
 
@@ -88,7 +88,10 @@ jobs:
           done
           gaza=$(docker run --rm --entrypoint "" portafolio-sitio:local stat -c '%s' /usr/share/nginx/html/dashboards/gaza-observatorio/index.html)
           echo "Gaza en la imagen: $gaza B"
-          test "$gaza" -lt 6000000 || { echo "El artefacto de Gaza parece incluir la lista nominal"; exit 1; }
+          test "$gaza" -lt 6291456 || { echo "El artefacto de Gaza supera 6 MiB"; exit 1; }
+          esperado=$(python -c 'import json; print(json.load(open("sitio/dist/dashboards/gaza-observatorio/provenance.json"))["sha256"])')
+          actual=$(docker run --rm --entrypoint "" portafolio-sitio:local sha256sum /usr/share/nginx/html/dashboards/gaza-observatorio/index.html | cut -d ' ' -f 1)
+          test "$actual" = "$esperado" || { echo "La imagen no contiene el artefacto público verificado"; exit 1; }
           docker run --rm --entrypoint "" portafolio-sitio:local \
             sh -c '! grep -qE "(127\.0\.0\.1|localhost):8010" /usr/share/nginx/html/config.js'
 

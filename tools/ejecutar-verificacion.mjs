@@ -22,6 +22,14 @@ await new Promise((resolve,reject)=>{
   server.listen(PORT,'127.0.0.1',resolve);
 });
 const child=spawn(process.execPath,['tools/verificar-fichas.mjs',...process.argv.slice(2)],{stdio:'inherit',env:{...process.env,SITE_BASE:`http://127.0.0.1:${PORT}`}});
-const code=await new Promise(resolve=>{child.once('error',()=>resolve(2));child.once('exit',code=>resolve(code ?? 2));});
+let code=await new Promise(resolve=>{child.once('error',()=>resolve(2));child.once('exit',code=>resolve(code ?? 2));});
+if (code === 0) {
+  const featured = spawn(process.execPath, ['tools/verificar-destacados.mjs'], {
+    stdio: 'inherit', env: {...process.env, SITE_BASE: `http://127.0.0.1:${PORT}`}
+  });
+  code = await new Promise(resolve => {
+    featured.once('error', () => resolve(2)); featured.once('exit', value => resolve(value ?? 2));
+  });
+}
 await new Promise(resolve=>server.close(resolve));
 process.exitCode=code;

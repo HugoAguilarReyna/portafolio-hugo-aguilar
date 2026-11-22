@@ -1,0 +1,9 @@
+{
+  "tipo": "agregados-sin-lista-nominal",
+  "repositorio": "https://github.com/Dev-HugoAguilar/gaza-humanitarian-observatory",
+  "commit": "0617806ff8ad870c28215a74ada9645339b925ab",
+  "comando": "python tools/construir.py && python tools/construir.py --comprobar",
+  "bytes": 4699056,
+  "sha256": "35c28ed0ea056360f781df2153bb29009b2bde45096a340a105a23172e4f5290",
+  "fecha_verificacion": "2026-11-21"
+}

@@ -29,6 +29,11 @@ jobs:
             test -s "$archivo" || { echo "Falta $archivo"; exit 1; }
           done
 
+      - name: Contratos de publicación y evidencia editorial
+        run: |
+          node --test tools/artefacto-publico.test.mjs tools/nl-sql-local.test.mjs
+          node tools/generar-evidencia.mjs --check
+
       - name: Comprobar sintaxis del sitio
         run: |
           set -eu

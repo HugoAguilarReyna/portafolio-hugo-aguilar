@@ -8,6 +8,7 @@
  *   node tools/verificar-config-produccion.mjs
  */
 import fs from 'node:fs';
+import { validarGaza } from './artefacto-publico.mjs';
 import path from 'node:path';
 import vm from 'node:vm';
 import assert from 'node:assert/strict';
@@ -148,8 +149,8 @@ comprobar('el manifiesto publica el artefacto de Gaza sin lista nominal', () => 
   assert.match(nginx, /root \/usr\/share\/nginx\/html;/, 'nginx no sirve desde la raíz esperada');
   assert.doesNotMatch(compose, /dashboards\/gaza-observatorio/, 'el manifiesto publica un artefacto suelto de Gaza');
   const gaza = path.join(RAIZ, 'dist/dashboards/gaza-observatorio/index.html');
-  const tamano = fs.statSync(gaza).size;
-  assert.ok(tamano < 6 * 1024 * 1024, `el artefacto de Gaza pesa ${tamano} B: parece el build con la lista nominal`);
+  const procedencia = JSON.parse(leer('dist/dashboards/gaza-observatorio/provenance.json'));
+  const { bytes: tamano } = validarGaza(fs.readFileSync(gaza), procedencia);
   assert.doesNotMatch(leer('dist/content.js'), /la lista nominal completa en «Cada punto, una vida», con un punto por persona/,
     'la ficha presenta la lista nominal como parte del build publicado');
   return `Gaza publicada: ${tamano} B`;

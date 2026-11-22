@@ -21,7 +21,7 @@ navegador ──▶ web (nginx) ─┬─▶ /            dist/  (sitio estátic
 
    ```bash
    git clone https://github.com/Dev-HugoAguilar/portafolio-hugo-aguilar.git
-   git clone https://github.com/Dev-HugoAguilar/portfolio-api.git
+   git clone https://github.com/HugoAguilarReyna/portfolio-api.git
    ```
 
    Si la carpeta de la API no está al lado, define `PORTFOLIO_API_CONTEXT`.

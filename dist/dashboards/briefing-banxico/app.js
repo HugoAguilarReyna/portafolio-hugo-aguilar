@@ -225,7 +225,8 @@ function modeLabel(result, source) {
 }
 
 function modeNote(result) {
-  if (result.mode === 'llm-grounded') return 'Respuesta generada por un modelo configurado, usando exclusivamente los fragmentos recuperados. Contrasta cada afirmación con las fuentes.';
+  if (result.mode === 'llm-grounded' && result.grounding_check === 'verbatim-retrieved-chunks') return 'Extractos seleccionados por el modelo y comprobados literalmente contra los fragmentos recuperados. Revisa su relevancia para la pregunta.';
+  if (result.mode === 'llm-grounded') return 'Respuesta de un modelo configurado. Contrasta cada afirmación con los fragmentos recuperados.';
   if (result.mode === 'extractiva-respaldo') return 'El modelo no respondió; se conserva la respuesta extractiva de los fragmentos recuperados.';
   if (result.mode === 'sin-coincidencias') return 'No se completó la respuesta con conocimiento externo. La pregunta queda fuera de la cobertura del corpus.';
   return 'Respuesta extractiva: concatenación de los fragmentos recuperados, sin generación libre de un modelo.';

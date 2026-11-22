@@ -77,7 +77,7 @@
    ========================================================================== */
 
 window.PORTAFOLIO = {
-  actualizado: '2026-04',
+  actualizado: '2026-11-21',
 
   estados: {
     previsto: {
@@ -86,7 +86,7 @@ window.PORTAFOLIO = {
     },
     desarrollo: {
       etiqueta: 'En desarrollo',
-      detalle: 'El caso se está construyendo; todavía sin resultados publicados.'
+      detalle: 'El caso sigue en desarrollo; la ficha detalla la demo y la evaluación disponibles.'
     },
     publicado: {
       etiqueta: 'Publicado',
@@ -477,7 +477,7 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Resumen del tablero «Walmart M5 — Planeación de demanda y evaluación de pronósticos», pantalla «Resultados»: encabezado del caso con la nota de independencia y la navegación de las seis pantallas, el plan de ventas a cuatro semanas con el corte del 22 de mayo de 2016, el resumen del conjunto filtrado (1 335 219,04 unidades previstas, 1 231 764 observadas, +103 455 de diferencia y 30 490 series), la tabla semanal por artículo y tienda con sus cuatro semanas y paginación, y el detalle de la serie seleccionada.',
           demoUrl: null,
-          codigoUrl: 'https://github.com/Dev-HugoAguilar/demand-forecasting-m5',
+          codigoUrl: 'https://github.com/HugoAguilarReyna/demand-forecasting-m5',
           hallazgos: null,
           notaEstado:
             'Datos reales de M5 importados en MongoDB local (base atlas_comercial_local). El tablero lee la versión publicada desde la API; no hay datos sintéticos en las cifras publicadas. El paquete de publicación compacto para la demo está generado, exportado y validado en local (base atlas_comercial_demo: 435 276 documentos, 164,8 MB de almacenamiento, archivo gzip de 70,5 MB, 60 de 60 respuestas equivalentes a la base de trabajo y las seis pantallas verificadas contra ella); la carga en MongoDB Atlas no se ha ejecutado en este incremento. La cobertura son los días con ventas: 1 941 de los 1 969 días de calendario, y los 28 días finales sin ventas se excluyen de la cobertura pública. La exploración por departamentos usa un derivado local tienda × departamento (70 combinaciones) construido desde los bloques y reconciliado contra los agregados antes de publicarse.',
@@ -637,13 +637,13 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Portada del observatorio «Gaza · Vidas y territorio»: el mapa bivariado del daño a todo el ancho de su sección, con el título que explica las dos dimensiones de cada celda, los controles de evaluación de UNOSAT, mínimo de sitios y descarga, la barra de ampliación y la franja de Gaza dividida en celdas de 0,005 grados sobre su contorno geográfico.',
           demoUrl: 'dashboards/gaza-observatorio/index.html',
-          codigoUrl: 'https://github.com/Dev-HugoAguilar/gaza-humanitarian-observatory',
+          codigoUrl: 'https://github.com/HugoAguilarReyna/gaza-humanitarian-observatory',
           hallazgos: null,
           tecnologiaEstado: null,
           problema:
             'Cuatro fuentes describen el mismo conflicto con gránulos distintos: reportes diarios de Tech for Palestine, una lista identificada de fallecidos, estimaciones de necesidades de rehabilitación de la OMS y evaluaciones satelitales de UNOSAT. Leídas juntas sin cuidado producen errores previsibles: tomar un reporte publicado como la muerte ocurrida ese día, leer la falta de reporte como cero, sumar categorías de lesiones que se solapan, tratar las prótesis colocadas como personas o confundir un sitio evaluado con un edificio dañado.',
           contribucion:
-            'Construí el observatorio como una sola página con once vistas conectadas: impacto humano con calendario de intensidad, círculos proporcionales por reporte y curva acumulada; edades declaradas con trama de cien celdas y pirámide de puntos por sexo, más prensa; la lista nominal completa en «Cada punto, una vida» —la extensión nominal opcional, que no forma parte del build publicado—, con un punto por persona, color por edad, ficha individual y tabla accesible; lesiones con rangos de necesidades de rehabilitación y actividad de prótesis; mapa bivariado del daño con catorce evaluaciones; explorador de sitios con selección vinculada y ficha del registro; trayectorias y un panel de pronóstico con validación temporal —muertes nuevas reportadas con sus rangos y su backtest, daño por zona y cambio de clasificación por sitio—; «Acceso y respuesta» con logística, IPC, financiación y efectivo; y las vistas de evidencia, archivo completo y referencias de diseño. Cada familia de cifras lleva su fuente y su fecha de corte junto a la visualización, los controles de universo, edad, año, métrica, evaluación, mínimo de sitios y búsqueda actúan sobre la vista que la contiene, y las tablas accesibles, la descarga de celdas visibles y el JSON del archivo filtrado permiten volver al registro original.',
+            'Construí el observatorio público con vistas agregadas conectadas: impacto humano con calendario de intensidad, círculos proporcionales por reporte y curva acumulada; edades declaradas con trama de cien celdas y pirámide de puntos por sexo, más prensa; la extensión nominal opcional «Cada punto, una vida» se construye por separado y no forma parte de esta demo pública; lesiones con rangos de necesidades de rehabilitación y actividad de prótesis; mapa bivariado del daño con catorce evaluaciones; explorador de sitios con selección vinculada y ficha del registro; trayectorias y un panel de pronóstico con validación temporal —muertes nuevas reportadas con sus rangos y su backtest, daño por zona y cambio de clasificación por sitio—; «Acceso y respuesta» con logística, IPC, financiación y efectivo; y las vistas de evidencia, archivo completo y referencias de diseño. Cada familia de cifras lleva su fuente y su fecha de corte junto a la visualización, los controles de universo, edad, año, métrica, evaluación, mínimo de sitios y búsqueda actúan sobre la vista que la contiene, y las tablas accesibles, la descarga de celdas visibles y el JSON del archivo filtrado permiten volver al registro original.',
           fuentes:
             'Tech for Palestine: 1 131 reportes diarios de Gaza y 1 131 de Cisjordania, 730 registros de infraestructura y 263 de prensa; los reportes llegan al corte del 10 de noviembre de 2026. Lista identificada de fallecidos: 72 835 registros con nombre y edad declarada, corte al 7 de mayo de 2026; el tablero la incluye completa en «Cada punto, una vida», la extensión nominal opcional, y no completa ni estima las personas que la lista no identifica. OMS (EMRO): estimación de necesidades de rehabilitación por politrauma, mayo de 2026, con rangos de escenario que no son intervalos de confianza; 2 277 personas evaluadas y 502 prótesis colocadas son actividades con unidades distintas, no una cohorte uno a uno. UNOSAT, producto 4213: 198 308 sitios y 14 evaluaciones, con el último producto de comparación de octubre de 2025. Los enlaces completos, los metadatos y los créditos de inspiración están dentro del propio observatorio; los datos de terceros conservan su licencia y no se redistribuyen desde este portafolio.',
           metodo:
@@ -831,11 +831,11 @@ window.PORTAFOLIO = {
           fuentes:
             'Banco de México, Anuncio de Política Monetaria del 5 de noviembre de 2026 (BM-2026-11-05) e Informe trimestral abril–junio de 2026 (BM-2026-08-26). El corpus transcribe siete fragmentos con identificador, título, fecha, URL oficial y palabras clave. No se añadieron documentos, cifras ni explicaciones externas.',
           metodo:
-            'La recuperación puntúa coincidencias léxicas entre la pregunta y el título, contenido y palabras clave de cada fragmento; devuelve como máximo tres evidencias. Si Atlas contiene la colección dedicada, se lee de allí; si no responde o está vacía, se usa corpus.json. Si las tres variables LLM están configuradas, el backend pide una respuesta al proveedor usando solo los fragmentos recuperados y que cite sus identificadores; si el modelo no los incluye, la API añade las fuentes de esos fragmentos. Si el proveedor falla, conserva la respuesta extractiva. El navegador nunca recibe URI ni claves.',
+            'La recuperación puntúa coincidencias léxicas entre la pregunta y el título, contenido y palabras clave de cada fragmento; devuelve como máximo tres evidencias. Si Atlas contiene la colección dedicada, se lee de allí; si no responde o está vacía, se usa corpus.json. Si las tres variables LLM están configuradas, el backend pide una respuesta al proveedor usando solo los fragmentos recuperados y que cite sus identificadores; el modo LLM selecciona citas literales con chunk_id; el servidor solo acepta citas que pertenecen a los fragmentos enviados y rechaza texto libre o identificadores ajenos. Si el proveedor falla, conserva la respuesta extractiva. El navegador nunca recibe URI ni claves.',
           resultados:
-            'La demo incluye cinco preguntas sugeridas sobre tasa, inflación, riesgos, convergencia y actividad económica; recupera fragmentos con fuente y fecha; distingue modo Atlas/corpus y respuesta extractiva/LLM; y publica la serie de inflación general y subyacente con valores observados y pronosticados. La respuesta del modelo es opcional, se contrasta con los fragmentos y se etiqueta por modo; sin proveedor, se mantiene la respuesta extractiva.',
+            'La demo incluye cinco preguntas sugeridas sobre tasa, inflación, riesgos, convergencia y actividad económica; recupera fragmentos con fuente y fecha; distingue modo Atlas/corpus y respuesta extractiva/LLM; y publica la serie de inflación general y subyacente con valores observados y pronosticados. La selección del modelo es opcional; el contrato comprueba identidad textual y procedencia, sin certificar relevancia ni suficiencia de la recuperación; sin proveedor, se mantiene la respuesta extractiva.',
           limitaciones:
-            'La recuperación es léxica, no vectorial: no usa embeddings ni comprende paráfrasis fuera del vocabulario del corpus. El corpus es una transcripción resumida de dos documentos y no cubre toda la economía mexicana. El pronóstico es el publicado por Banco de México; la demo no estima escenarios propios ni convierte el pronóstico en una serie observada. La consulta al LLM es opcional, requiere que la API del servidor esté configurada y no reemplaza la verificación de las citas contra los fragmentos. Sin proveedor, la demo responde de forma extractiva. No se muestran URI ni secretos ni se modifica la configuración del clúster. El enlace «Demo publicada» de la tarjeta lleva a la carpeta del artefacto publicado (`dist/dashboards/briefing-banxico/`), no al código fuente: el código de esta demo no se distribuye en ese repositorio; la API opcional se publica aparte, en el repositorio `portfolio-api`.',
+            'La recuperación es léxica, no vectorial: no usa embeddings ni comprende paráfrasis fuera del vocabulario del corpus. El corpus es una transcripción resumida de dos documentos y no cubre toda la economía mexicana. El backend publica además una evaluación de recuperación léxica, vectores locales de términos y mezcla híbrida; esos vectores locales no son embeddings de un modelo y el benchmark sigue siendo simulado. El pronóstico es el publicado por Banco de México; la demo no estima escenarios propios ni convierte el pronóstico en una serie observada. La consulta al LLM es opcional, requiere que la API del servidor esté configurada y no reemplaza la verificación de las citas contra los fragmentos. Sin proveedor, la demo responde de forma extractiva. No se muestran URI ni secretos ni se modifica la configuración del clúster.',
           tecnologias: ['Python', 'FastAPI', 'MongoDB Atlas', 'D3.js', 'RAG léxico', 'JavaScript'],
           tecnologiasGrupos: [
             { funcion: 'Datos y recuperación', items: ['Python', 'FastAPI', 'RAG léxico', 'MongoDB Atlas'] },
@@ -850,8 +850,7 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Portada de «Briefing con evidencia · Banco de México»: cabecera de la demo con el estado local y la API activa, título «Una respuesta. Fuentes a la vista.», corte documental del 5 de noviembre de 2026, las cifras de tasa e inflación, el panel de consulta con preguntas sugeridas, la respuesta pendiente y el inicio de la gráfica D3 de inflación observada y pronosticada.',
           demoUrl: 'dashboards/briefing-banxico/index.html',
-          codigoUrl: 'https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/briefing-banxico',
-          codigoEtiqueta: 'Demo publicada',
+          codigoUrl: 'https://github.com/HugoAguilarReyna/portfolio-api/tree/main/app/rag_banxico',
           enlaces: [
             {
               texto: 'Banco de México · Anuncio de Política Monetaria, 5 nov 2026',
@@ -885,9 +884,9 @@ window.PORTAFOLIO = {
           metodo:
             'El parser reconoce únicamente PIB, inflación y desempleo, años entre 2019 y 2025 y operaciones de tendencia, comparación, máximo o mínimo. El texto libre nunca se ejecuta como SQL: se construye una plantilla permitida con parámetros enlazados y se consulta una base SQLite de solo lectura. Si hay un proveedor LLM configurado, solo puede devolver un plan JSON validado contra el catálogo; si falla o devuelve algo inválido, se usa el parser local. Atlas es opcional y recibe solo metadatos de ejecución en una colección dedicada.',
           resultados:
-            'Las cuatro consultas sugeridas están verificadas: tendencia del PIB, máximo de inflación, comparación de PIB e inflación en 2020 y tendencia del desempleo. El máximo de inflación se contrasta contra la serie completa, el ranking devuelve los siete años consultados y los valores negativos del PIB se dibujan con referencia en cero. Las comparaciones usan paneles separados con escala y unidad propias; la tabla conserva todas las filas y resalta el extremo solicitado. El plan LLM es opcional; el SQL siempre lo construye el servidor después de validar el plan.',
+            'Las cuatro consultas sugeridas están verificadas: tendencia del PIB, máximo de inflación, comparación de PIB e inflación en 2020 y tendencia del desempleo. El máximo de inflación se contrasta contra la serie completa, el ranking devuelve los siete años consultados y los valores negativos del PIB se dibujan con referencia en cero. Las comparaciones usan paneles separados con escala y unidad propias; la tabla conserva todas las filas y resalta el extremo solicitado. El plan LLM es opcional; el SQL siempre lo construye el servidor después de validar el plan. El backend incluye una evaluación de 51 casos con modos parser, LLM simulado y fallback; conserva los cuatro errores de alcance conocidos como regresiones y los rechaza antes del proveedor. El conjunto ya usado para corregir no es una prueba independiente. Las cifras del doble no miden un modelo real.',
           limitaciones:
-            'El parser es léxico, no semántico: reconoce términos y plantillas de un catálogo cerrado, no comprende libremente cualquier pregunta. La demo cubre un país, tres indicadores y siete años; no imputa faltantes ni suma porcentajes de conceptos distintos. El LLM, si está configurado, solo produce un plan JSON que el servidor valida; no ejecuta SQL arbitrario ni es necesario para usar la demo. Atlas es opcional y su auditoría no guarda preguntas. El enlace «Demo publicada» de la tarjeta lleva a la carpeta del artefacto publicado (`dist/dashboards/copiloto-nl-sql/`), no al código fuente: el código de esta demo no se distribuye en ese repositorio; la API opcional se publica aparte, en el repositorio `portfolio-api`.',
+            'El parser es léxico, no semántico: reconoce términos y plantillas de un catálogo cerrado, no comprende libremente cualquier pregunta. La demo cubre un país, tres indicadores y siete años; no imputa faltantes ni suma porcentajes de conceptos distintos. El LLM, si está configurado, solo produce un plan JSON que el servidor valida; no ejecuta SQL arbitrario ni es necesario para usar la demo. Atlas es opcional y su auditoría no guarda preguntas.',
           tecnologias: ['Python', 'FastAPI', 'SQL', 'SQLite', 'ETL', 'D3.js', 'JavaScript'],
           tecnologiasGrupos: [
             { funcion: 'Datos y consulta', items: ['Python', 'FastAPI', 'SQL parametrizado', 'SQLite de solo lectura', 'ETL WDI'] },
@@ -902,8 +901,7 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Portada de «Copiloto NL-to-SQL · indicadores económicos de México»: cabecera de la demo, pregunta en español sobre la inflación, panel de resultado con el ranking completo de 2019 a 2025, barras horizontales con el máximo de 2022 resaltado, tabla con todas las filas y el SQL parametrizado visible.',
           demoUrl: 'dashboards/copiloto-nl-sql/index.html',
-          codigoUrl: 'https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/copiloto-nl-sql',
-          codigoEtiqueta: 'Demo publicada',
+          codigoUrl: 'https://github.com/HugoAguilarReyna/portfolio-api/tree/main/app/nl_sql',
           enlaces: [
             {
               texto: 'Banco Mundial · Crecimiento del PIB real (México)',
@@ -949,15 +947,15 @@ window.PORTAFOLIO = {
           problema:
             'Cuando falla un pipeline, una respuesta rápida puede propagar errores o ejecutar una corrección no autorizada. Los equipos necesitan entender qué activos están afectados, qué alternativas existen y qué evidencia respalda cada decisión antes de intervenir.',
           contribucion:
-            'Diseñé e implementé un prototipo supervisado para DataOps. Modelé el ciclo de triage, consulta de evidencia, análisis del linaje declarado, comparación de cuatro remediaciones, validación de políticas y pausa de aprobación humana. Construí cuatro visualizaciones SVG —linaje, coordenadas paralelas, matriz de controles y traza por carriles— y el flujo de aprobación/rechazo con recibo temporal. Las decisiones del flujo base son deterministas; una llamada opcional a OpenAI ofrece una recomendación consultiva separada.',
+            'Diseñé e implementé un prototipo supervisado para DataOps. Modelé el ciclo de triage, consulta de evidencia, análisis del linaje declarado, comparación de cuatro remediaciones, validación de políticas y pausa de aprobación humana. Construí cuatro visualizaciones SVG —linaje, coordenadas paralelas, matriz de controles y traza por carriles— y el flujo de aprobación/rechazo con recibo temporal. Las decisiones del flujo base son deterministas; una llamada opcional a OpenAI ofrece una recomendación consultiva separada. El backend publica además un endpoint de agente con cinco herramientas de solo lectura, máximo seis pasos, presupuesto de tokens y traza; la interfaz conserva el flujo consultivo existente.',
           fuentes:
             'Snapshot público de World Development Indicators para México, 2019–2025: 21 observaciones con año, código de indicador, valor, unidad y enlace de origen, bajo CC BY 4.0. Las anomalías de periodo ausente, clave duplicada y contrato alterado son fixtures sintéticas inyectadas en copias temporales; no son incidentes reportados por el Banco Mundial ni defectos del snapshot original.',
           metodo:
             'El usuario elige uno de tres escenarios sintéticos. La anomalía se inyecta solo en una copia temporal; el flujo evalúa reglas de contrato, recorre el linaje declarado y compara cuatro alternativas con puntuaciones hipotéticas del escenario. La matriz distingue pasa, revisar y bloquea. La imputación está prohibida. La ejecución se detiene para revisión humana; aprobar simula la reparación únicamente en memoria y devuelve un recibo, mientras que rechazar no cambia datos. Después de iniciar un run, la persona puede pedir una recomendación a OpenAI: es una sola consulta consultiva sobre el contexto del run, no selecciona herramientas ni modifica su estado. La aprobación humana conserva la decisión final.',
           resultados:
-            'El demo permite inspeccionar tres escenarios, el radio de impacto, cuatro remediaciones, la matriz de validaciones y la traza del flujo. También permite solicitar una recomendación consultiva de OpenAI si la API está configurada. La persona puede aprobar o rechazar; la reparación aprobada se simula en una copia temporal y el recibo queda visible durante la sesión.',
+            'El demo permite inspeccionar tres escenarios, el radio de impacto, cuatro remediaciones, la matriz de validaciones y la traza del flujo. También permite solicitar una recomendación consultiva de OpenAI si la API está configurada. La persona puede aprobar o rechazar; la reparación aprobada se simula en una copia temporal y el recibo queda visible durante la sesión. La evaluación simulada del agente de backend cubre 12 incidentes: cierra 10, bloquea dos violaciones y registra cero escrituras; el baseline determinista cierra 12. No son resultados de un modelo real.',
           limitaciones:
-            'Es un prototipo supervisado, no un agente autónomo: el LLM no elige herramientas, no aprueba y no ejecuta reparaciones. La consulta a OpenAI es opcional, de una sola llamada y depende de la configuración de la API; el flujo principal sigue siendo determinista. Las puntuaciones comparan opciones hipotéticas del demo, no métricas operativas. Los recibos viven en memoria y desaparecen al reiniciar. No se escriben archivos, bases de datos, Atlas ni sistemas externos. El enlace «Demo publicada» de la tarjeta lleva a la carpeta del artefacto publicado (`dist/dashboards/data-incident-commander/`), no al código fuente: el código de esta demo no se distribuye en ese repositorio; la API opcional se publica aparte, en el repositorio `portfolio-api`.',
+            'La interfaz publicada conserva una consulta consultiva de una sola llamada; la aprobación y reparación simulada pertenecen al flujo determinista. El agente del backend sí selecciona herramientas de solo lectura dentro de un bucle acotado, pero no aprueba, cambia estados ni repara. Su evaluación utiliza un proveedor simulado; no se verificó en un VPS ni con un modelo real. Las puntuaciones comparan opciones hipotéticas del demo, no métricas operativas. Los recibos viven en memoria y desaparecen al reiniciar. No se escriben archivos, bases de datos, Atlas ni sistemas externos.',
           tecnologias: ['Python', 'FastAPI', 'Flujo de agente simulado', 'Validaciones de contrato', 'Aprobación humana', 'Estado efímero', 'JavaScript', 'SVG', 'HTML/CSS'],
           tecnologiasGrupos: [
             { funcion: 'Orquestación y controles', items: ['Python', 'FastAPI', 'flujo de agente simulado', 'validaciones de contrato', 'aprobación humana', 'estado efímero'] },
@@ -972,8 +970,7 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Portada de «Data Incident Commander»: consola editorial con el escenario de periodo ausente, KPIs del incidente, Sankey de dependencias afectadas, comparación de remediaciones, matriz de validaciones, traza por carriles y el plan de cuarentena con aprobación humana pendiente.',
           demoUrl: 'dashboards/data-incident-commander/index.html',
-          codigoUrl: 'https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/data-incident-commander',
-          codigoEtiqueta: 'Demo publicada',
+          codigoUrl: 'https://github.com/HugoAguilarReyna/portfolio-api/tree/main/app/incident_commander',
           enlaces: [
             {
               texto: 'Banco Mundial · World Development Indicators',
@@ -1009,7 +1006,7 @@ window.PORTAFOLIO = {
           resultados:
             'La demo permite recorrer los tres escenarios, cambiar la duración de la interrupción y el inventario, ejecutar el episodio, comparar tres planes y leer las perspectivas deterministas de los tres roles. También permite pedir una perspectiva consultiva a OpenAI si la API está configurada. El mapa regional resalta los países bajo presión y muestra una tarjeta de exposición; las dos bandas separan cobertura de inventario y demanda pendiente; el trade-off y el resumen se actualizan con cada configuración y se pueden seleccionar con puntero o teclado.',
           limitaciones:
-            'Los valores de importación son comercio nominal agregado, no volumen físico, proveedores de una empresa, rutas observadas, capacidad de sustitución ni pronóstico. La red interna, los escenarios, inventarios, capacidades y costos son hipotéticos. El motor y las perspectivas base son deterministas; la consulta opcional al LLM es de una sola llamada, requiere la API y no constituye agentes independientes ni aprendizaje automático. Los resultados viven en el navegador y no se persisten; no se escriben archivos, bases de datos ni sistemas operativos externos. El enlace «Demo publicada» de la tarjeta lleva a la carpeta del artefacto publicado (`dist/dashboards/the-ripple-room/`), no al código fuente: el código de esta demo no se distribuye en ese repositorio; la API opcional se publica aparte, en el repositorio `portfolio-api`.',
+            'Los valores de importación son comercio nominal agregado, no volumen físico, proveedores de una empresa, rutas observadas, capacidad de sustitución ni pronóstico. La red interna, los escenarios, inventarios, capacidades y costos son hipotéticos. El motor y las perspectivas base son deterministas; la consulta opcional al LLM es de una sola llamada, requiere la API y no constituye agentes independientes ni aprendizaje automático. Los resultados viven en el navegador y no se persisten; no se escriben archivos, bases de datos ni sistemas operativos externos.',
           tecnologias: ['JavaScript', 'D3.js', 'SVG', 'HTML/CSS', 'simulación determinista', 'WITS · UN Comtrade'],
           tecnologiasGrupos: [
             { funcion: 'Datos y simulación', items: ['WITS · UN Comtrade', 'simulación determinista', 'motor local'] },
@@ -1024,8 +1021,7 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Portada de «The Ripple Room»: mapa regional centrado en el Pacífico con países bajo presión y tarjeta de exposición comercial, panel de agentes simulados de Operaciones, Abastecimiento y Finanzas, dos bandas alineadas de cobertura de inventario y demanda pendiente, y diagrama de trade-off servicio-costo.',
           demoUrl: 'dashboards/the-ripple-room/index.html',
-          codigoUrl: 'https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/the-ripple-room',
-          codigoEtiqueta: 'Demo publicada',
+          codigoUrl: 'https://github.com/Dev-HugoAguilar/ripple-room-supply-chain',
           enlaces: [
             {
               texto: 'WITS · México, importaciones HS 8542, 2023',
@@ -1065,7 +1061,7 @@ window.PORTAFOLIO = {
           resultados:
             'La demo permite seleccionar corredores y tramos, abrir su ficha, revisar tramos compartidos y sus advertencias de solapamiento, filtrar por estado, aplicar escenarios de interrupción, mostrar u ocultar la flota, pausarla, inspeccionar una unidad virtual y comparar los volúmenes y estados en cuatro vistas sincronizadas. El zoom llega a 800%, se ancla al cursor y devuelve la rueda a la página al alcanzar los límites.',
           limitaciones:
-            'Los envíos son agregados ficticios por corredor, no camiones únicos, viajes GPS, toneladas ni tráfico observado. Las carreteras provienen de un snapshot OSM/OSRM de perfil automóvil; no validan carga pesada, cierres activos, clima, seguridad ni capacidad de flota. Los camiones y sus posiciones son sintéticos y no representan telemetría. El copiloto determinista sigue disponible; la consulta opcional a OpenAI requiere la API del servidor y no se conecta a INEGI, SICT, un TMS o un ERP, no despacha y no persiste cambios. La demo no usa datos operativos reales. El enlace «Demo publicada» de la tarjeta lleva a la carpeta del artefacto publicado (`dist/dashboards/kilometro-cero/`), no al código fuente: el código de esta demo no se distribuye en ese repositorio; la API opcional se publica aparte, en el repositorio `portfolio-api`.',
+            'Los envíos son agregados ficticios por corredor, no camiones únicos, viajes GPS, toneladas ni tráfico observado. Las carreteras provienen de un snapshot OSM/OSRM de perfil automóvil; no validan carga pesada, cierres activos, clima, seguridad ni capacidad de flota. Los camiones y sus posiciones son sintéticos y no representan telemetría. El copiloto determinista sigue disponible; la consulta opcional a OpenAI requiere la API del servidor y no se conecta a INEGI, SICT, un TMS o un ERP, no despacha y no persiste cambios. La demo no usa datos operativos reales.',
           tecnologias: ['MapLibre GL JS 5.6.1', 'D3.js 7.9.0', 'JavaScript', 'HTML/CSS', 'OpenStreetMap', 'OSRM', 'Natural Earth', 'WebGL'],
           tecnologiasGrupos: [
             { funcion: 'Mapa y geometrías', items: ['MapLibre GL JS 5.6.1', 'OpenStreetMap', 'OSRM', 'Natural Earth', 'WebGL'] },
@@ -1080,8 +1076,7 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Portada de «Kilómetro Cero»: mapa MapLibre de México con carreteras y corredores de envío consolidados, hubs y terminales, flota simulada de muestra, panel de filtros y escenario de red, KPIs, Sankey por corredor y estado, dispersión volumen–puntualidad y tabla de corredores.',
           demoUrl: 'dashboards/kilometro-cero/index.html',
-          codigoUrl: 'https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/kilometro-cero',
-          codigoEtiqueta: 'Demo publicada',
+          codigoUrl: 'https://github.com/Dev-HugoAguilar/kilometro-cero-logistics',
           enlaces: [
             {
               texto: 'OpenStreetMap · copyright y licencia ODbL',
@@ -1129,7 +1124,7 @@ window.PORTAFOLIO = {
           resultados:
             'Cinco pantallas exclusivas con 48 SKU y selección persistente. Resumen: KPIs, cinco excepciones y catálogo filtrable. Demanda: histórico, pronóstico, banda, referencia estacional, tabla de 12 semanas, 48 pequeños múltiplos y ABC. Inventario: balance semanal, cobertura de 576 celdas y calendario de recepciones de 72 celdas con detalle. Compras: fórmula, cascada, alternativas capital-servicio, CSV y estrés de 120 simulaciones. Modelos: cuatro modelos, error por horizonte y cobertura test. Random Forest ganó en ambos conjuntos: WAPE test sintético 7.47% frente a 10.56% de la referencia; benchmark público 5.07% frente a 5.24%. Cobertura media 82.8% y 73.5%. Son resultados de backtest, no ahorro ni mejora de servicio demostrados.',
           limitaciones:
-            'La operación es sintética: productos, existencias, precios, costos, plazos, empaques y canales no son datos de una empresa. El benchmark público es histórico, está en USD y se mantiene separado del inventario en unidades/MXN; no se usa para abastecer SKU. La reposición es una regla con presupuesto, no una optimización global ni una frontera óptima; la aprobación es local y no despacha compras. No modela caducidad, capacidad física, citas, comisiones, devoluciones, restricciones de proveedor ni inventario multicanal. Los escenarios de promoción, plazo y estrés son supuestos; el estrés no son probabilidades comerciales calibradas. La explicación LLM es opcional y consultiva: no recalcula pronósticos, modifica inventario ni crea órdenes. No hay integración con marketplace ni persistencia. El CSV público raw no se redistribuye. El enlace «Demo publicada» de la tarjeta lleva a la carpeta del artefacto publicado (`dist/dashboards/dockmind/`), no al código fuente: el código de esta demo no se distribuye en ese repositorio; la API opcional se publica aparte, en el repositorio `portfolio-api`.',
+            'La operación es sintética: productos, existencias, precios, costos, plazos, empaques y canales no son datos de una empresa. El benchmark público es histórico, está en USD y se mantiene separado del inventario en unidades/MXN; no se usa para abastecer SKU. La reposición es una regla con presupuesto, no una optimización global ni una frontera óptima; la aprobación es local y no despacha compras. No modela caducidad, capacidad física, citas, comisiones, devoluciones, restricciones de proveedor ni inventario multicanal. Los escenarios de promoción, plazo y estrés son supuestos; el estrés no son probabilidades comerciales calibradas. La explicación LLM es opcional y consultiva: no recalcula pronósticos, modifica inventario ni crea órdenes. No hay integración con marketplace ni persistencia. El CSV público raw no se redistribuye.',
           tecnologias: ['Python', 'scikit-learn', 'pandas', 'NumPy', 'joblib', 'JavaScript', 'D3.js', 'HTML/CSS'],
           tecnologiasGrupos: [
             { funcion: 'Entrenamiento y datos', items: ['Python', 'scikit-learn', 'pandas', 'NumPy', 'joblib'] },
@@ -1144,8 +1139,7 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Portada de «DockMind»: resumen de 48 SKU con KPIs de demanda, compras, ventas no cubiertas y servicio; salud del plan, cinco excepciones priorizadas, catálogo filtrable, navegación de cinco pantallas y controles de escenario, producto, política y presupuesto.',
           demoUrl: 'dashboards/dockmind/index.html',
-          codigoUrl: 'https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/dockmind',
-          codigoEtiqueta: 'Demo publicada',
+          codigoUrl: 'https://github.com/Dev-HugoAguilar/dockmind-demand-planning',
           enlaces: [
             {
               texto: 'Benchmark público · Walmart.csv (GonzaloBP, GitHub)',

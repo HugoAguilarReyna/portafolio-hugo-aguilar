@@ -8,9 +8,9 @@ su repositorio público.
 [![Sitio](https://img.shields.io/badge/sitio-est%C3%A1tico-2f855a)](#ejecutar)
 
 > **Alcance.** Sitio estático: HTML, CSS y JavaScript sin compilación ni backend.
-> No usa analítica, cookies ni servicios de terceros en tiempo de ejecución.
+> No usa analítica ni cookies propias. La portada carga fuentes de Google Fonts; las demos conectadas consultan la API y el LLM es opcional.
 
-**Estados**: `Publicado` — terminado, documentado y verificable · `En desarrollo` — en construcción, sin resultados publicados · `Próximamente` — caso definido y pendiente de desarrollo (*roadmap*).
+**Estados**: `Publicado` — terminado, documentado y verificable · `En desarrollo` — versión en construcción; la ficha detalla la demo y evaluación disponibles · `Próximamente` — caso definido y pendiente de desarrollo (*roadmap*).
 
 ---
 
@@ -34,10 +34,10 @@ su repositorio público.
 
 | # | Proyecto | Estado | Categoría | Repositorio |
 |---|---|---|---|---|
-| 1 | Walmart M5 — Planeación de demanda y evaluación de pronósticos | Publicado | Demanda | [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) |
+| 1 | Walmart M5 — Planeación de demanda y evaluación de pronósticos | Publicado | Demanda | [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) |
 | 2 | Clientes y campañas — Segmentación, propensión e incrementalidad | Publicado | Marketing | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) |
 | 3 | Clientes en movimiento | Publicado | Marketing | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) |
-| 4 | Gaza · Vidas y territorio | Publicado | Observatorio humanitario | [`gaza-humanitarian-observatory`](https://github.com/Dev-HugoAguilar/gaza-humanitarian-observatory) |
+| 4 | Gaza · Vidas y territorio | Publicado | Observatorio humanitario | [`gaza-humanitarian-observatory`](https://github.com/HugoAguilarReyna/gaza-humanitarian-observatory) |
 | 5 | RetailOps Unified | Publicado | Machine Learning | [`retailops-unified`](https://github.com/Dev-HugoAguilar/retailops-unified) |
 
 ## 03 · Ingeniería de datos
@@ -54,8 +54,8 @@ su repositorio público.
 
 | # | Proyecto | Estado | Categoría | Repositorio |
 |---|---|---|---|---|
-| 1 | Briefing con evidencia · Banco de México | En desarrollo | RAG / Finanzas | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/briefing-banxico) |
-| 2 | Copiloto NL-to-SQL · indicadores económicos de México | En desarrollo | NL-to-SQL | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/copiloto-nl-sql) |
+| 1 | Briefing con evidencia · Banco de México | En desarrollo | RAG / Finanzas | [`banxico-evidence-briefing`](https://github.com/HugoAguilarReyna/banxico-evidence-briefing) |
+| 2 | Copiloto NL-to-SQL · indicadores económicos de México | En desarrollo | NL-to-SQL | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) |
 
 ## 05 · Agentes y sistemas de decisión
 
@@ -63,10 +63,10 @@ su repositorio público.
 
 | # | Proyecto | Estado | Categoría | Repositorio |
 |---|---|---|---|---|
-| 1 | Data Incident Commander | En desarrollo | Data Reliability | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/data-incident-commander) |
-| 2 | The Ripple Room — disrupciones de semiconductores | En desarrollo | Simulación / Supply Chain | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/the-ripple-room) |
-| 3 | Kilómetro Cero — control de red de envíos | En desarrollo | Logística | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/kilometro-cero) |
-| 4 | DockMind — pronóstico y planificación de inventario | En desarrollo | Operaciones | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/dockmind) |
+| 1 | Data Incident Commander | En desarrollo | Data Reliability | [`data-incident-commander`](https://github.com/Dev-HugoAguilar/data-incident-commander) |
+| 2 | The Ripple Room — disrupciones de semiconductores | En desarrollo | Simulación / Supply Chain | [`ripple-room-supply-chain`](https://github.com/Dev-HugoAguilar/ripple-room-supply-chain) |
+| 3 | Kilómetro Cero — control de red de envíos | En desarrollo | Logística | [`kilometro-cero-logistics`](https://github.com/Dev-HugoAguilar/kilometro-cero-logistics) |
+| 4 | DockMind — pronóstico y planificación de inventario | En desarrollo | Operaciones | [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) |
 | 5 | Analista asistido por IA | Próximamente | Agentes | Sin repositorio (Roadmap) |
 
 ## Infraestructura compartida
@@ -101,14 +101,14 @@ existe, de modo que una fila nunca apunta a un destino inexistente.
 
 | Tecnología | Nivel | Dónde se demuestra |
 |---|---|---|
-| Python | ✅ | 15 repositorios: [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5), [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) y el resto de pipelines |
+| Python | ✅ | 15 repositorios: [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5), [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) y el resto de pipelines |
 | Pandas | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) |
-| NumPy | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) |
+| NumPy | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) |
 | SciPy | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) (potencia estadística y corrección de Holm) |
 | Scikit-learn | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) (K-Means y propensión), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) (Ridge y Random Forest multisalida) |
-| LightGBM | ✅ | [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) (modelo global por horizonte), [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) |
-| Validación cruzada y selección de modelo | ✅ | [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5): cortes de desarrollo para elegir por WAPE y cortes reservados para evaluar; [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence): validación temporal y de estabilidad entre semillas |
-| Pipelines de datos analíticos | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (ingesta idempotente con revisiones por hash), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) (importar → entrenar → pronosticar → agregar) |
+| LightGBM | ✅ | [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) (modelo global por horizonte), [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) |
+| Validación cruzada y selección de modelo | ✅ | [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5): cortes de desarrollo para elegir por WAPE y cortes reservados para evaluar; [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence): validación temporal y de estabilidad entre semillas |
+| Pipelines de datos analíticos | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (ingesta idempotente con revisiones por hash), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) (importar → entrenar → pronosticar → agregar) |
 
 ### IA generativa y LLMs
 
@@ -126,13 +126,13 @@ existe, de modo que una fila nunca apunta a un destino inexistente.
 |---|---|---|
 | SAS → Python: macros y reportes regulatorios (CNBV / banca) | ◐ | Caso de roadmap *Modernización SAS → Python* (sin repositorio) |
 | SQL | ✅ | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) (plantillas parametrizadas sobre SQLite en solo lectura), [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (agregaciones y consultas) |
-| MongoDB Atlas | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (pymongo, índices, importadores idempotentes con revisiones por hash), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) |
+| MongoDB Atlas | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (pymongo, índices, importadores idempotentes con revisiones por hash), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) |
 | SQLite | ✅ | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) (base derivada abierta en modo lectura) |
 | BigQuery | ✅ | [`ga4-marketing-analytics`](https://github.com/Dev-HugoAguilar/ga4-marketing-analytics), [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (extracción de la muestra pública de GA4) |
 | Docker | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (`Dockerfile`) |
 | Docker Compose | ✅ | [`deploy/docker-compose.yml`](deploy/docker-compose.yml) (sitio + API con un solo origen público) y el `docker-compose.yml` del monorepo de trabajo, que no se publica |
 | FastAPI | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) y los servicios de dominio de varios repositorios |
-| Pydantic | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5), [`data-incident-commander`](https://github.com/Dev-HugoAguilar/data-incident-commander), [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing), [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) |
+| Pydantic | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5), [`data-incident-commander`](https://github.com/Dev-HugoAguilar/data-incident-commander), [`banxico-evidence-briefing`](https://github.com/HugoAguilarReyna/banxico-evidence-briefing), [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) |
 | APIs REST | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (`/api/v1/…`) y las aplicaciones que la consumen |
 | Git | ✅ | Los repositorios enlazados, con commits convencionales |
 
@@ -140,8 +140,8 @@ existe, de modo que una fila nunca apunta a un destino inexistente.
 
 | Tecnología | Nivel | Dónde se demuestra |
 |---|---|---|
-| D3.js | ✅ | 10 repositorios: [`vidas-en-transito`](https://github.com/Dev-HugoAguilar/vidas-en-transito), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning), [`cdmx-traffic-atlas`](https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas), [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing) y el resto |
-| React | ✅ | [`cdmx-traffic-atlas`](https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas), [`mexican-banking-analytics`](https://github.com/Dev-HugoAguilar/mexican-banking-analytics), [`ga4-marketing-analytics`](https://github.com/Dev-HugoAguilar/ga4-marketing-analytics), [`walmex-financial-pulse`](https://github.com/Dev-HugoAguilar/walmex-financial-pulse), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) |
+| D3.js | ✅ | 10 repositorios: [`vidas-en-transito`](https://github.com/Dev-HugoAguilar/vidas-en-transito), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning), [`cdmx-traffic-atlas`](https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas), [`banxico-evidence-briefing`](https://github.com/HugoAguilarReyna/banxico-evidence-briefing) y el resto |
+| React | ✅ | [`cdmx-traffic-atlas`](https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas), [`mexican-banking-analytics`](https://github.com/Dev-HugoAguilar/mexican-banking-analytics), [`ga4-marketing-analytics`](https://github.com/Dev-HugoAguilar/ga4-marketing-analytics), [`walmex-financial-pulse`](https://github.com/Dev-HugoAguilar/walmex-financial-pulse), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) |
 | Vite | ✅ | Los cuatro tableros React (`cdmx-traffic-atlas`, `mexican-banking-analytics`, `ga4-marketing-analytics`, `walmex-financial-pulse`) con build verificado en CI; `demand-forecasting-m5` incluye la fuente de su interfaz, sin build en CI |
 | HTML5 / CSS3 moderno | ✅ | Todos los sitios: sistema visual propio, sin frameworks de UI |
 | MapLibre GL · Three.js · SGP4 | ✅ | [`kilometro-cero-logistics`](https://github.com/Dev-HugoAguilar/kilometro-cero-logistics) (mapa vectorial), [`orbita-orbital-intelligence`](https://github.com/Dev-HugoAguilar/orbita-orbital-intelligence) (Tierra 3D y propagación orbital) |
@@ -157,7 +157,7 @@ python -m http.server 8000 --directory dist
 
 Abre <http://127.0.0.1:8000/>. Las rutas son *hash*
 (`#/area/<id>/<proyecto>`), así que el sitio funciona desde cualquier servidor de
-archivos. No hay compilación, dependencias ni backend.
+archivos. El integrador no necesita compilación. Las demos conectadas necesitan la API; las autocontenidas funcionan sin ella.
 
 Los cuatro tableros conectados resuelven la API en tiempo de ejecución con
 `dist/config.js`: por omisión `/api` (mismo origen, detrás del proxy). Para
@@ -213,7 +213,7 @@ tools/
 node tools/verificar-taxonomia.mjs
 ```
 
-Comprueba en un navegador real el orden de las cinco áreas, sus etiquetas, el
+La taxonomía se verifica en un navegador real: orden de las cinco áreas, sus etiquetas, el
 recuento de casos por estado, las fichas de cada área, los 17 enlaces a
 repositorio, los 12 enlaces a demo, el tratamiento de *roadmap* y la ausencia de
 desbordes a 390 px. La última ejecución local se hizo sobre el commit indicado en el PR, no en GitHub Actions.
@@ -251,7 +251,7 @@ documentan en los repositorios enlazados.
 
 | Capacidad | Tecnologías | Proyecto | Evidencia directa |
 |---|---|---|---|
-| Machine Learning y evaluación | Python, LightGBM, scikit-learn, Pandas, NumPy | `demand-forecasting-m5` | [`lib/app/comercial/modelo.py`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5/blob/main/lib/app/comercial/modelo.py) |
+| Machine Learning y evaluación | Python, LightGBM, scikit-learn, Pandas, NumPy | `demand-forecasting-m5` | [`lib/app/comercial/modelo.py`](https://github.com/HugoAguilarReyna/demand-forecasting-m5/blob/main/lib/app/comercial/modelo.py) |
 | Segmentación y experimentación | scikit-learn, SciPy, pandas | `customer-growth-intelligence` | [`pipeline/src`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence/tree/main/pipeline/src) |
 | Pronóstico y artefactos `joblib` | scikit-learn, joblib | `dockmind-demand-planning` | [`pipeline/train_models.py`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning/blob/main/pipeline/train_models.py) |
 | Ingeniería de datos | Python, importer idempotente, índices | `portfolio-api` | [`app/cnbv`](https://github.com/HugoAguilarReyna/portfolio-api/tree/main/app/cnbv) y [`app/db/indexes.py`](https://github.com/HugoAguilarReyna/portfolio-api/blob/main/app/db/indexes.py) |
@@ -294,20 +294,15 @@ antes de abrir una demo:
 | **Demos autocontenidas** | `retailops-unified`, `orbita-orbital-intelligence`, `kilometro-cero-logistics`, `ripple-room-supply-chain`, `dockmind-demand-planning`, `vidas-en-transito`, `gaza-humanitarian-observatory` | Servidor de archivos. Datos, estilos y lógica viajan dentro del artefacto. |
 | **Tableros que requieren la API** | Banca múltiple, Atlas vial, Marketing y clientes, Pulso comercial (Walmex) | `portfolio-api` en ejecución y MongoDB con los datos importados. |
 | **Servicios de dominio** | `nl2sql-economic-copilot`, `banxico-evidence-briefing`, `data-incident-commander` | `pip install -e .` en su repositorio; no usan la API HTTP. |
-| **Entrenamiento y actualización de datos** | `demand-forecasting-m5`, `customer-growth-intelligence`, `dockmind-demand-planning` | CSV externos (M5, Complete Journey, Criteo), MongoDB y, en M5, Unix. |
+| **Entrenamiento y actualización de datos** | `demand-forecasting-m5`, `customer-growth-intelligence`, `dockmind-demand-planning` | CSV externos (M5, Complete Journey, Criteo), MongoDB local para el flujo completo; M5 incluye un recorrido pequeño sin MongoDB. |
 
-### Sobre `localhost:8010`
+### Configuración de la API
 
-Los cuatro tableros piden la API en `http://127.0.0.1:8010`. En una demo servida
-**desde tu equipo** eso apunta a tu propia máquina: hay que arrancar
-`portfolio-api` en ese puerto con una base importada. En una demo remota, ese
-`localhost` apunta al equipo del visitante y no funcionará: los tableros muestran
-su estado de error, no una cifra inventada. El puerto y `ALLOWED_ORIGINS` se
-configuran por variables de entorno; el detalle está en el README de
-[`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api).
-
-Versiones compatibles registradas: los cuatro tableros se probaron contra
-`portfolio-api` en el commit `8a27227`.
+El artefacto publicado usa `/api` en el mismo origen mediante `dist/config.js`.
+El proxy nginx lo reenvía al servicio de API. Al servir solo `dist/` con Python,
+las demos que necesitan backend requieren configurar `PORTFOLIO_API_BASE` con
+una API local y autorizar el origen en su configuración CORS. El puerto 8010 es
+un ejemplo de desarrollo, no el destino de los visitantes del sitio publicado.
 
 ## Estado editorial de las fichas
 
@@ -352,3 +347,45 @@ conserva `artifacts/verificacion-fichas.json` y
 workflow `Despliegue integrado` construye las dos imágenes y levanta el stack
 completo. [Alcance y reproducción](docs/CORRECCION_HALLAZGOS_2026-11-19.md).
 
+
+
+## Inventario de evidencia y procedencia
+
+`dist/content.js` es la fuente de estados, código, demos, resultados declarados y
+límites. `node tools/generar-evidencia.mjs` genera la matriz CSV y
+`docs/EVIDENCIA_PROYECTOS.json`. CI usa `--check` para impedir que queden obsoletos.
+Este inventario no sustituye la evaluación ni certifica cifras de los modelos.
+
+Gaza se reconstruyó desde el commit indicado en
+`dist/dashboards/gaza-observatorio/provenance.json`, ejecutando el constructor
+público y su comparación idempotente. La verificación exige las secciones
+agregadas, ausencia de marcas nominales, presupuesto de tamaño y SHA-256 exacto.
+No se aumenta el umbral para aceptar el artefacto nominal.
+
+Las demos con nombres estables se revalidan con `no-cache`; solo los bundles con
+hash en `assets/` reciben `immutable`. Nginx comprime HTML, CSS, JS y JSON.
+Esto reduce transferencia, pero no sustituye separar datos pesados de los HTML.
+
+La API de esta corrección cambia el modo LLM de Banxico a selección de citas
+literales por fragmento. Desplegar el sitio y la API desde las ramas compatibles:
+la verificación literal no certifica relevancia, exhaustividad ni validez del corpus.
+
+
+La prueba de portada (`tools/verificar-destacados.mjs`) forma parte de
+`npm run verificar` y comprueba tres casos, enlaces, navegación y ancho de 390 px.
+El diagnóstico piloto de recuperación, con sus fallos publicados, vive en
+`banxico-evidence-briefing/research`; no debe confundirse con sus pruebas unitarias.
+
+
+## Integración de las fases F1, F2 y F3 ya publicadas
+
+Esta corrección parte de `portfolio-api` en `f7b5099` y del sitio en `abdce09`.
+Se conservan las cuotas compartidas por IP y globales, los 51 casos de NL-to-SQL,
+los 32 de Banxico y el agente de Incident Commander con herramientas de solo
+lectura, presupuesto y máximo de pasos. El evaluador simulado de citas de F2 se
+adapta al contrato literal de esta corrección. No se ejecutan proveedores reales.
+
+Las interfaces conservan sus recorridos. El endpoint `/agent` no se presenta como
+una reparación autónoma: la evaluación del backend usa un doble simulado y no
+modifica el flujo de aprobación ni despacha acciones externas. El código de las
+tres capacidades recientes se enlaza a la API canónica desde las fichas.
