@@ -120,3 +120,16 @@ jobs:
           docker compose -f deploy/docker-compose.yml \
             --env-file /tmp/despliegue-validacion.env config --quiet
           echo "Manifiesto válido"
+          docker compose -f deploy/docker-compose.yml -f deploy/docker-compose.m5.yml \
+            --env-file /tmp/despliegue-validacion.env config --format json > /tmp/m5-compose.json
+          python3 - <<'PY'
+          import json
+          c = json.load(open('/tmp/m5-compose.json'))
+          m = c['services']['mongo-m5']
+          assert not m.get('ports'), 'MongoDB M5 no debe publicar puertos'
+          assert c['networks']['m5-interna']['internal'] is True
+          assert set(m['networks']) == {'m5-interna'}
+          assert c['services']['api']['environment']['COMERCIAL_MONGODB_URI'] == 'mongodb://mongo-m5:27017/atlas_comercial_local'
+          assert any(v['target'] == '/data/db' and v['type'] == 'volume' for v in m['volumes'])
+          print('M5: configuración válida, red interna, volumen persistente y sin puertos publicados')
+          PY

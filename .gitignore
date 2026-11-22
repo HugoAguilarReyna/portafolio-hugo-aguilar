@@ -41,6 +41,9 @@ accesos.txt
 # tareas, entornos y entradas propias de cada equipo no se publican.
 deploy/*
 !deploy/docker-compose.yml
+!deploy/docker-compose.m5.yml
+!deploy/compose-con-m5.sh
+!deploy/M5.md
 !deploy/Dockerfile.sitio
 !deploy/nginx.conf
 !deploy/LEEME.md
