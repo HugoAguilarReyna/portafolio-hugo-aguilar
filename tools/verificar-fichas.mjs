@@ -91,7 +91,14 @@ async function editorial(page,p){
     texto:String(el.textContent||'').trim().slice(0,60)
    });
   }
-  return{url:location.href,hash:location.hash,fields:[...document.querySelectorAll('dt')].map(dt=>[dt.textContent.trim(),dt.nextElementSibling?.textContent??'']),host:!!document.querySelector('[data-testid="hallazgos-host"]'),viewport:{ancho_visible:ancho,innerWidth:window.innerWidth,scrollWidth:de.scrollWidth},overflow:de.scrollWidth-ancho,desbordes};
+  /* Los apartados pueden ir en un <details> (fichas con método plegable): el
+     título vive en `.plegable-titulo` y el texto en `.plegable-cuerpo`, así que
+     se recogen aparte para comprobar igual el contenido. */
+  const plegables=[...document.querySelectorAll('.field--plegable')].map(el=>[
+    el.querySelector('.plegable-titulo')?.textContent.trim()??'',
+    el.querySelector('.plegable-cuerpo')?.textContent??''
+  ]);
+  return{url:location.href,hash:location.hash,fields:[...document.querySelectorAll('dt')].map(dt=>[dt.textContent.trim(),dt.nextElementSibling?.textContent??'']).concat(plegables),host:!!document.querySelector('[data-testid="hallazgos-host"]'),viewport:{ancho_visible:ancho,innerWidth:window.innerWidth,scrollWidth:de.scrollWidth},overflow:de.scrollWidth-ancho,desbordes};
  });
  currentSnapshot=actual;
  assert.equal(actual.hash,routeOf(p),'Ruta incorrecta');

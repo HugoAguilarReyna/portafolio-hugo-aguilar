@@ -20,9 +20,9 @@
       return api.placeholder(host, {
         titulo: 'Modernización SAS → Python',
         puntos: [
-          'Ejemplo reproducible con datos sintéticos',
-          'Conciliación de resultados entre el proceso original y el migrado',
-          'Comparación de tiempos y de trazabilidad'
+          'Entregable siguiente: datos sintéticos con el contrato de entrada',
+          'Comparador celda por celda entre el proceso original y el migrado',
+          'Tiempos de ejecución y reglas sin equivalente, documentados'
         ]
       });
     }

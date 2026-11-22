@@ -1795,7 +1795,8 @@
      clicable por una capa absoluta (`card-hit`, z-index 2), así que estos
      enlaces llevan z-index propio en la hoja de estilos y nunca se anidan
      dentro de esa capa. Se abren en pestaña nueva; un campo vacío no dibuja
-     ningún enlace. */
+     ningún enlace. `codigoEtiqueta` permite que el enlace diga «Demo publicada»
+     cuando el destino es la carpeta del artefacto y no código fuente. */
   function enlaceExterno(href, etiqueta, descripcion) {
     return '<a class="card-link" href="' + esc(href) + '"' +
       ' target="_blank" rel="noopener noreferrer"' +
@@ -1808,8 +1809,11 @@
   function enlacesProyecto(project, titulo) {
     var items = [];
     if (project.codigoUrl) {
-      items.push(enlaceExterno(project.codigoUrl, 'Código',
-        'Ver el repositorio de ' + titulo + ' en GitHub'));
+      var etiquetaCodigo = project.codigoEtiqueta || 'Código';
+      var descripcionCodigo = project.codigoEtiqueta
+        ? 'Abrir la demo publicada de ' + titulo
+        : 'Ver el repositorio de ' + titulo + ' en GitHub';
+      items.push(enlaceExterno(project.codigoUrl, etiquetaCodigo, descripcionCodigo));
     }
     if (project.demoUrl) {
       items.push(enlaceExterno(project.demoUrl, 'Abrir demo',
@@ -2479,6 +2483,18 @@
         return;
       }
 
+      /* Detalle metodológico plegable: cuando la ficha lo declara, el texto
+         largo del método se guarda en un <details> y el resto de apartados
+         —incluidas las limitaciones— sigue visible. */
+      if (pair[0] === 'metodo' && project.metodoEnDetalle && project.metodo) {
+        rows += '<div class="field field--plegable"><details>' +
+          '<summary><span class="plegable-titulo">' + esc(pair[1]) + '</span>' +
+            '<span class="plegable-hint">Detalle metodológico</span></summary>' +
+          '<div class="plegable-cuerpo"><p>' + esc(project.metodo) + '</p></div>' +
+          '</details></div>';
+        return;
+      }
+
       var value = project[pair[0]];
       if (value) {
         rows += '<div><dt>' + esc(pair[1]) + '</dt><dd>' + esc(value) + '</dd></div>';
@@ -2515,6 +2531,14 @@
     var tituloPrincipal = partesTitulo[0];
     var subtituloPrincipal = partesTitulo.length > 1 ? partesTitulo.slice(1).join(' — ') : null;
 
+    /* Resumen de métricas clave (opcional): se lee antes del detalle, con el
+       mismo lenguaje visual que los apartados de la ficha. */
+    var metricas = project.resumenMetricas
+      ? '<dl class="fields project-fields ficha-metricas"><div>' +
+          '<dt>Métricas clave</dt><dd>' + esc(project.resumenMetricas) + '</dd>' +
+        '</div></dl>'
+      : '';
+
     var html = '<header class="view-head view-head--proyecto">' +
         '<p class="eyebrow">Proyecto / Área ' + esc(area.numero) + '</p>' +
         '<h1 class="view-title" id="project-view-title" tabindex="-1">' + esc(tituloPrincipal) + '</h1>' +
@@ -2524,6 +2548,7 @@
         '<p class="view-chips">' + chip(project.estado) +
           '<span class="micro-label">' + esc(etiquetaCategoria) + '</span></p>' +
       '</header>' +
+      metricas +
       (rows ? '<dl class="fields project-fields">' + rows + '</dl>' : '') +
       /* El dashboard se monta directamente, sin marco ni barra externa. */
       '<div class="demo-body" id="demo-back">' +

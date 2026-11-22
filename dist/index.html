@@ -116,7 +116,10 @@
             <p class="section-intro">
               Cinco áreas de trabajo, de la exploración de datos a los sistemas de decisión.
               Cada área reúne sus proyectos y cada proyecto se explica y se usa aquí mismo,
-              sin salir del portafolio. Hoy los casos están planificados.
+              sin salir del portafolio. Las seis demos de las áreas de IA generativa y agentes
+              —Banxico, NL-to-SQL, Data Incident Commander, Kilómetro Cero, The Ripple Room y
+              DockMind— están publicadas y se ejecutan en este sitio; el resto de fichas
+              describe el alcance, los datos y los límites de cada caso.
             </p>
           </header>
 
@@ -180,11 +183,16 @@
               LinkedIn
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
             </a>
+            <a class="btn btn-outline" href="https://github.com/HugoAguilarReyna"
+               target="_blank" rel="noopener noreferrer">
+              GitHub · HugoAguilarReyna
+              <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+            </a>
           </div>
           <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
           <p class="note-inline">
             Este sitio no tiene formulario ni envía datos a ningún servidor: el contacto
-            ocurre directamente por correo o LinkedIn.
+            ocurre directamente por correo, LinkedIn o GitHub.
           </p>
         </div>
       </div>
@@ -427,74 +435,146 @@
             <h2 id="about-tools-title">Herramientas y <em>capacidades.</em></h2>
           </div>
 
+          <p class="cap-leyenda">
+            Cada tecnología se marca según lo que se puede comprobar hoy en los repositorios
+            y en este sitio: <strong>Demostrado</strong> cuando hay código o una demo ejecutable;
+            <strong>Formación</strong> cuando solo hay curso, certificado o mención documental.
+          </p>
+
           <div class="cap-grid">
             <div class="cap">
               <h3 class="cap-title">Ingeniería de datos y Business Intelligence</h3>
-              <p class="cap-stack">SAS · Macros SAS · SQL · Python · ETL · Power BI · SAS Web Report</p>
+              <p class="cap-stack">
+                <span class="cap-nivel">Demostrado</span>SQL · Python · ETL
+              </p>
+              <p class="cap-stack">
+                <span class="cap-nivel cap-nivel--formacion">Formación</span>SAS · Macros SAS · Power BI · SAS Web Report
+              </p>
               <p class="cap-text">
                 Desarrollo de pipelines, integración de fuentes, modelado de reglas de negocio,
                 automatización de reportes regulatorios y optimización de procesos de cierre.
                 Modelado multidimensional, documentación de transformaciones y trazabilidad de
-                resultados. Migración de procesos SAS a Python.
+                resultados. La migración de procesos SAS a Python es un caso definido: no hay
+                proceso migrado publicado.
+              </p>
+              <p class="cap-evidencia">
+                Evidencia: <code>backend/scripts/importar_cnbv.py</code> ·
+                <code>backend/app/nl_sql/service.py</code>
               </p>
             </div>
 
             <div class="cap">
               <h3 class="cap-title">Procesamiento masivo y almacenamiento analítico</h3>
-              <p class="cap-stack">PySpark · Spark · Snowflake · HDFS · MapReduce · Kafka · Impala</p>
+              <p class="cap-stack">
+                <span class="cap-nivel cap-nivel--formacion">Formación</span>PySpark · Spark · Snowflake · HDFS · MapReduce · Kafka · Impala
+              </p>
               <p class="cap-text">
-                Formación y práctica técnica en procesamiento distribuido, arquitectura de datos y
-                almacenamiento analítico.
+                Formación en procesamiento distribuido, arquitectura de datos y almacenamiento
+                analítico. Ninguna de estas tecnologías tiene código ni demo en los proyectos
+                publicados.
+              </p>
+              <p class="cap-evidencia">
+                Evidencia: certificado de Snowflake «Hands-On Essentials: Data Warehousing
+                Workshop» y cursos de UNIR México; sin código en los repositorios revisados.
               </p>
             </div>
 
             <div class="cap">
               <h3 class="cap-title">Ciencia de datos, Machine Learning y Deep Learning</h3>
-              <p class="cap-stack">Python · Pandas · Scikit-learn · XGBoost · R</p>
+              <p class="cap-stack">
+                <span class="cap-nivel">Demostrado</span>Python · Pandas · Scikit-learn · NumPy · LightGBM
+              </p>
+              <p class="cap-stack">
+                <span class="cap-nivel cap-nivel--formacion">Formación</span>XGBoost · R
+              </p>
               <p class="cap-text">
                 Análisis exploratorio, preparación de variables, clasificación, regresión, árboles
                 de decisión, métodos de ensamble, clustering y reducción de dimensionalidad.
                 Formación en redes neuronales y redes neuronales profundas. Comparación de
                 modelos, ajuste de hiperparámetros y evaluación de errores y generalización.
               </p>
+              <p class="cap-evidencia">
+                Evidencia: <code>dashboards/dockmind/train_models.py</code> (scikit-learn, pandas,
+                joblib) · <code>backend/app/comercial/modelo.py</code> (LightGBM)
+              </p>
             </div>
 
             <div class="cap">
               <h3 class="cap-title">Bases de datos</h3>
-              <p class="cap-stack">SQL · SQL Server · Oracle · MongoDB · MongoDB Atlas · Neo4j · Cypher</p>
+              <p class="cap-stack">
+                <span class="cap-nivel">Demostrado</span>SQL · MongoDB · MongoDB Atlas
+              </p>
+              <p class="cap-stack">
+                <span class="cap-nivel cap-nivel--formacion">Formación</span>SQL Server · Oracle · Neo4j · Cypher
+              </p>
               <p class="cap-text">
-                Integración y consulta de fuentes relacionales, modelado de documentos y grafos,
-                consultas Cypher y conexión de Neo4j con aplicaciones Python.
+                Integración y consulta de fuentes relacionales, modelado de documentos y grafos.
+                Las consultas Cypher y la conexión de Neo4j con aplicaciones Python corresponden a
+                formación: no hay proyecto publicado que las use.
+              </p>
+              <p class="cap-evidencia">
+                Evidencia: <code>backend/app/db/mongo.py</code> ·
+                <code>backend/app/nl_sql/service.py</code> (SQL parametrizado sobre SQLite)
               </p>
             </div>
 
             <div class="cap">
               <h3 class="cap-title">Aplicaciones, servicios y contenedores</h3>
-              <p class="cap-stack">FastAPI · Pydantic · React · Git · Docker · Docker Compose</p>
+              <p class="cap-stack">
+                <span class="cap-nivel">Demostrado</span>FastAPI · Pydantic · React · Git · Docker · Docker Compose
+              </p>
               <p class="cap-text">
                 Desarrollo e integración de APIs e interfaces, contratos de datos, validación y
                 pruebas de integración. Contenedorización de servicios y ejecución conjunta de
                 backend, frontend y proxy inverso en entornos locales reproducibles.
               </p>
+              <p class="cap-evidencia">
+                Evidencia: <code>backend/Dockerfile</code> · <code>docker-compose.yml</code> ·
+                <code>backend/app/main.py</code> · <code>dashboards/atlas-vial/src</code> (React y
+                TypeScript)
+              </p>
             </div>
 
             <div class="cap">
               <h3 class="cap-title">Visualización e interfaces</h3>
-              <p class="cap-stack">Power BI · D3.js · React · Plotly · Streamlit · jQuery</p>
+              <p class="cap-stack">
+                <span class="cap-nivel">Demostrado</span>D3.js · React
+              </p>
+              <p class="cap-stack">
+                <span class="cap-nivel cap-nivel--formacion">Formación</span>Power BI · Plotly · Streamlit · jQuery
+              </p>
               <p class="cap-text">
                 Construcción de tableros, visualizaciones interactivas e interfaces para explorar
                 información y comunicar resultados.
+              </p>
+              <p class="cap-evidencia">
+                Evidencia: <code>dashboards/briefing-banxico/runtime/vendor/d3.min.js</code> ·
+                <code>dashboards/atlas-vial/src</code>
               </p>
             </div>
 
             <div class="cap">
               <h3 class="cap-title">IA generativa, RAG y agentes</h3>
-              <p class="cap-stack">LLMs mediante APIs · LangChain · LangGraph · LangSmith · MCP</p>
+              <p class="cap-stack">
+                <span class="cap-nivel">Demostrado</span>LLMs mediante APIs · RAG léxico · Flujos supervisados con aprobación humana
+              </p>
+              <p class="cap-stack">
+                <span class="cap-nivel cap-nivel--formacion">Formación</span>LangChain · LangGraph · LangSmith · MCP · Agentes autónomos
+              </p>
               <p class="cap-text">
-                Preparación y fragmentación de documentos, embeddings, recuperación de contexto y
-                respuestas con fuentes. Diseño de instrucciones, integración de herramientas,
-                flujos y agentes con estado, trazabilidad y evaluación. Validación de entradas y
-                salidas y diagnóstico de errores de conexión, autenticación e interoperabilidad.
+                Preparación y fragmentación de documentos, recuperación de contexto por
+                coincidencia de términos y respuestas con fuentes. El briefing de Banxico es
+                recuperación léxica: no usa embeddings ni búsqueda vectorial. Diseño de
+                instrucciones, integración de herramientas, flujos de decisión con estado,
+                trazabilidad y evaluación. Validación de entradas y salidas y diagnóstico de
+                errores de conexión, autenticación e interoperabilidad. Los agentes autónomos y
+                las herramientas de orquestación (LangChain, LangGraph, LangSmith, MCP) no se han
+                usado en ningún proyecto publicado.
+              </p>
+              <p class="cap-evidencia">
+                Evidencia: <code>backend/app/rag_banxico/service.py</code> ·
+                <code>backend/app/nl_sql/service.py</code> ·
+                <code>backend/app/incident_commander/service.py</code>
               </p>
             </div>
           </div>
@@ -649,7 +729,7 @@
                       Scrum Master Professional Certificate, SMPC®
                     </span>
                     <span class="certi-emisor">CertiProf</span>
-                    <span class="certi-nota">Credencial vencida en mayo de 2024</span>
+                    <span class="certi-nota">Credencial vencida en mayo de 2024 · no vigente a noviembre de 2026</span>
                   </li>
                 </ul>
               </div>
@@ -657,33 +737,15 @@
           </div>
         </section>
 
-        <!-- 5. Contacto -->
-        <section class="about-block about-contact" aria-labelledby="about-contact-title">
-          <div class="about-block-head">
-            <p class="eyebrow">05 / Contacto</p>
-            <h2 id="about-contact-title">Hablemos de lo que <em>estás construyendo.</em></h2>
-            <p class="about-block-intro">
-              Si tu proyecto requiere conectar datos, modelos y una aplicación que permita
-              utilizarlos, <a class="about-link" href="#contacto">conversemos</a> sobre el
-              problema y su alcance.
-            </p>
-          </div>
-
-          <div class="about-contact-grid">
-            <div class="about-contact-actions">
-              <a class="about-email" href="mailto:aguilar.hugo55@gmail.com">aguilar.hugo55@gmail.com</a>
-              <a class="btn btn-ghost" href="https://www.linkedin.com/in/hugo-aguilar-reyna/"
-                 target="_blank" rel="noopener noreferrer">
-                LinkedIn
-                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
-              </a>
-            </div>
-          </div>
-        </section>
-
         <p class="about-foot">
           <a class="view-back" href="#portafolio">
             Explora mi trabajo
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
+          </a>
+          <!-- El contacto vive en una sola sección (#contacto, Inicio): aquí solo se
+               enlaza para no duplicar correo ni perfiles. -->
+          <a class="view-back" href="#contacto">
+            Hablemos de tu próximo desafío
             <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>
           </a>
         </p>
