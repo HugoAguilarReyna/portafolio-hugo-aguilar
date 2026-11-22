@@ -30,7 +30,11 @@ const routes = {
  'walmex/motores':{...noData,unidad:'porcentaje',paneles:[],definicion:'',advertencia:motivo,notas:[],avisos:[]},
  'walmex/desempeno':{...noData,indicador:'mismas_tiendas',etiqueta:'',unidad:'porcentaje',base:null,bases:[],periodos:[],filas:[],periodo_ranking:null,ranking:[],divergente:false,notas:[],avisos:[]},
  'walmex/matriz':{...noData,periodos:[],mercados:[],indicadores:[],celdas:[],notas:[],avisos:[]},
- 'walmex/fuentes':{...noData,fuentes:[],periodos:[]}
+ 'walmex/fuentes':{...noData,fuentes:[],periodos:[]},
+ // Telemetría anónima: contadores en cero, el pie del sitio permanece oculto.
+ 'visitas':{visitas_totales:0,visitantes_unicos:0,top_proyectos:[]},
+ 'visitas/registrar':{visitas_totales:0,visitantes_unicos:0,contabilizada:false},
+ 'visitas/proyecto':{ok:true,proyecto_id:'fixture',vistas_proyecto:0}
 };
 export function emptyApi(url) { const key=new URL(url).pathname.split('/api/v1/')[1]; return Object.hasOwn(routes,key)?structuredClone(routes[key]):null; }
 export const fixturePaths=Object.freeze(Object.keys(routes));

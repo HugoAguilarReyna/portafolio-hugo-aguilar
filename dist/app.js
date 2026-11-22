@@ -2957,6 +2957,7 @@
       showView('project');
       document.title = route.project.titulo + ' · Hugo Aguilar';
       areaActual = route.area.id;
+      registrarVistaProyecto(route.area, route.project);
     } else if (level === 'area') {
       destroyProject();
       renderAreaView(route.area);
@@ -3097,6 +3098,191 @@
     pintar();
   }
 
+  /* ============ 16. TELEMETRÍA ANÓNIMA ============
+     Contadores del pie y ranking de proyectos sobre /api/v1/visitas. El sitio
+     funciona igual sin la API: cualquier fallo deja el bloque oculto, sin
+     mensajes ni excepciones. La sesión evita contar dos veces la misma visita
+     o el mismo proyecto. No se usan cookies. */
+
+  var CLAVE_VISITA = 'portafolio_visita_registrada';
+  var MAXIMO_TELEMETRIA = 5;
+
+  function telemetriaBase() {
+    var config = window.PORTAFOLIO_CONFIG;
+    var base = (config && config.apiBaseUrl) || window.PORTAFOLIO_API_BASE || '/api';
+    return String(base).replace(/\/+$/, '');
+  }
+
+  function telemetriaUrl(ruta) {
+    return telemetriaBase() + '/v1/visitas' + (ruta || '');
+  }
+
+  function leerSesion(clave) {
+    try {
+      return window.sessionStorage.getItem(clave);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function guardarSesion(clave, valor) {
+    try {
+      window.sessionStorage.setItem(clave, valor);
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function pedirTelemetria(url, opciones) {
+    return fetch(url, opciones).then(function (respuesta) {
+      if (!respuesta || !respuesta.ok) return null;
+      return respuesta.json().then(function (datos) {
+        return datos && typeof datos === 'object' ? datos : null;
+      }, function () {
+        return null;
+      });
+    }).catch(function () {
+      return null;
+    });
+  }
+
+  function formatearMetrica(valor) {
+    var numero = Number(valor);
+    if (!isFinite(numero) || numero < 0) numero = 0;
+    return numero.toLocaleString('es-MX');
+  }
+
+  function registrarVisitaPortafolio() {
+    var opciones = { cache: 'no-store', headers: { Accept: 'application/json' } };
+    if (leerSesion(CLAVE_VISITA) === '1') {
+      return pedirTelemetria(telemetriaUrl(''), opciones);
+    }
+    return pedirTelemetria(telemetriaUrl('/registrar'), {
+      method: 'POST',
+      headers: { Accept: 'application/json' }
+    }).then(function (registro) {
+      /* Sin respuesta válida no se insiste con el GET: la API no está ahí y el
+         pie debe quedarse oculto con una sola petición fallida. */
+      if (!registro || typeof registro.visitas_totales !== 'number') return null;
+      guardarSesion(CLAVE_VISITA, '1');
+      return pedirTelemetria(telemetriaUrl(''), opciones).then(function (estado) {
+        return estado || registro;
+      });
+    });
+  }
+
+  function buscarProyectoTelemetria(id) {
+    for (var i = 0; i < AREAS.length; i += 1) {
+      var area = AREAS[i];
+      var proyectos = area.proyectos || [];
+      for (var j = 0; j < proyectos.length; j += 1) {
+        if (proyectos[j].id === id) return { area: area, project: proyectos[j] };
+      }
+    }
+    return null;
+  }
+
+  function pintarTelemetria(datos) {
+    var contenedor = document.getElementById('telemetria');
+    var cifras = document.getElementById('telemetria-cifras');
+    var panel = document.getElementById('telemetria-panel');
+    var lista = document.getElementById('telemetria-top');
+    if (!contenedor || !cifras || !lista) return;
+
+    var visitas = Number(datos.visitas_totales);
+    if (!isFinite(visitas) || visitas <= 0) {
+      contenedor.hidden = true;
+      return;
+    }
+    var unicos = Number(datos.visitantes_unicos);
+    if (!isFinite(unicos) || unicos < 0) unicos = 0;
+    cifras.textContent = formatearMetrica(unicos) + ' visitantes · ' +
+      formatearMetrica(visitas) + ' vistas';
+
+    var top = Array.isArray(datos.top_proyectos) ? datos.top_proyectos : [];
+    var filas = [];
+    for (var i = 0; i < top.length && filas.length < MAXIMO_TELEMETRIA; i += 1) {
+      var entrada = top[i] || {};
+      var proyecto = buscarProyectoTelemetria(entrada.proyecto_id);
+      var vistas = Number(entrada.vistas);
+      if (!proyecto || !isFinite(vistas) || vistas <= 0) continue;
+      filas.push({ area: proyecto.area, project: proyecto.project, vistas: vistas });
+    }
+
+    if (!filas.length) {
+      if (panel) panel.hidden = true;
+      contenedor.hidden = false;
+      return;
+    }
+
+    var maximo = 0;
+    filas.forEach(function (fila) {
+      if (fila.vistas > maximo) maximo = fila.vistas;
+    });
+
+    var fragmento = document.createDocumentFragment();
+    filas.forEach(function (fila) {
+      var item = document.createElement('li');
+      item.className = 'telemetry-item';
+
+      var enlace = document.createElement('a');
+      enlace.className = 'telemetry-link';
+      enlace.href = '#/area/' + fila.area.id + '/' + fila.project.id;
+      enlace.title = fila.project.titulo;
+
+      var nombre = document.createElement('span');
+      nombre.className = 'telemetry-name';
+      nombre.textContent = String(fila.project.titulo || fila.project.id)
+        .split(/\s+—\s+/)[0];
+
+      var conteo = document.createElement('span');
+      conteo.className = 'telemetry-count';
+      conteo.textContent = formatearMetrica(fila.vistas);
+
+      var barra = document.createElement('span');
+      barra.className = 'telemetry-bar';
+      barra.setAttribute('aria-hidden', 'true');
+      var relleno = document.createElement('span');
+      relleno.style.width = Math.max(6, Math.round((fila.vistas / maximo) * 100)) + '%';
+      barra.appendChild(relleno);
+
+      enlace.appendChild(nombre);
+      enlace.appendChild(conteo);
+      enlace.appendChild(barra);
+      item.appendChild(enlace);
+      fragmento.appendChild(item);
+    });
+
+    lista.replaceChildren(fragmento);
+    if (panel) panel.hidden = false;
+    contenedor.hidden = false;
+  }
+
+  function registrarVistaProyecto(area, project) {
+    if (!area || !project || !project.id) return;
+    var clave = 'portafolio_visto_' + project.id;
+    if (leerSesion(clave) === '1') return;
+    guardarSesion(clave, '1');
+    pedirTelemetria(telemetriaUrl('/proyecto'), {
+      method: 'POST',
+      keepalive: true,
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({ proyecto_id: project.id, area_id: area.id })
+    });
+  }
+
+  function iniciarTelemetria() {
+    registrarVisitaPortafolio().then(function (datos) {
+      if (datos) pintarTelemetria(datos);
+    }, function () {
+      /* La API no respondió: el pie permanece oculto. */
+    });
+  }
+
   function init() {
     /* Sin JavaScript (o si este archivo falla) el contenido queda visible: las
        entradas de la galería solo se preparan cuando esta clase existe. */
@@ -3110,6 +3296,7 @@
     mountScenes();
     initRouter();
     initCopy();
+    iniciarTelemetria();
 
     /* La cabecera fija pasa a fondo opaco al desplazarse: con el velo
        translúcido se leía el contenido que circula por debajo. */

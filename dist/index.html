@@ -759,6 +759,16 @@
   </main>
 
   <footer class="site-footer">
+    <section class="wrap footer-telemetry" id="telemetria" aria-label="Métricas anónimas del portafolio" hidden>
+      <p class="telemetry-live">
+        <span class="telemetry-dot" aria-hidden="true"></span>
+        <span id="telemetria-cifras" role="status" aria-live="polite">—</span>
+      </p>
+      <div class="telemetry-panel" id="telemetria-panel" hidden>
+        <p class="telemetry-kicker">Proyectos más explorados</p>
+        <ol class="telemetry-top" id="telemetria-top"></ol>
+      </div>
+    </section>
     <div class="wrap footer-inner">
       <p>© 2026 Hugo César Aguilar Reyna</p>
       <nav class="footer-nav" aria-label="Navegación del pie">
@@ -767,7 +777,7 @@
         <a href="#portafolio">Portafolio</a>
         <a href="#contacto">Contacto</a>
       </nav>
-      <p class="footer-note">Sitio estático, sin analítica ni cookies.</p>
+      <p class="footer-note">Sitio estático, sin cookies. Telemetría anónima y agregada, sin IP almacenada.</p>
     </div>
   </footer>
 

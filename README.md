@@ -7,8 +7,10 @@ su repositorio público.
 [![Integridad](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/actions/workflows/tests.yml/badge.svg)](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/actions/workflows/tests.yml)
 [![Sitio](https://img.shields.io/badge/sitio-est%C3%A1tico-2f855a)](#ejecutar)
 
-> **Alcance.** Sitio estático: HTML, CSS y JavaScript sin compilación ni backend.
-> No usa analítica ni cookies propias. La portada carga fuentes de Google Fonts; las demos conectadas consultan la API y el LLM es opcional.
+> **Alcance.** Sitio estático: HTML, CSS y JavaScript sin compilación. No usa
+> cookies ni seguimiento individual: el pie muestra contadores agregados y
+> anónimos de visitas y proyectos, sin guardar la IP. La portada carga fuentes de
+> Google Fonts; las demos conectadas consultan la API y el LLM es opcional.
 
 **Estados**: `Publicado` — terminado, documentado y verificable · `En desarrollo` — versión en construcción; la ficha detalla la demo y evaluación disponibles · `Próximamente` — caso definido y pendiente de desarrollo (*roadmap*).
 
@@ -275,7 +277,9 @@ entrenamiento original sigue pendiente); *propuesta* en los casos de roadmap.
 - El contenido de las fichas describe lo que cada repositorio demuestra; las
   tecnologías sin repositorio público están marcadas como experiencia profesional
   en la sección de stack.
-- No hay analítica ni seguimiento de usuarios.
+- No hay cookies ni seguimiento individual. El pie consulta contadores agregados
+  y anónimos (`/api/v1/visitas`): la unicidad diaria se resuelve con un HMAC y la
+  IP no se guarda. Si la API no responde, el bloque permanece oculto.
 
 ## Seguridad y contribución
 
