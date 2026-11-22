@@ -120,6 +120,7 @@ jobs:
           docker compose -f deploy/docker-compose.yml \
             --env-file /tmp/despliegue-validacion.env config --quiet
           echo "Manifiesto válido"
+          bash -n deploy/compose-con-m5.sh
           docker compose -f deploy/docker-compose.yml -f deploy/docker-compose.m5.yml \
             --env-file /tmp/despliegue-validacion.env config --format json > /tmp/m5-compose.json
           python3 - <<'PY'

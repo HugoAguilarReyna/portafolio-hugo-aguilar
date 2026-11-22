@@ -14,7 +14,8 @@ services:
 
   mongo-m5:
     image: mongo:8.0
-    command: ["mongod", "--bind_ip_all"]
+    command: ["mongod", "--bind_ip_all", "--wiredTigerCacheSizeGB", "0.25"]
+    mem_limit: 1g
     volumes:
       - m5_datos:/data/db
     networks:
