@@ -104,6 +104,15 @@ function sourceFor(code) {
 
 function parseQuestion(question) {
   const q = normalize(question);
+  if (/\bper[\s-]*capita\b|\bpor habitante\b/.test(q)) {
+    throw new Error('El catálogo no incluye indicadores por habitante.');
+  }
+  if (/\b(?:trimestral(?:es)?|trimestres?|mensual(?:es)?|semanal(?:es)?|diari[oa]s?)\b/.test(q)) {
+    throw new Error('El snapshot contiene observaciones anuales, no esa frecuencia.');
+  }
+  if (/^\s*(?:(?:por favor|ahora|haz|realiza|ejecuta)\s+)*(?:borra(?:r)?|elimina(?:r)?|actualiza(?:r)?|modifica(?:r)?|sobrescribe|(?:un\s+)?backfill)\b/.test(q)) {
+    throw new Error('Solo se permiten consultas de lectura; no cambios ni backfill.');
+  }
   if (UNSUPPORTED_COUNTRIES.some((country) => q.includes(country))) {
     throw new Error('El snapshot de esta demo solo cubre México.');
   }
