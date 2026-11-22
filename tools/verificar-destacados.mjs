@@ -14,6 +14,7 @@ try {
     assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
     await cards.nth(2).getByRole('link',{name:'Ver caso'}).click();
     await page.waitForURL('**/#/area/ia-generativa/asistente-investigacion');
+    await page.locator('.featured').waitFor({state:'hidden'});
     assert.equal(await page.locator('.featured').isVisible(),false);
     assert.match(await page.locator('#project-view-title').innerText(),/Briefing con evidencia/);
     await page.close();

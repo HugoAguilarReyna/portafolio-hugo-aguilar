@@ -41,7 +41,7 @@ jobs:
       - name: Descargar la API (${{ env.API_REF }})
         uses: actions/checkout@v4
         with:
-          repository: Dev-HugoAguilar/portfolio-api
+          repository: HugoAguilarReyna/portfolio-api
           ref: ${{ env.API_REF }}
           path: api
 

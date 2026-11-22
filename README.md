@@ -34,10 +34,10 @@ su repositorio público.
 
 | # | Proyecto | Estado | Categoría | Repositorio |
 |---|---|---|---|---|
-| 1 | Walmart M5 — Planeación de demanda y evaluación de pronósticos | Publicado | Demanda | [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) |
+| 1 | Walmart M5 — Planeación de demanda y evaluación de pronósticos | Publicado | Demanda | [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) |
 | 2 | Clientes y campañas — Segmentación, propensión e incrementalidad | Publicado | Marketing | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) |
 | 3 | Clientes en movimiento | Publicado | Marketing | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) |
-| 4 | Gaza · Vidas y territorio | Publicado | Observatorio humanitario | [`gaza-humanitarian-observatory`](https://github.com/Dev-HugoAguilar/gaza-humanitarian-observatory) |
+| 4 | Gaza · Vidas y territorio | Publicado | Observatorio humanitario | [`gaza-humanitarian-observatory`](https://github.com/HugoAguilarReyna/gaza-humanitarian-observatory) |
 | 5 | RetailOps Unified | Publicado | Machine Learning | [`retailops-unified`](https://github.com/Dev-HugoAguilar/retailops-unified) |
 
 ## 03 · Ingeniería de datos
@@ -54,7 +54,7 @@ su repositorio público.
 
 | # | Proyecto | Estado | Categoría | Repositorio |
 |---|---|---|---|---|
-| 1 | Briefing con evidencia · Banco de México | En desarrollo | RAG / Finanzas | [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing) |
+| 1 | Briefing con evidencia · Banco de México | En desarrollo | RAG / Finanzas | [`banxico-evidence-briefing`](https://github.com/HugoAguilarReyna/banxico-evidence-briefing) |
 | 2 | Copiloto NL-to-SQL · indicadores económicos de México | En desarrollo | NL-to-SQL | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) |
 
 ## 05 · Agentes y sistemas de decisión
@@ -101,14 +101,14 @@ existe, de modo que una fila nunca apunta a un destino inexistente.
 
 | Tecnología | Nivel | Dónde se demuestra |
 |---|---|---|
-| Python | ✅ | 15 repositorios: [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5), [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) y el resto de pipelines |
+| Python | ✅ | 15 repositorios: [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5), [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) y el resto de pipelines |
 | Pandas | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) |
-| NumPy | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) |
+| NumPy | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) |
 | SciPy | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) (potencia estadística y corrección de Holm) |
 | Scikit-learn | ✅ | [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence) (K-Means y propensión), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) (Ridge y Random Forest multisalida) |
-| LightGBM | ✅ | [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) (modelo global por horizonte), [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) |
-| Validación cruzada y selección de modelo | ✅ | [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5): cortes de desarrollo para elegir por WAPE y cortes reservados para evaluar; [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence): validación temporal y de estabilidad entre semillas |
-| Pipelines de datos analíticos | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (ingesta idempotente con revisiones por hash), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) (importar → entrenar → pronosticar → agregar) |
+| LightGBM | ✅ | [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) (modelo global por horizonte), [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) |
+| Validación cruzada y selección de modelo | ✅ | [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5): cortes de desarrollo para elegir por WAPE y cortes reservados para evaluar; [`customer-growth-intelligence`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence): validación temporal y de estabilidad entre semillas |
+| Pipelines de datos analíticos | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (ingesta idempotente con revisiones por hash), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) (importar → entrenar → pronosticar → agregar) |
 
 ### IA generativa y LLMs
 
@@ -126,13 +126,13 @@ existe, de modo que una fila nunca apunta a un destino inexistente.
 |---|---|---|
 | SAS → Python: macros y reportes regulatorios (CNBV / banca) | ◐ | Caso de roadmap *Modernización SAS → Python* (sin repositorio) |
 | SQL | ✅ | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) (plantillas parametrizadas sobre SQLite en solo lectura), [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (agregaciones y consultas) |
-| MongoDB Atlas | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (pymongo, índices, importadores idempotentes con revisiones por hash), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) |
+| MongoDB Atlas | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (pymongo, índices, importadores idempotentes con revisiones por hash), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) |
 | SQLite | ✅ | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) (base derivada abierta en modo lectura) |
 | BigQuery | ✅ | [`ga4-marketing-analytics`](https://github.com/Dev-HugoAguilar/ga4-marketing-analytics), [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (extracción de la muestra pública de GA4) |
 | Docker | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (`Dockerfile`) |
 | Docker Compose | ✅ | [`deploy/docker-compose.yml`](deploy/docker-compose.yml) (sitio + API con un solo origen público) y el `docker-compose.yml` del monorepo de trabajo, que no se publica |
 | FastAPI | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) y los servicios de dominio de varios repositorios |
-| Pydantic | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5), [`data-incident-commander`](https://github.com/Dev-HugoAguilar/data-incident-commander), [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing), [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) |
+| Pydantic | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5), [`data-incident-commander`](https://github.com/Dev-HugoAguilar/data-incident-commander), [`banxico-evidence-briefing`](https://github.com/HugoAguilarReyna/banxico-evidence-briefing), [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) |
 | APIs REST | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (`/api/v1/…`) y las aplicaciones que la consumen |
 | Git | ✅ | Los repositorios enlazados, con commits convencionales |
 
@@ -140,8 +140,8 @@ existe, de modo que una fila nunca apunta a un destino inexistente.
 
 | Tecnología | Nivel | Dónde se demuestra |
 |---|---|---|
-| D3.js | ✅ | 10 repositorios: [`vidas-en-transito`](https://github.com/Dev-HugoAguilar/vidas-en-transito), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning), [`cdmx-traffic-atlas`](https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas), [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing) y el resto |
-| React | ✅ | [`cdmx-traffic-atlas`](https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas), [`mexican-banking-analytics`](https://github.com/Dev-HugoAguilar/mexican-banking-analytics), [`ga4-marketing-analytics`](https://github.com/Dev-HugoAguilar/ga4-marketing-analytics), [`walmex-financial-pulse`](https://github.com/Dev-HugoAguilar/walmex-financial-pulse), [`demand-forecasting-m5`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5) |
+| D3.js | ✅ | 10 repositorios: [`vidas-en-transito`](https://github.com/Dev-HugoAguilar/vidas-en-transito), [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning), [`cdmx-traffic-atlas`](https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas), [`banxico-evidence-briefing`](https://github.com/HugoAguilarReyna/banxico-evidence-briefing) y el resto |
+| React | ✅ | [`cdmx-traffic-atlas`](https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas), [`mexican-banking-analytics`](https://github.com/Dev-HugoAguilar/mexican-banking-analytics), [`ga4-marketing-analytics`](https://github.com/Dev-HugoAguilar/ga4-marketing-analytics), [`walmex-financial-pulse`](https://github.com/Dev-HugoAguilar/walmex-financial-pulse), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) |
 | Vite | ✅ | Los cuatro tableros React (`cdmx-traffic-atlas`, `mexican-banking-analytics`, `ga4-marketing-analytics`, `walmex-financial-pulse`) con build verificado en CI; `demand-forecasting-m5` incluye la fuente de su interfaz, sin build en CI |
 | HTML5 / CSS3 moderno | ✅ | Todos los sitios: sistema visual propio, sin frameworks de UI |
 | MapLibre GL · Three.js · SGP4 | ✅ | [`kilometro-cero-logistics`](https://github.com/Dev-HugoAguilar/kilometro-cero-logistics) (mapa vectorial), [`orbita-orbital-intelligence`](https://github.com/Dev-HugoAguilar/orbita-orbital-intelligence) (Tierra 3D y propagación orbital) |
@@ -251,7 +251,7 @@ documentan en los repositorios enlazados.
 
 | Capacidad | Tecnologías | Proyecto | Evidencia directa |
 |---|---|---|---|
-| Machine Learning y evaluación | Python, LightGBM, scikit-learn, Pandas, NumPy | `demand-forecasting-m5` | [`lib/app/comercial/modelo.py`](https://github.com/Dev-HugoAguilar/demand-forecasting-m5/blob/main/lib/app/comercial/modelo.py) |
+| Machine Learning y evaluación | Python, LightGBM, scikit-learn, Pandas, NumPy | `demand-forecasting-m5` | [`lib/app/comercial/modelo.py`](https://github.com/HugoAguilarReyna/demand-forecasting-m5/blob/main/lib/app/comercial/modelo.py) |
 | Segmentación y experimentación | scikit-learn, SciPy, pandas | `customer-growth-intelligence` | [`pipeline/src`](https://github.com/Dev-HugoAguilar/customer-growth-intelligence/tree/main/pipeline/src) |
 | Pronóstico y artefactos `joblib` | scikit-learn, joblib | `dockmind-demand-planning` | [`pipeline/train_models.py`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning/blob/main/pipeline/train_models.py) |
 | Ingeniería de datos | Python, importer idempotente, índices | `portfolio-api` | [`app/cnbv`](https://github.com/HugoAguilarReyna/portfolio-api/tree/main/app/cnbv) y [`app/db/indexes.py`](https://github.com/HugoAguilarReyna/portfolio-api/blob/main/app/db/indexes.py) |

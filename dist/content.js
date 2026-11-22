@@ -477,7 +477,7 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Resumen del tablero «Walmart M5 — Planeación de demanda y evaluación de pronósticos», pantalla «Resultados»: encabezado del caso con la nota de independencia y la navegación de las seis pantallas, el plan de ventas a cuatro semanas con el corte del 22 de mayo de 2016, el resumen del conjunto filtrado (1 335 219,04 unidades previstas, 1 231 764 observadas, +103 455 de diferencia y 30 490 series), la tabla semanal por artículo y tienda con sus cuatro semanas y paginación, y el detalle de la serie seleccionada.',
           demoUrl: null,
-          codigoUrl: 'https://github.com/Dev-HugoAguilar/demand-forecasting-m5',
+          codigoUrl: 'https://github.com/HugoAguilarReyna/demand-forecasting-m5',
           hallazgos: null,
           notaEstado:
             'Datos reales de M5 importados en MongoDB local (base atlas_comercial_local). El tablero lee la versión publicada desde la API; no hay datos sintéticos en las cifras publicadas. El paquete de publicación compacto para la demo está generado, exportado y validado en local (base atlas_comercial_demo: 435 276 documentos, 164,8 MB de almacenamiento, archivo gzip de 70,5 MB, 60 de 60 respuestas equivalentes a la base de trabajo y las seis pantallas verificadas contra ella); la carga en MongoDB Atlas no se ha ejecutado en este incremento. La cobertura son los días con ventas: 1 941 de los 1 969 días de calendario, y los 28 días finales sin ventas se excluyen de la cobertura pública. La exploración por departamentos usa un derivado local tienda × departamento (70 combinaciones) construido desde los bloques y reconciliado contra los agregados antes de publicarse.',
@@ -637,7 +637,7 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Portada del observatorio «Gaza · Vidas y territorio»: el mapa bivariado del daño a todo el ancho de su sección, con el título que explica las dos dimensiones de cada celda, los controles de evaluación de UNOSAT, mínimo de sitios y descarga, la barra de ampliación y la franja de Gaza dividida en celdas de 0,005 grados sobre su contorno geográfico.',
           demoUrl: 'dashboards/gaza-observatorio/index.html',
-          codigoUrl: 'https://github.com/Dev-HugoAguilar/gaza-humanitarian-observatory',
+          codigoUrl: 'https://github.com/HugoAguilarReyna/gaza-humanitarian-observatory',
           hallazgos: null,
           tecnologiaEstado: null,
           problema:
