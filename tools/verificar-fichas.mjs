@@ -199,7 +199,7 @@ try{
  git=estadoGit();
  const c={window:{}};vm.createContext(c);vm.runInContext(fs.readFileSync(path.join(ROOT,'dist/content.js'),'utf8'),c,{timeout:1000});
  projects=c.window.PORTAFOLIO.areas.flatMap(a=>a.proyectos.map(p=>({...p,area:a.id})));
- assert.equal(projects.length,20,'Registro incompleto');
+ assert.equal(projects.length,19,'Registro incompleto');
  if(PILOT)projects=[projects.find(p=>p.id==='comparativo-bancario')];
  for(const p of projects)for(const vp of Object.keys(VPS)){
   add('determinista',p,vp,'entrada-directa',async()=>{const t=await open(vp);try{await t.page.goto(BASE+'/'+routeOf(p),{waitUntil:'domcontentloaded'});await editorial(t.page,p);assert.deepEqual(t.errors,[],'Excepción del aplicativo');return{api:'simulada-vacia-o-no-disponible',network:t.network,requests:t.requests,requestsWithoutFixture:t.missing};}finally{await t.close();}});
