@@ -25,7 +25,8 @@ const FICHAS = [
   ['comparativo-bancario', 'dashboards'],
   ['atlas-vial', 'dashboards'],
   ['marketing-clientes', 'dashboards'],
-  ['pulso-comercial', 'dashboards']
+  ['pulso-comercial', 'dashboards'],
+  ['atlas-comercial', 'ciencia-de-datos']
 ];
 
 const TIPOS = {
@@ -98,6 +99,7 @@ try {
       atlas: window.PORTFOLIO_ATLAS_API,
       marketing: window.PORTFOLIO_MARKETING_API,
       walmex: window.PORTFOLIO_WALMEX_API,
+      comercial: window.PORTFOLIO_COMERCIAL_API,
       origen: location.origin
     }));
 
@@ -109,7 +111,8 @@ try {
         banca: apiBase.banca,
         atlas: apiBase.atlas,
         marketing: apiBase.marketing,
-        walmex: apiBase.walmex
+        walmex: apiBase.walmex,
+        comercial: apiBase.comercial
       },
       peticiones_api: peticiones.slice(0, 10),
       errores_consola: erroresConsola.slice(0, 5)

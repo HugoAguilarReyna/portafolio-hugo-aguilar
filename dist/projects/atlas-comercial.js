@@ -14,7 +14,7 @@
    de importar») y no muestra cifras.
 
    Base de la API (en orden): `opts.apiBase` → `window.PORTFOLIO_COMERCIAL_API` →
-   `http://127.0.0.1:8010/api/v1/comercial/m5`.
+   `/api/v1/comercial/m5`.
    ========================================================================== */
 
 (function () {

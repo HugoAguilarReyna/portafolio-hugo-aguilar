@@ -27,6 +27,7 @@ const ARCHIVOS_RUNTIME = [
   'dist/config.js',
   'dist/app.js',
   'dist/projects.js',
+  'dist/projects/atlas-comercial.js',
   'deploy/nginx.conf'
 ];
 
@@ -79,7 +80,8 @@ comprobar('el build de producción resuelve /api/v1 sin URL absoluta', () => {
     PORTFOLIO_BANCA_API: '/api/v1/cnbv/banca-multiple',
     PORTFOLIO_ATLAS_API: '/api/v1/atlas-vial',
     PORTFOLIO_MARKETING_API: '/api/v1/marketing',
-    PORTFOLIO_WALMEX_API: '/api/v1/walmex'
+    PORTFOLIO_WALMEX_API: '/api/v1/walmex',
+    PORTFOLIO_COMERCIAL_API: '/api/v1/comercial/m5'
   };
   for (const [clave, valor] of Object.entries(esperado)) {
     assert.equal(window[clave], valor, `${clave} = ${window[clave]}`);
