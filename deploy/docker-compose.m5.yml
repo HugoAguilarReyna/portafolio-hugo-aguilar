@@ -1,0 +1,36 @@
+# Usar junto con docker-compose.yml. MongoDB M5 no publica puertos y usa
+# un volumen exclusivo y una red interna compartida solo con la API.
+services:
+  api:
+    environment:
+      COMERCIAL_MONGODB_URI: mongodb://mongo-m5:27017/atlas_comercial_local
+      COMERCIAL_MONGODB_DB: atlas_comercial_local
+    networks:
+      - default
+      - m5-interna
+    depends_on:
+      mongo-m5:
+        condition: service_healthy
+
+  mongo-m5:
+    image: mongo:8.0
+    command: ["mongod", "--bind_ip_all", "--wiredTigerCacheSizeGB", "0.25"]
+    mem_limit: 1g
+    volumes:
+      - m5_datos:/data/db
+    networks:
+      - m5-interna
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "if (!db.adminCommand({ping:1}).ok) quit(1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 15s
+    restart: unless-stopped
+
+volumes:
+  m5_datos:
+
+networks:
+  m5-interna:
+    internal: true
