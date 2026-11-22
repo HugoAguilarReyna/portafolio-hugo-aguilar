@@ -55,8 +55,8 @@ su repositorio público.
 
 | # | Proyecto | Estado | Categoría | Repositorio |
 |---|---|---|---|---|
-| 1 | Briefing con evidencia · Banco de México | En desarrollo | RAG / Finanzas | [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing) |
-| 2 | Copiloto NL-to-SQL · indicadores económicos de México | En desarrollo | NL-to-SQL | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) |
+| 1 | Briefing con evidencia · Banco de México | En desarrollo | RAG / Finanzas | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/briefing-banxico) |
+| 2 | Copiloto NL-to-SQL · indicadores económicos de México | En desarrollo | NL-to-SQL | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/copiloto-nl-sql) |
 
 ## 05 · Agentes y sistemas de decisión
 
@@ -64,18 +64,18 @@ su repositorio público.
 
 | # | Proyecto | Estado | Categoría | Repositorio |
 |---|---|---|---|---|
-| 1 | Data Incident Commander | En desarrollo | Data Reliability | [`data-incident-commander`](https://github.com/Dev-HugoAguilar/data-incident-commander) |
-| 2 | The Ripple Room — disrupciones de semiconductores | En desarrollo | Simulación / Supply Chain | [`ripple-room-supply-chain`](https://github.com/Dev-HugoAguilar/ripple-room-supply-chain) |
-| 3 | Kilómetro Cero — control de red de envíos | En desarrollo | Logística | [`kilometro-cero-logistics`](https://github.com/Dev-HugoAguilar/kilometro-cero-logistics) |
-| 4 | DockMind — pronóstico y planificación de inventario | En desarrollo | Operaciones | [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) |
+| 1 | Data Incident Commander | En desarrollo | Data Reliability | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/data-incident-commander) |
+| 2 | The Ripple Room — disrupciones de semiconductores | En desarrollo | Simulación / Supply Chain | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/the-ripple-room) |
+| 3 | Kilómetro Cero — control de red de envíos | En desarrollo | Logística | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/kilometro-cero) |
+| 4 | DockMind — pronóstico y planificación de inventario | En desarrollo | Operaciones | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/dockmind) |
 | 5 | Analista asistido por IA | Próximamente | Agentes | Sin repositorio (Roadmap) |
 
 ## Infraestructura compartida
 
 | Repositorio | Qué contiene |
 |---|---|
-| [`portfolio-api`](https://github.com/Dev-HugoAguilar/portfolio-api) | API de solo lectura (FastAPI + MongoDB Atlas) que sirve a los tableros de las cinco categorías. |
-| [`portafolio-hugo-aguilar`](https://github.com/Dev-HugoAguilar/portafolio-hugo-aguilar) | Este sitio integrador: galería, fichas y montaje de las demos. |
+| [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) | API FastAPI + MongoDB Atlas; incluye consultas LLM consultivas opcionales para las demos. |
+| [`portafolio-hugo-aguilar`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar) | Este sitio integrador: galería, fichas, interfaces y artefactos publicados de las demos. |
 
 ## Estado de publicación
 
@@ -109,11 +109,11 @@ existe, de modo que una fila nunca apunta a un destino inexistente.
 
 | Capacidad | Nivel | Dónde se demuestra |
 |---|---|---|
-| Integración de modelos de lenguaje por API | ✅ | [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing) (proveedor compatible con OpenAI, respuesta condicionada a la evidencia), [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) (plan JSON del modelo, validado antes de tocar la base) |
-| Diseño de prompts contextuales | ✅ | [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing): se envía solo la evidencia recuperada y se exige citar `[BM-…]` |
-| Arquitecturas RAG | ✅ | [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing): corpus versionado, recuperación léxica y abstención. **Sin embeddings**: el repositorio lo declara como límite, no como equivalencia |
-| Flujos con agentes | ✅ | [`data-incident-commander`](https://github.com/Dev-HugoAguilar/data-incident-commander): agente supervisado que diagnostica, propone y se detiene para aprobación humana |
-| Validación de entradas y salidas | ✅ | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) (plan descartado si no pasa reglas), [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing) (verificación de cita), [`data-incident-commander`](https://github.com/Dev-HugoAguilar/data-incident-commander) (reglas y límites de autoridad) |
+| Integración de modelos de lenguaje por API | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (cliente compartido, configuración solo en servidor), [`portafolio-hugo-aguilar`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards) (seis interfaces que llaman a la API del mismo origen) |
+| Diseño de prompts contextuales | ✅ | Briefing Banxico envía la pregunta y los fragmentos recuperados; NL-to-SQL solicita un plan JSON limitado al catálogo; las consultas consultivas de los otros tableros reciben el escenario activo. Las llamadas son explícitas y opcionales. |
+| Arquitecturas RAG | ✅ | Briefing Banxico: corpus versionado, recuperación léxica, citas verificadas y abstención. **Sin embeddings**: la recuperación no es vectorial. |
+| Sistemas de decisión supervisados | ✅ | Data Incident Commander conserva un flujo determinista y una pausa de aprobación humana; el LLM da una recomendación consultiva de una sola llamada. Kilómetro Cero, The Ripple Room y DockMind también conservan sus motores deterministas. **No son agentes autónomos ni ejecutan acciones con el LLM.** |
+| Validación de entradas y salidas | ✅ | NL-to-SQL valida el plan antes de construir SQL de solo lectura; Banxico valida citas; Incident Commander, Kilómetro Cero, Ripple Room y DockMind limitan las respuestas al catálogo y al contexto permitido. |
 
 ### Ingeniería de datos, bases de datos y cloud
 
