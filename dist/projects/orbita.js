@@ -14,8 +14,43 @@
   if (!window.PORTFOLIO_PROJECTS) return;
 
   var PAGINA = 'dashboards/orbita/index.html';
+  /* Icono de la pestaña mientras la ficha está abierta: red neuronal con la
+     paleta de datos del proyecto, sin fondo. Se restituye al salir. */
+  var ICONO_ORBITA = 'data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cg%20stroke%3D%22%23408e7a%22%20stroke-width%3D%221.9%22%20stroke-linecap%3D%22round%22%3E%3Cpath%20d%3D%22M6%2010%2016%206M6%2010%2016%2016M6%2022%2016%2016M6%2022%2016%2026M16%206%2026%2010M16%2016%2026%2010M16%2016%2026%2022M16%2026%2026%2022%22%2F%3E%3C%2Fg%3E%3Ccircle%20cx%3D%226%22%20cy%3D%2210%22%20r%3D%222.9%22%20fill%3D%22%23a36bd3%22%2F%3E%3Ccircle%20cx%3D%226%22%20cy%3D%2222%22%20r%3D%222.9%22%20fill%3D%22%23a36bd3%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%226%22%20r%3D%222.9%22%20fill%3D%22%23a36bd3%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2216%22%20r%3D%223.3%22%20fill%3D%22%23e98239%22%2F%3E%3Ccircle%20cx%3D%2216%22%20cy%3D%2226%22%20r%3D%222.9%22%20fill%3D%22%23a36bd3%22%2F%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%2210%22%20r%3D%222.9%22%20fill%3D%22%23a36bd3%22%2F%3E%3Ccircle%20cx%3D%2226%22%20cy%3D%2222%22%20r%3D%222.9%22%20fill%3D%22%23a36bd3%22%2F%3E%3C%2Fsvg%3E';
+  var enlaceIcono = null;
+  var iconoAnterior = null;
+
   var ALTO_MINIMO = 900;
   var ALTO_RESPALDO = 6200;
+
+
+  /* El tablero vive en un iframe: el icono que ve el navegador es el del
+     documento del portafolio. Se cambia solo mientras dura esta ficha. */
+  function usarIconoDelProyecto() {
+    var enlace = document.querySelector('link[rel~="icon"]');
+    if (!enlace || enlaceIcono) return;
+    enlaceIcono = enlace;
+    iconoAnterior = {
+      href: enlace.getAttribute('href'),
+      type: enlace.getAttribute('type'),
+      sizes: enlace.getAttribute('sizes'),
+    };
+    enlace.setAttribute('type', 'image/svg+xml');
+    enlace.setAttribute('sizes', 'any');
+    enlace.setAttribute('href', ICONO_ORBITA);
+  }
+
+  function restituirIcono() {
+    if (!enlaceIcono) return;
+    if (iconoAnterior.href === null) enlaceIcono.removeAttribute('href');
+    else enlaceIcono.setAttribute('href', iconoAnterior.href);
+    if (iconoAnterior.type === null) enlaceIcono.removeAttribute('type');
+    else enlaceIcono.setAttribute('type', iconoAnterior.type);
+    if (iconoAnterior.sizes === null) enlaceIcono.removeAttribute('sizes');
+    else enlaceIcono.setAttribute('sizes', iconoAnterior.sizes);
+    enlaceIcono = null;
+    iconoAnterior = null;
+  }
 
   function ajustarAlto(marco) {
     var documento = null;
@@ -46,6 +81,8 @@
       var observador = null;
       var temporizador = null;
       var vivo = true;
+
+      usarIconoDelProyecto();
 
       host.innerHTML = '';
       host.style.padding = '0';
@@ -86,6 +123,7 @@
       return {
         destroy: function () {
           vivo = false;
+          restituirIcono();
           window.removeEventListener('resize', alRedimensionar);
           if (temporizador) window.clearInterval(temporizador);
           if (observador) observador.disconnect();
