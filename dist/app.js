@@ -1865,6 +1865,35 @@
     return '<dl class="tec-grupos">' + filas + '</dl>';
   }
 
+  function renderFeatured() {
+    var host = document.getElementById('featured-projects');
+    if (!host) return;
+    var choices = [
+      ['atlas-comercial', 'Pronóstico de demanda', 'LightGBM y baseline semanal, evaluación temporal y error por horizonte.', 'Los cortes finales fueron consultados para confirmar la publicación; no son un holdout intacto.'],
+      ['clientes-campanas', 'Clientes y campañas', 'Segmentación, propensión y un benchmark independiente de incrementalidad.', 'La propensión ordena clientes; el experimento comercial sigue pendiente.'],
+      ['asistente-investigacion', 'Briefing con evidencia', 'Consulta documental con recuperación léxica y fuentes que se pueden inspeccionar.', 'Corpus acotado. La demo y la evaluación del sistema son alcances distintos.']
+    ];
+    host.innerHTML = choices.map(function (choice) {
+      var area, project;
+      DATA.areas.some(function (a) {
+        return a.proyectos.some(function (p) {
+          if (p.id !== choice[0]) return false;
+          area = a; project = p; return true;
+        });
+      });
+      if (!project) return '';
+      return '<article class="featured-card">' +
+        '<p class="micro-label">' + esc(area.etiqueta) + '</p>' +
+        '<h3>' + esc(choice[1]) + '</h3>' + chip(project.estado) +
+        '<p>' + esc(choice[2]) + '</p>' +
+        '<p class="featured-limit">' + esc(choice[3]) + '</p>' +
+        '<div class="featured-links"><a href="#/area/' + esc(area.id) + '/' + esc(project.id) + '">Ver caso</a>' +
+        (project.demoUrl ? '<a href="' + esc(project.demoUrl) + '" target="_blank" rel="noopener noreferrer">Demo</a>' : '') +
+        (project.codigoUrl ? '<a href="' + esc(project.codigoUrl) + '" target="_blank" rel="noopener noreferrer">Código</a>' : '') +
+        '</div></article>';
+    }).join('');
+  }
+
   function renderStrip() {
     if (!stripEl) return;
     stripEl.innerHTML = AREAS.map(function (area) {
@@ -2775,6 +2804,8 @@
     if (pageHome) pageHome.hidden = esSobreMi;
     if (pageAbout) pageAbout.hidden = !esSobreMi;
 
+    var destacados = document.querySelector('.featured');
+    if (destacados) destacados.hidden = !esInicio;
     if (seccionHero) seccionHero.hidden = !esInicio;
     if (franjaAreas) franjaAreas.hidden = !esInicio;
     if (seccionContacto) seccionContacto.hidden = !esInicio;
@@ -3072,6 +3103,7 @@
     document.documentElement.classList.add('has-js');
 
     /* La red del hero la monta el router: solo existe en Inicio. */
+    renderFeatured();
     renderStrip();
     renderFilters();
     renderCards();

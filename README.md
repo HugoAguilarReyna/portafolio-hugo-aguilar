@@ -8,9 +8,9 @@ su repositorio público.
 [![Sitio](https://img.shields.io/badge/sitio-est%C3%A1tico-2f855a)](#ejecutar)
 
 > **Alcance.** Sitio estático: HTML, CSS y JavaScript sin compilación ni backend.
-> No usa analítica, cookies ni servicios de terceros en tiempo de ejecución.
+> No usa analítica ni cookies propias. La portada carga fuentes de Google Fonts; las demos conectadas consultan la API y el LLM es opcional.
 
-**Estados**: `Publicado` — terminado, documentado y verificable · `En desarrollo` — en construcción, sin resultados publicados · `Próximamente` — caso definido y pendiente de desarrollo (*roadmap*).
+**Estados**: `Publicado` — terminado, documentado y verificable · `En desarrollo` — versión en construcción; la ficha detalla la demo y evaluación disponibles · `Próximamente` — caso definido y pendiente de desarrollo (*roadmap*).
 
 ---
 
@@ -54,8 +54,8 @@ su repositorio público.
 
 | # | Proyecto | Estado | Categoría | Repositorio |
 |---|---|---|---|---|
-| 1 | Briefing con evidencia · Banco de México | En desarrollo | RAG / Finanzas | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/briefing-banxico) |
-| 2 | Copiloto NL-to-SQL · indicadores económicos de México | En desarrollo | NL-to-SQL | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/copiloto-nl-sql) |
+| 1 | Briefing con evidencia · Banco de México | En desarrollo | RAG / Finanzas | [`banxico-evidence-briefing`](https://github.com/Dev-HugoAguilar/banxico-evidence-briefing) |
+| 2 | Copiloto NL-to-SQL · indicadores económicos de México | En desarrollo | NL-to-SQL | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) |
 
 ## 05 · Agentes y sistemas de decisión
 
@@ -63,10 +63,10 @@ su repositorio público.
 
 | # | Proyecto | Estado | Categoría | Repositorio |
 |---|---|---|---|---|
-| 1 | Data Incident Commander | En desarrollo | Data Reliability | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/data-incident-commander) |
-| 2 | The Ripple Room — disrupciones de semiconductores | En desarrollo | Simulación / Supply Chain | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/the-ripple-room) |
-| 3 | Kilómetro Cero — control de red de envíos | En desarrollo | Logística | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/kilometro-cero) |
-| 4 | DockMind — pronóstico y planificación de inventario | En desarrollo | Operaciones | [`demo publicada`](https://github.com/HugoAguilarReyna/portafolio-hugo-aguilar/tree/main/dist/dashboards/dockmind) |
+| 1 | Data Incident Commander | En desarrollo | Data Reliability | [`data-incident-commander`](https://github.com/Dev-HugoAguilar/data-incident-commander) |
+| 2 | The Ripple Room — disrupciones de semiconductores | En desarrollo | Simulación / Supply Chain | [`ripple-room-supply-chain`](https://github.com/Dev-HugoAguilar/ripple-room-supply-chain) |
+| 3 | Kilómetro Cero — control de red de envíos | En desarrollo | Logística | [`kilometro-cero-logistics`](https://github.com/Dev-HugoAguilar/kilometro-cero-logistics) |
+| 4 | DockMind — pronóstico y planificación de inventario | En desarrollo | Operaciones | [`dockmind-demand-planning`](https://github.com/Dev-HugoAguilar/dockmind-demand-planning) |
 | 5 | Analista asistido por IA | Próximamente | Agentes | Sin repositorio (Roadmap) |
 
 ## Infraestructura compartida
@@ -157,7 +157,7 @@ python -m http.server 8000 --directory dist
 
 Abre <http://127.0.0.1:8000/>. Las rutas son *hash*
 (`#/area/<id>/<proyecto>`), así que el sitio funciona desde cualquier servidor de
-archivos. No hay compilación, dependencias ni backend.
+archivos. El integrador no necesita compilación. Las demos conectadas necesitan la API; las autocontenidas funcionan sin ella.
 
 Los cuatro tableros conectados resuelven la API en tiempo de ejecución con
 `dist/config.js`: por omisión `/api` (mismo origen, detrás del proxy). Para
@@ -213,7 +213,7 @@ tools/
 node tools/verificar-taxonomia.mjs
 ```
 
-Comprueba en un navegador real el orden de las cinco áreas, sus etiquetas, el
+La taxonomía se verifica en un navegador real: orden de las cinco áreas, sus etiquetas, el
 recuento de casos por estado, las fichas de cada área, los 17 enlaces a
 repositorio, los 12 enlaces a demo, el tratamiento de *roadmap* y la ausencia de
 desbordes a 390 px. La última ejecución local se hizo sobre el commit indicado en el PR, no en GitHub Actions.
@@ -296,18 +296,13 @@ antes de abrir una demo:
 | **Servicios de dominio** | `nl2sql-economic-copilot`, `banxico-evidence-briefing`, `data-incident-commander` | `pip install -e .` en su repositorio; no usan la API HTTP. |
 | **Entrenamiento y actualización de datos** | `demand-forecasting-m5`, `customer-growth-intelligence`, `dockmind-demand-planning` | CSV externos (M5, Complete Journey, Criteo), MongoDB y, en M5, Unix. |
 
-### Sobre `localhost:8010`
+### Configuración de la API
 
-Los cuatro tableros piden la API en `http://127.0.0.1:8010`. En una demo servida
-**desde tu equipo** eso apunta a tu propia máquina: hay que arrancar
-`portfolio-api` en ese puerto con una base importada. En una demo remota, ese
-`localhost` apunta al equipo del visitante y no funcionará: los tableros muestran
-su estado de error, no una cifra inventada. El puerto y `ALLOWED_ORIGINS` se
-configuran por variables de entorno; el detalle está en el README de
-[`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api).
-
-Versiones compatibles registradas: los cuatro tableros se probaron contra
-`portfolio-api` en el commit `8a27227`.
+El artefacto publicado usa `/api` en el mismo origen mediante `dist/config.js`.
+El proxy nginx lo reenvía al servicio de API. Al servir solo `dist/` con Python,
+las demos que necesitan backend requieren configurar `PORTFOLIO_API_BASE` con
+una API local y autorizar el origen en su configuración CORS. El puerto 8010 es
+un ejemplo de desarrollo, no el destino de los visitantes del sitio publicado.
 
 ## Estado editorial de las fichas
 
@@ -352,3 +347,31 @@ conserva `artifacts/verificacion-fichas.json` y
 workflow `Despliegue integrado` construye las dos imágenes y levanta el stack
 completo. [Alcance y reproducción](docs/CORRECCION_HALLAZGOS_2026-11-19.md).
 
+
+
+## Inventario de evidencia y procedencia
+
+`dist/content.js` es la fuente de estados, código, demos, resultados declarados y
+límites. `node tools/generar-evidencia.mjs` genera la matriz CSV y
+`docs/EVIDENCIA_PROYECTOS.json`. CI usa `--check` para impedir que queden obsoletos.
+Este inventario no sustituye la evaluación ni certifica cifras de los modelos.
+
+Gaza se reconstruyó desde el commit indicado en
+`dist/dashboards/gaza-observatorio/provenance.json`, ejecutando el constructor
+público y su comparación idempotente. La verificación exige las secciones
+agregadas, ausencia de marcas nominales, presupuesto de tamaño y SHA-256 exacto.
+No se aumenta el umbral para aceptar el artefacto nominal.
+
+Las demos con nombres estables se revalidan con `no-cache`; solo los bundles con
+hash en `assets/` reciben `immutable`. Nginx comprime HTML, CSS, JS y JSON.
+Esto reduce transferencia, pero no sustituye separar datos pesados de los HTML.
+
+La API de esta corrección cambia el modo LLM de Banxico a selección de citas
+literales por fragmento. Desplegar el sitio y la API desde las ramas compatibles:
+la verificación literal no certifica relevancia, exhaustividad ni validez del corpus.
+
+
+La prueba de portada (`tools/verificar-destacados.mjs`) forma parte de
+`npm run verificar` y comprueba tres casos, enlaces, navegación y ancho de 390 px.
+El diagnóstico piloto de recuperación, con sus fallos publicados, vive en
+`banxico-evidence-briefing/research`; no debe confundirse con sus pruebas unitarias.

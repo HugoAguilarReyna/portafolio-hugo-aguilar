@@ -2255,3 +2255,13 @@ body.demo-ampliado .demo-body { margin-top: 0; }
 
 
 
+
+/* Casos destacados: acceso directo a evidencia y código. */
+.featured-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.5rem;margin-top:2rem}
+.featured-card{padding:1.5rem;border:1px solid #d6dce8;border-radius:1rem;background:#fff;min-width:0}
+.featured-card h3{font-size:1.35rem;margin:.6rem 0 1rem}
+.featured-card p{line-height:1.65;overflow-wrap:anywhere}
+.featured-limit{font-size:.9rem;color:#4a5568}
+.featured-links{display:flex;flex-wrap:wrap;gap:1rem;margin-top:1.2rem}
+.featured-links a{color:#2348c0;text-decoration:underline;text-underline-offset:.2em}
+@media(max-width:800px){.featured-grid{grid-template-columns:1fr}}
