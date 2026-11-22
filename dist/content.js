@@ -189,7 +189,7 @@ window.PORTAFOLIO = {
           resumen: 'Explora adquisicion, conversion y retorno de usuarios a partir de eventos de comercio electronico de una muestra publica y ofuscada de Google Analytics 4.',
           titulo: 'Marketing y clientes',
           resultados: 'Cobertura verificada: muestra del 5 % de usuarios de GA4 (13 509 de 270 154), periodo del 1 de noviembre de 2020 al 31 de enero de 2021. Los hallazgos por filtro se calculan contra la API.',
-          estado: 'desarrollo',
+          estado: 'publicado',
           descripcion: 'Explora adquisición, conversión y retorno de usuarios a partir de eventos de comercio electrónico.',
           destinatario: 'Profesionales de marketing, analítica y comercio electrónico que necesitan explorar adquisición, conversión y retorno de usuarios desde una misma aplicación, con métricas consistentes y filtros conectados.',
           categoria: 'Marketing',
@@ -266,9 +266,9 @@ window.PORTAFOLIO = {
         {
           id: 'vidas-en-transito',
           titulo: 'Vidas en tránsito — Muertes, desapariciones y movilidad migrante',
-          estado: 'desarrollo',
+          estado: 'publicado',
           notaEstado:
-            "Prototipo en desarrollo. La integración local está completada y verificada: el tablero se sirve como página autónoma dentro de la ficha, con sus archivos de datos junto a ella y sin servicios externos. No se anuncia como publicado.",
+            "Demo publicada. El tablero se sirve como página autónoma dentro de la ficha, con sus archivos de datos junto a ella y sin servicios externos. Publicado como demo autocontenida con los cortes y límites de datos indicados.",
           descripcion:
             "Observatorio de muertes y desapariciones en tránsito, violencia documentada y evidencia territorial. Reúne fuentes con unidades, periodos y coberturas diferentes; por eso presenta sus cifras por separado y explica qué puede leerse de cada una. El explorador de desapariciones del EAAF permite abrir los agregados publicados por banco o mecanismo, año y entidad de México*. La vista Atención y perfiles explora las combinaciones de motivos registradas, la coaparición de violencias y perpetradores en una misma fila y la cobertura del campo de violencia por año. Estos registros describen lo consignado en las fuentes; no representan por sí solos a toda la población migrante.",
           destinatario:
@@ -333,38 +333,12 @@ window.PORTAFOLIO = {
           ]
         },
         {
-          problema: 'Comparar el sistema financiero mexicano exige leer boletines de distintas autoridades con periodicidades, unidades y definiciones que no coinciden; sin ese contexto es fácil sumar agregados con instituciones o comparar saldos con flujos.',
-          contribucion: 'Alcance previsto, no implementado: definir el modelo de fuentes y unidades, el importador con control de revisiones y las vistas de crédito, captación y tasas. No hay datos importados ni vista construida.',
-          fuentes: 'Fuentes candidatas, ninguna integrada: Banco de México (tasas y agregados monetarios) y CNBV (banca múltiple y banca de desarrollo). Su licencia y corte se documentarán al importarlas.',
-          metodo: 'Criterio previsto: una unidad por vista, sin sumar agregados con instituciones, comparación interanual entre cortes equivalentes y huecos marcados cuando falte el boletín. La conciliación contra los archivos originales será requisito previo a publicar.',
-          resultados: 'Caso definido; sin implementación ni evaluación publicadas. No se declaran coberturas, métricas ni validaciones ejecutadas.',
-          id: 'observatorio-financiero',
-          resultados: 'No hay resultados: el caso está definido y pendiente de desarrollo. No se declaran coberturas, métricas ni validaciones ejecutadas.',
-          titulo: 'Observatorio financiero de México',
-          estado: 'previsto',
-          resumen: 'Caso previsto: reunir en un solo tablero los indicadores financieros públicos de México que hoy se consultan en boletines separados, con la unidad y el corte de cada fuente a la vista.',
-          categoria: 'Finanzas',
-          descripcion: 'Explorar indicadores financieros por periodo y región a partir de fuentes públicas, con filtros, notas que expliquen cada lectura y acceso a la fuente original.',
-          destinatario: 'Pensado para quien necesita entender la evolución del sistema financiero sin depender de reportes estáticos en PDF.',
-          problema: 'Comparar el sistema financiero mexicano exige leer boletines de distintas autoridades con periodicidades, unidades y definiciones que no coinciden; sin ese contexto es fácil sumar agregados con instituciones o comparar saldos con flujos.',
-          contribucion: 'Alcance previsto, no implementado: definir el modelo de fuentes y unidades, el importador con control de revisiones y las vistas de crédito, captación y tasas. No hay datos importados ni vista construida.',
-          fuentes: 'Fuentes candidatas, ninguna integrada: Banco de México (tasas y agregados monetarios) y CNBV (banca múltiple y banca de desarrollo). Su licencia y corte se documentarán al importarlas.',
-          metodo: 'Criterio previsto: una unidad por vista, sin sumar agregados con instituciones, comparación interanual entre cortes equivalentes y huecos marcados cuando falte el boletín. La conciliación contra los archivos originales será requisito previo a publicar.',
-          resultados: 'Caso definido; sin implementación ni evaluación publicadas. No se declaran coberturas, métricas ni validaciones ejecutadas.',
-          limitaciones: 'Caso previsto: no existe implementación, datos importados ni evaluación. Cualquier cifra que se publique deberá declarar su fuente, su unidad, su corte y el hueco cuando falte el boletín; el agregado de una autoridad no se suma con el de otra.',
-          tecnologias: ['D3.js', 'React', 'Datos públicos', 'Power BI'],
-          capturas: [],
-          demoUrl: null,
-          codigoUrl: null,
-          enlaces: []
-        },
-        {
           id: 'orbita',
           titulo: 'ORBITA — Inteligencia orbital y visualización geoespacial interactiva',
-          estado: 'desarrollo',
+          estado: 'publicado',
           categoria: 'Ingeniería de datos y visualización',
           notaEstado:
-            'Demo local con snapshot fijo. La UI 26 se sirve como recurso estático y se carga solo al abrir esta ficha; no usa telemetría, backend, Atlas, LLM ni credenciales. La integración local está verificada; el despliegue público sigue pendiente.',
+            'Demo local con snapshot fijo. La UI 26 se sirve como recurso estático y se carga solo al abrir esta ficha; no usa telemetría, backend, Atlas, LLM ni credenciales. Demo publicada en el portal; el snapshot y sus límites se mantienen explícitos.',
           descripcion:
             'Explorador interactivo para analizar un snapshot público de satélites, comprender la estructura de sus órbitas y comparar su presencia geométrica desde una ubicación. Integra una Tierra 3D, propagación orbital, distribuciones estadísticas, ventanas de paso y trazabilidad del catálogo en una experiencia local reproducible.',
           resumen:

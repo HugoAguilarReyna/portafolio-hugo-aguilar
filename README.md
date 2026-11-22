@@ -1,6 +1,6 @@
 # Portafolio de datos · Hugo Aguilar
 
-Sitio integrador del portafolio: **20 fichas** de proyecto organizadas en **cinco
+Sitio integrador del portafolio: **19 fichas** de proyecto organizadas en **cinco
 categorías oficiales**, cada una con su estado, su categoría visible y el enlace a
 su repositorio público.
 
@@ -22,11 +22,10 @@ su repositorio público.
 |---|---|---|---|---|
 | 1 | Banca múltiple mexicana — Comparativo financiero | Publicado | Finanzas | [`mexican-banking-analytics`](https://github.com/Dev-HugoAguilar/mexican-banking-analytics) |
 | 2 | Atlas vial · Ciudad de México | Publicado | Movilidad | [`cdmx-traffic-atlas`](https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas) |
-| 3 | Marketing y clientes | En desarrollo | Marketing | [`ga4-marketing-analytics`](https://github.com/Dev-HugoAguilar/ga4-marketing-analytics) |
+| 3 | Marketing y clientes | Publicado | Marketing | [`ga4-marketing-analytics`](https://github.com/Dev-HugoAguilar/ga4-marketing-analytics) |
 | 4 | Pulso comercial · Walmex | Publicado | Finanzas | [`walmex-financial-pulse`](https://github.com/Dev-HugoAguilar/walmex-financial-pulse) |
-| 5 | Vidas en tránsito | En desarrollo | Ciencia de datos · Observatorio humanitario | [`vidas-en-transito`](https://github.com/Dev-HugoAguilar/vidas-en-transito) |
-| 6 | Observatorio financiero de México | Próximamente | Finanzas | Sin repositorio (Roadmap) |
-| 7 | ORBITA — Inteligencia orbital | En desarrollo | Ingeniería de datos y visualización | [`orbita-orbital-intelligence`](https://github.com/Dev-HugoAguilar/orbita-orbital-intelligence) |
+| 5 | Vidas en tránsito | Publicado | Ciencia de datos · Observatorio humanitario | [`vidas-en-transito`](https://github.com/Dev-HugoAguilar/vidas-en-transito) |
+| 6 | ORBITA — Inteligencia orbital | Publicado | Ingeniería de datos y visualización | [`orbita-orbital-intelligence`](https://github.com/Dev-HugoAguilar/orbita-orbital-intelligence) |
 
 ## 02 · Ciencia de datos y Machine Learning
 
@@ -86,7 +85,7 @@ repositorios de infraestructura responden **HTTP 200** y son públicos —
 se volvió a comprobar en esa fecha; si alguno cambia de nombre o deja de ser público,
 el enlace falla y la ficha se queda sin destino hasta corregirlo.
 
-Los tres casos **Próximamente** —Observatorio financiero de México, Modernización
+Los dos casos **Próximamente** —Modernización
 SAS → Python y Analista asistido por IA— no tienen repositorio todavía: solo
 tienen caso definido. Cuando se publiquen se añadirá su enlace a la tabla y su
 `codigoUrl` en el contenido; el sitio solo dibuja un enlace cuando el repositorio
@@ -330,7 +329,7 @@ npm run verificar:real            # + fase real aislada (requiere API y datos)
 ```
 
 `npm run verificar` administra su servidor estático en el puerto 8000 (`PORT`
-para cambiarlo) y verifica las 20 fichas en escritorio y móvil, la navegación
+para cambiarlo) y verifica las 19 fichas en escritorio y móvil, la navegación
 SPA y los estados de error, vacío y reintento de los cuatro tableros. La batería
 predeterminada usa respuestas interceptadas con contratos explícitos y se
 informa como **simulada**; no certifica la API real.

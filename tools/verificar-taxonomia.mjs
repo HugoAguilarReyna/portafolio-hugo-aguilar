@@ -37,7 +37,7 @@ const { chromium } = playwright;
 mkdirSync(SALIDA, { recursive: true });
 
 const AREAS = [
-  { numero: '01', id: 'dashboards', nombre: 'Dashboards y visualización', etiqueta: 'Visualización', casos: 7 },
+  { numero: '01', id: 'dashboards', nombre: 'Dashboards y visualización', etiqueta: 'Visualización', casos: 6 },
   { numero: '02', id: 'ciencia-de-datos', nombre: 'Ciencia de datos y Machine Learning', etiqueta: 'Ciencia de datos', casos: 5 },
   { numero: '03', id: 'ingenieria-de-datos', nombre: 'Ingeniería de datos', etiqueta: 'Ingeniería de datos', casos: 1 },
   { numero: '04', id: 'ia-generativa', nombre: 'IA generativa y LLMs', etiqueta: 'IA generativa', casos: 2 },
@@ -55,7 +55,7 @@ const CON_DEMO = [
   'gaza-observatorio', 'retailops', 'asistente-investigacion', 'copiloto-nl-sql',
   'data-incident-commander', 'the-ripple-room', 'kilometro-cero', 'dockmind'
 ];
-const PREVISTOS = ['observatorio-financiero', 'modernizacion-sas-python', 'analista-asistido'];
+const PREVISTOS = ['modernizacion-sas-python', 'analista-asistido'];
 const ESTADOS = ['Publicado', 'En desarrollo', 'Próximamente'];
 
 const fallos = [];

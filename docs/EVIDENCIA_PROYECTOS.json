@@ -25,7 +25,7 @@
     {
       "project_id": "marketing-clientes",
       "area": "Dashboards y visualización",
-      "estado": "desarrollo",
+      "estado": "publicado",
       "codigo_url": "https://github.com/Dev-HugoAguilar/ga4-marketing-analytics",
       "demo_url": "",
       "resultados_declarados": "Cobertura verificada: muestra del 5 % de usuarios de GA4 (13 509 de 270 154), periodo del 1 de noviembre de 2020 al 31 de enero de 2021. Los hallazgos por filtro se calculan contra la API.",
@@ -45,7 +45,7 @@
     {
       "project_id": "vidas-en-transito",
       "area": "Dashboards y visualización",
-      "estado": "desarrollo",
+      "estado": "publicado",
       "codigo_url": "https://github.com/Dev-HugoAguilar/vidas-en-transito",
       "demo_url": "dashboards/vidas-en-transito/index.html",
       "resultados_declarados": "El tablero conserva trece áreas previas del proyecto e incorpora veinte visualizaciones nuevas. Incluye desgloses de los datos UPMRIP disponibles; 156 incidentes ICIJ/CLIP, con 148 ubicaciones seleccionables; y 3,822 elementos de la capa de servicios de OIM, agrupados por país, tipo de sitio y completitud. El explorador EAAF permite recorrer los agregados hacia el banco o mecanismo y los desgloses disponibles por año, entidad de México* o país de hallazgo. Los cortes publicados en 2025 y 2026 no se enlazan como una tendencia cuando sus definiciones o niveles de detalle no coinciden. En Atención y perfiles, REDODEM se presenta como 40,800 filas de atención u observación. El módulo incluye 14 combinaciones de motivos, una matriz de 14 categorías de violencia por 10 de perpetradores —38 celdas visibles y 38 suprimidas por el umbral—, rankings basados en 737 menciones de violencia y 597 de perpetradores, y la cobertura del campo de violencia por año: 317 de 22,123 filas en 2023 y 182 de 18,677 en 2024. Las gráficas incluyen tablas accesibles y notas sobre sus denominadores.",
@@ -53,19 +53,9 @@
       "demo_sha256": "08b9557744d2fe61fcd61f6e687d6f2867f994bd0dbebc98f3a89326a6f9a01b"
     },
     {
-      "project_id": "observatorio-financiero",
-      "area": "Dashboards y visualización",
-      "estado": "previsto",
-      "codigo_url": "",
-      "demo_url": "",
-      "resultados_declarados": "Caso definido; sin implementación ni evaluación publicadas. No se declaran coberturas, métricas ni validaciones ejecutadas.",
-      "limites_declarados": "Caso previsto: no existe implementación, datos importados ni evaluación. Cualquier cifra que se publique deberá declarar su fuente, su unidad, su corte y el hueco cuando falte el boletín; el agregado de una autoridad no se suma con el de otra.",
-      "demo_sha256": ""
-    },
-    {
       "project_id": "orbita",
       "area": "Dashboards y visualización",
-      "estado": "desarrollo",
+      "estado": "publicado",
       "codigo_url": "https://github.com/Dev-HugoAguilar/orbita-orbital-intelligence",
       "demo_url": "dashboards/orbita/index.html",
       "resultados_declarados": "El prototipo permite explorar seis grupos, seleccionar satélites, comparar distribuciones de altura e inclinación, inspeccionar ventanas desde ciudades predefinidas y contrastar la presencia geométrica de tres constelaciones. La selección de altura dispone de tabla y CSV; la comparación ofrece un cursor temporal compartido y la trayectoria polar puede recorrerse con teclado. En el escenario precomputado de ISS desde Ciudad de México se obtienen dos ventanas sobre 10° dentro de las 24 horas del snapshot. Es un resultado de ese escenario y de ese snapshot, no una predicción vigente ni una garantía de visibilidad.",
