@@ -1,8 +1,8 @@
 /* ==========================================================================
    CONFIGURACIÓN DE RUNTIME DE LA API
    --------------------------------------------------------------------------
-   Los cuatro tableros conectados (comparativo bancario, Atlas vial, Marketing y
-   clientes, Pulso comercial) piden sus datos a la API del portafolio. Este
+   Los cinco tableros conectados (comparativo bancario, Atlas vial, Marketing y
+   clientes, Pulso comercial y Walmart M5) piden sus datos a la API del portafolio. Este
    archivo resuelve la base de esa API en tiempo de ejecución, para que el mismo
    artefacto sirva en local y en producción:
 
@@ -34,7 +34,8 @@
     PORTFOLIO_BANCA_API: '/v1/cnbv/banca-multiple',
     PORTFOLIO_ATLAS_API: '/v1/atlas-vial',
     PORTFOLIO_MARKETING_API: '/v1/marketing',
-    PORTFOLIO_WALMEX_API: '/v1/walmex'
+    PORTFOLIO_WALMEX_API: '/v1/walmex',
+    PORTFOLIO_COMERCIAL_API: '/v1/comercial/m5'
   };
 
   Object.keys(RUTAS).forEach(function (nombre) {

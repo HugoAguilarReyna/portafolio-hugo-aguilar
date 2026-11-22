@@ -130,7 +130,7 @@
       "demo_url": "dashboards/briefing-banxico/index.html",
       "resultados_declarados": "La demo incluye cinco preguntas sugeridas sobre tasa, inflación, riesgos, convergencia y actividad económica; recupera fragmentos con fuente y fecha; distingue modo Atlas/corpus y respuesta extractiva/LLM; y publica la serie de inflación general y subyacente con valores observados y pronosticados. La selección del modelo es opcional; el contrato comprueba identidad textual y procedencia, sin certificar relevancia ni suficiencia de la recuperación; sin proveedor, se mantiene la respuesta extractiva.",
       "limites_declarados": "La recuperación es léxica, no vectorial: no usa embeddings ni comprende paráfrasis fuera del vocabulario del corpus. El corpus es una transcripción resumida de dos documentos y no cubre toda la economía mexicana. El backend publica además una evaluación de recuperación léxica, vectores locales de términos y mezcla híbrida; esos vectores locales no son embeddings de un modelo y el benchmark sigue siendo simulado. El pronóstico es el publicado por Banco de México; la demo no estima escenarios propios ni convierte el pronóstico en una serie observada. La consulta al LLM es opcional, requiere que la API del servidor esté configurada y no reemplaza la verificación de las citas contra los fragmentos. Sin proveedor, la demo responde de forma extractiva. No se muestran URI ni secretos ni se modifica la configuración del clúster.",
-      "demo_sha256": "bfb72db8c0c2e0448d9b4220f4fb8f8aa5cf78d0931aeeb6e84bb868d3f2aadf"
+      "demo_sha256": "f1e4bfadcaf4c98701475015481330250ab04c2f12a16d63f4c992055c919b1e"
     },
     {
       "project_id": "copiloto-nl-sql",

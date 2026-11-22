@@ -36,7 +36,7 @@
       Math.ceil(documento.body.getBoundingClientRect().height),
     );
     if (!alto) return;
-    var nuevo = Math.max(ALTO_MINIMO, Math.ceil(alto) + 2);
+    var nuevo = Math.max(ALTO_MINIMO, Math.ceil(alto) + 8);
     if (Math.abs(parseInt(marco.style.height || '0', 10) - nuevo) > 4) {
       marco.style.height = nuevo + 'px';
     }
@@ -76,6 +76,7 @@
       marco.src = new URL(PAGINA, document.baseURI).toString();
       marco.title = 'Briefing con evidencia · Banco de México';
       marco.setAttribute('loading', 'eager');
+      marco.setAttribute('scrolling', 'no');
       marco.style.width = '100%';
       marco.style.border = '0';
       marco.style.display = 'block';
@@ -85,6 +86,10 @@
       marco.addEventListener('load', function () {
         if (!vivo) return;
         limpiarEspera();
+        if (marco.contentDocument) {
+          marco.contentDocument.documentElement.classList.add('embedded');
+          if (marco.contentDocument.fonts) marco.contentDocument.fonts.ready.then(alRedimensionar);
+        }
         ajustarAlto(marco);
         try {
           if ('ResizeObserver' in window && marco.contentDocument && marco.contentDocument.body) {

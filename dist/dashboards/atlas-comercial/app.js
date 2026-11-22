@@ -9321,7 +9321,7 @@ Error generating stack: ` + s.message + `
 })), y = N0(), c1 = i1();
 function o1(l) {
   const i = window.PORTFOLIO_COMERCIAL_API;
-  return (l || i || "http://127.0.0.1:8010/api/v1/comercial/m5").replace(/\/+$/, "");
+  return (l || i || "/api/v1/comercial/m5").replace(/\/+$/, "");
 }
 var sa = class extends Error {
   constructor(l, i, r = null) {

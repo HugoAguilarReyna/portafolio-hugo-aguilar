@@ -31,5 +31,13 @@ if (code === 0) {
     featured.once('error', () => resolve(2)); featured.once('exit', value => resolve(value ?? 2));
   });
 }
+if (code === 0) {
+  const banxico = spawn(process.execPath, ['tools/verificar-banxico-embebido.mjs'], {
+    stdio: 'inherit', env: {...process.env, SITE_BASE: `http://127.0.0.1:${PORT}`}
+  });
+  code = await new Promise(resolve => {
+    banxico.once('error', () => resolve(2)); banxico.once('exit', value => resolve(value ?? 2));
+  });
+}
 await new Promise(resolve=>server.close(resolve));
 process.exitCode=code;
