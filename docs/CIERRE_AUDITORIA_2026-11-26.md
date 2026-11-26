@@ -45,9 +45,11 @@ No se desplegó al VPS ni se modificó producción.
 
 - `npm run verificar` abre las 19 fichas en escritorio y móvil, con entrada
   directa y navegación atrás/adelante, y las variantes de API vacía/error/reintento:
-  **100/100 casos aprobados** (`artifacts/verificacion-fichas.json`).
+  **100/100 casos aprobados** (salida de consola de la corrida; el artifact
+  versionado se regenera con el mismo comando).
 - `node tools/generar-evidencia.mjs --check` pasa.
-- El resultado se conserva en `artifacts/verificacion-fichas.json`.
+- La rama se publicó en `origin/audit/cierre-auditoria-2026-11-26`; no se creó
+  un PR automático porque no hay `gh`/token de GitHub en el entorno.
 
 ## Límites
 
