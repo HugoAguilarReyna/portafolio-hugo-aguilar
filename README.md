@@ -326,10 +326,11 @@ afirmación en [`docs/MATRIZ_EVIDENCIA_PROYECTOS.csv`](docs/MATRIZ_EVIDENCIA_PRO
 ```bash
 npm ci
 npx playwright install chromium
-npm run verificar                 # 104 casos con la API simulada
+npm run verificar                 # 100 casos con la API simulada
 npm run verificar:config          # build de producción: URL /api y Gaza
 npm run verificar:produccion      # comportamiento: ninguna petición a una API local
 npm run verificar:real            # + fase real aislada (requiere API y datos)
+npm run verificar:agente          # botón /agent: éxito, 429 y 503 con API interceptada
 ```
 
 `npm run verificar` administra su servidor estático en el puerto 8000 (`PORT`
