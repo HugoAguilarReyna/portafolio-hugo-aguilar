@@ -2,7 +2,7 @@
   "name": "portafolio-verificacion",
   "private": true,
   "version": "1.0.0",
-  "description": "Verificación de las 20 fichas del portafolio con Playwright.",
+  "description": "Verificación de las 19 fichas del portafolio con Playwright.",
   "type": "module",
   "scripts": {
     "verificar": "node tools/ejecutar-verificacion.mjs",
@@ -11,7 +11,8 @@
     "verificar:config": "node tools/verificar-config-produccion.mjs",
     "verificar:limites": "node tools/verificar-limites-ia.mjs",
     "verificar:produccion": "node tools/verificar-produccion.mjs",
-    "verificar:real": "node tools/ejecutar-verificacion.mjs --api-real"
+    "verificar:real": "node tools/ejecutar-verificacion.mjs --api-real",
+    "verificar:agente": "node tools/verificar-agent-ui.mjs"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1"

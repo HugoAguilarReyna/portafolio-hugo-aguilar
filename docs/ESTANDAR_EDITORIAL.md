@@ -37,6 +37,8 @@ configuración del repositorio las respaldan.
 - En el resto, `hallazgos: null` omite el bloque; los resultados estáticos van en
   `resultados`.
 - Un `demoUrl: null` es válido cuando la demo se monta dentro de la ficha.
+- Esa demo montada debe declarar `demo: {modo:'ficha', verificado:'AAAA-MM-DD',
+  descripcion}`. No se inventa una URL independiente si no existe.
 - Un enlace a repositorio solo se declara si el repositorio existe.
 
 ## Casos de roadmap

@@ -17,7 +17,9 @@ const rows = data.areas.flatMap(area => area.proyectos.map(p => {
   if (file && !fs.existsSync(file)) throw new Error(`Demo ausente: ${p.id}`);
   return {
     project_id:p.id, area:area.nombre, estado:p.estado, codigo_url:p.codigoUrl || '',
-    demo_url:p.demoUrl || '', resultados_declarados:p.resultados || '',
+    demo_url:p.demoUrl || '', demo_modo:p.demo?.modo || (p.demoUrl ? 'url' : ''),
+    demo_verificado:p.demo?.verificado || '',
+    resultados_declarados:p.resultados || '',
     limites_declarados:p.limitaciones || '',
     demo_sha256:file ? createHash('sha256').update(fs.readFileSync(file)).digest('hex') : '',
   };

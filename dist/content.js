@@ -54,6 +54,9 @@
      demoUrl       ruta relativa de la demo publicada (dentro de dist/). La
                    tarjeta ofrece «Abrir demo» en pestaña nueva; la ficha del
                    proyecto sigue montando la aplicación dentro del sitio
+     demo          metadatos de la demo montada en la ficha: {modo:'ficha',
+                   descripcion}. Se usa cuando no hay URL independiente; no
+                   sustituye a demoUrl en las demos autónomas
      codigoUrl     URL del repositorio público o, si el código no se publica,
                    la carpeta del artefacto publicado. La tarjeta ofrece el
                    enlace en pestaña nueva
@@ -77,7 +80,7 @@
    ========================================================================== */
 
 window.PORTAFOLIO = {
-  actualizado: '2026-11-21',
+  actualizado: '2026-11-26',
 
   estados: {
     previsto: {
@@ -141,6 +144,11 @@ window.PORTAFOLIO = {
           categoria: 'Finanzas',
           meta: 'CNBV · Visualización interactiva',
           demoUrl: null,
+          demo: {
+            modo: 'ficha',
+            verificado: '2026-11-26',
+            descripcion: 'Demo montada dentro de la ficha; no tiene URL independiente. Verificada el 2026-11-26.'
+          },
           codigoUrl: 'https://github.com/Dev-HugoAguilar/mexican-banking-analytics',
           enlaces: [
             {
@@ -163,6 +171,11 @@ window.PORTAFOLIO = {
           captura: 'img/atlas-vial-completo.jpg',
           capturaAlt: 'Captura del tablero «Atlas vial · Ciudad de México» con el mapa de las 16 alcaldías, el panel de resumen del filtro y la línea temporal de los hechos de tránsito de 2024.',
           demoUrl: null,
+          demo: {
+            modo: 'ficha',
+            verificado: '2026-11-26',
+            descripcion: 'Demo montada dentro de la ficha; no tiene URL independiente. Verificada el 2026-11-26.'
+          },
           codigoUrl: 'https://github.com/Dev-HugoAguilar/cdmx-traffic-atlas',
           problema: 'La SSC publica los hechos de tránsito de 2024 en cinco archivos separados de unas 30 655 filas cada uno. Para responder preguntas elementales —dónde ocurren, a qué hora, quiénes resultan afectados— hay que descargarlos, adivinar la codificación y el separador, cruzar cinco tablas por folio y reconstruir los mapas a mano. El riesgo no es solo el esfuerzo: al sumar desgloses de personas se cuentan dos veces las mismas víctimas y al unir archivos por folio se multiplican los hechos.',
           contribucion: 'Diseñé y construí el proceso de datos (descarga desde el catálogo oficial, validación, normalización y publicación atómica en MongoDB), la API de consulta y este tablero con tres vistas conectadas por un mismo estado de filtros. La interfaz está escrita en React, TypeScript y D3; el backend, en Python y FastAPI.',
@@ -201,6 +214,12 @@ window.PORTAFOLIO = {
           capturaRatio: '1600 / 1726',
           capturaAlt: 'Captura del tablero «Marketing y clientes» en su vista Resumen: ocho indicadores del periodo (210 672 eventos, 13 509 usuarios, 17 906 sesiones, 261 compras), el bloque de muestra y cobertura con la población de 270 154 usuarios, la serie diaria de usuarios y el diagrama de la adquisición a la compra con sus tres columnas.',
           demoUrl: null,
+          demoUrl: null,
+          demo: {
+            modo: 'ficha',
+            verificado: '2026-11-26',
+            descripcion: 'Demo montada dentro de la ficha; no tiene URL independiente. Verificada el 2026-11-26.'
+          },
           codigoUrl: 'https://github.com/Dev-HugoAguilar/ga4-marketing-analytics',
           hallazgos: '',
           notaEstado: 'Versión publicada en MongoDB Atlas y servida solo desde ahí: muestra determinista del 5 % de usuarios (13 509 de 270 154) del periodo 1 nov 2020 – 31 ene 2021. Las cuatro vistas se recalculan sobre la misma muestra, y el panel de cobertura del tablero permite auditar población, proporción, método de selección y consistencia entre cada indicador y su gráfica.',
@@ -243,6 +262,12 @@ window.PORTAFOLIO = {
           capturaRatio: '1600 / 1726',
           capturaAlt: 'Captura del tablero «Pulso comercial · Walmex» en su vista Resumen comercial completa: cabecera con el último trimestre publicado, controles de rango y trimestre, tres indicadores con su tendencia —ingresos consolidados, crecimiento anual y brecha entre mercados—, el puente de origen del crecimiento con los totales de 3T25 y 3T26 y la aportación de cada mercado, las áreas de mezcla del negocio y el calendario comercial de círculos proporcionales.',
           demoUrl: null,
+          demoUrl: null,
+          demo: {
+            modo: 'ficha',
+            verificado: '2026-11-26',
+            descripcion: 'Demo montada dentro de la ficha; no tiene URL independiente. Verificada el 2026-11-26.'
+          },
           codigoUrl: 'https://github.com/Dev-HugoAguilar/walmex-financial-pulse',
           hallazgos: '',
           notaEstado: 'Primera versión publicada con datos oficiales del 1T23 al 3T26 (15 trimestres). Se sirve solo desde MongoDB Atlas y declara la fuente, la base de comparación y la unidad de cada cifra. El comercio electrónico y el detalle por tienda no se publican porque la empresa no los reporta con cobertura y definición comparables en todo el periodo.',
@@ -451,6 +476,12 @@ window.PORTAFOLIO = {
           capturaAlt:
             'Resumen del tablero «Walmart M5 — Planeación de demanda y evaluación de pronósticos», pantalla «Resultados»: encabezado del caso con la nota de independencia y la navegación de las seis pantallas, el plan de ventas a cuatro semanas con el corte del 22 de mayo de 2016, el resumen del conjunto filtrado (1 335 219,04 unidades previstas, 1 231 764 observadas, +103 455 de diferencia y 30 490 series), la tabla semanal por artículo y tienda con sus cuatro semanas y paginación, y el detalle de la serie seleccionada.',
           demoUrl: null,
+          demoUrl: null,
+          demo: {
+            modo: 'ficha',
+            verificado: '2026-11-26',
+            descripcion: 'Demo montada dentro de la ficha; no tiene URL independiente. Verificada el 2026-11-26.'
+          },
           codigoUrl: 'https://github.com/HugoAguilarReyna/demand-forecasting-m5',
           hallazgos: null,
           notaEstado:
@@ -927,12 +958,12 @@ window.PORTAFOLIO = {
           metodo:
             'El usuario elige uno de tres escenarios sintéticos. La anomalía se inyecta solo en una copia temporal; el flujo evalúa reglas de contrato, recorre el linaje declarado y compara cuatro alternativas con puntuaciones hipotéticas del escenario. La matriz distingue pasa, revisar y bloquea. La imputación está prohibida. La ejecución se detiene para revisión humana; aprobar simula la reparación únicamente en memoria y devuelve un recibo, mientras que rechazar no cambia datos. Después de iniciar un run, la persona puede pedir una recomendación a OpenAI: es una sola consulta consultiva sobre el contexto del run, no selecciona herramientas ni modifica su estado. La aprobación humana conserva la decisión final.',
           resultados:
-            'El demo permite inspeccionar tres escenarios, el radio de impacto, cuatro remediaciones, la matriz de validaciones y la traza del flujo. También permite solicitar una recomendación consultiva de OpenAI si la API está configurada. La persona puede aprobar o rechazar; la reparación aprobada se simula en una copia temporal y el recibo queda visible durante la sesión. Las métricas del agente de backend corresponden a la corrida simulada con «mock-agente-v1», no a un modelo real: de 12 incidentes cierra 10 (83.3 %) y los dos adversariales (i09 e i10) quedan bloqueados por política antes de cerrar plan, con cero escrituras externas. El baseline determinista de referencia, que solo propone «quarantine», acierta 7 de los 10 casos no adversariales.',
+            'El demo permite inspeccionar tres escenarios, el radio de impacto, cuatro remediaciones, la matriz de validaciones y la traza del flujo. La ficha ofrece una acción explícita para ejecutar el agente de solo lectura después de iniciar un run, además de la consulta consultiva de OpenAI si la API está configurada. La persona puede aprobar o rechazar; la reparación aprobada se simula en una copia temporal y el recibo queda visible durante la sesión. Las métricas del agente de backend corresponden a la corrida simulada con «mock-agente-v1», no a un modelo real: 10/10 casos válidos con plan y herramientas exactos, y 2/2 bloqueos de seguridad correctos (una petición fuera de alcance y un intento de escritura), con cero escrituras externas. El baseline determinista de referencia, que solo propone «quarantine», acierta 7 de los 10 casos válidos.',
           resumenMetricas:
-            '10 de 12 incidentes cerrados (83.3 %) y 2 adversariales (i09, i10) bloqueados por política; baseline determinista: 7 de 10 casos no adversariales. Corrida simulada con mock-agente-v1, no un modelo real.',
+            '10/10 casos válidos con plan y herramientas exactos; 2/2 bloqueos de seguridad correctos (fuera de alcance y adversarial); baseline determinista: 7/10 casos válidos. Corrida simulada con mock-agente-v1, no un modelo real.',
           limitaciones:
-            'La interfaz publicada conserva una consulta consultiva de una sola llamada; la aprobación y reparación simulada pertenecen al flujo determinista. El agente del backend sí selecciona herramientas de solo lectura dentro de un bucle acotado, pero no aprueba, cambia estados ni repara. Su evaluación utiliza un proveedor simulado; no se verificó en un VPS ni con un modelo real. Las puntuaciones comparan opciones hipotéticas del demo, no métricas operativas. Los recibos viven en memoria y desaparecen al reiniciar. No se escriben archivos, bases de datos, Atlas ni sistemas externos.',
-          tecnologias: ['Python', 'FastAPI', 'Flujo de agente simulado', 'Validaciones de contrato', 'Aprobación humana', 'Estado efímero', 'JavaScript', 'SVG', 'HTML/CSS'],
+            'La interfaz publicada conserva una consulta consultiva de una sola llamada y añade una acción explícita para el agente de solo lectura; la aprobación y reparación simulada pertenecen al flujo determinista. El agente del backend sí selecciona herramientas de solo lectura dentro de un bucle acotado, pero no aprueba, cambia estados ni repara. Su evaluación utiliza un proveedor simulado; no se verificó en un VPS ni con un modelo real. Las puntuaciones comparan opciones hipotéticas del demo, no métricas operativas. Los recibos viven en memoria y desaparecen al reiniciar. No se escriben archivos, bases de datos, Atlas ni sistemas externos.',
+          tecnologias: ['Python', 'FastAPI', 'Flujo de agente simulado', 'Agente de solo lectura', 'Validaciones de contrato', 'Aprobación humana', 'Estado efímero', 'JavaScript', 'SVG', 'HTML/CSS'],
           tecnologiasGrupos: [
             { funcion: 'Orquestación y controles', items: ['Python', 'FastAPI', 'flujo de agente simulado', 'validaciones de contrato', 'aprobación humana', 'estado efímero'] },
             { funcion: 'Interfaz y explicabilidad', items: ['JavaScript', 'SVG', 'HTML/CSS'] }

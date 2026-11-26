@@ -23,6 +23,9 @@ jobs:
       - name: Fichas, navegación, fallo de red, vacío y reintento
         run: npm run verificar
 
+      - name: Agente /agent: botón explícito, éxito, 429 y 503
+        run: npm run verificar:agente
+
       - name: Build de producción (URL de API relativa y artefacto publicado)
         run: |
           npm run verificar:config
