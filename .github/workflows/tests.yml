@@ -31,7 +31,7 @@ jobs:
 
       - name: Contratos de publicación y evidencia editorial
         run: |
-          node --test tools/artefacto-publico.test.mjs tools/nl-sql-local.test.mjs
+          node --test tools/artefacto-publico.test.mjs tools/nl-sql-local.test.mjs tools/demos-contrato.test.mjs
           node tools/generar-evidencia.mjs --check
 
       - name: Comprobar sintaxis del sitio

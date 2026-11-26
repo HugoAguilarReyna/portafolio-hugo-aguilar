@@ -32,11 +32,11 @@ function drawPlanOptions(){const host=el('plan-options');if(!host)return;host.re
 function drawHeatmap(){const svg=el('heatmap');svg.replaceChildren();const names=['Cuarentena','Backfill','Recarga total','Imputación'],x0=184,y0=51,cw=72,ch=29;names.forEach((n,i)=>svg.append(svgEl('text',{x:x0+i*cw+cw/2,y:33,'text-anchor':'middle',class:'heat-label'},n)));checks.forEach((label,r)=>{svg.append(svgEl('text',{x:0,y:y0+r*ch+13,class:'heat-label'},label));checkGrid[r].forEach((v,c)=>{const x=x0+c*cw,cls=v==='P'?'pass':v==='W'?'warn':'fail',estado=v==='P'?'pasa':v==='W'?'revisar':'bloquea',rect=svgEl('rect',{x,y:y0+r*ch,width:cw-5,height:22,rx:4,class:'heat-cell '+cls+(c===['quarantine','backfill','fullreload','forward'].indexOf(selectedPlan)?' selected-cell':''),'data-col':c});rect.setAttribute('tabindex','0');rect.setAttribute('role','img');rect.setAttribute('aria-label',label+' · '+names[c]+': '+estado);rect.append(svgEl('title',{},label+' · '+names[c]+': '+estado));svg.append(rect);svg.append(svgEl('text',{x:x+(cw-5)/2,y:y0+r*ch+14,class:'heat-text'},v==='P'?'✓':v==='W'?'!':'×'))})});svg.append(svgEl('text',{x:x0,y:244,class:'svg-sub'},'Los criterios son reglas de la demo, no certificaciones de producción.'))}
 function drawTrace(){const svg=el('trace');svg.replaceChildren();const lanes=['Orquestador','Profiler SQL','Analista de linaje','Planner','Evaluador','Revisión humana'],ys=[28,66,104,142,180,218],xpoints=[137,283,429,575,721,835];ys.forEach((y,i)=>{svg.append(svgEl('text',{x:2,y:y+12,class:'trace-lane-label'},lanes[i]));svg.append(svgEl('line',{x1:122,x2:912,y1:y+20,y2:y+20,class:'trace-lane'}))});const events=traceItems.length?traceItems:[{name:'abrir run',status:'pending'},{name:'perfilado',status:'pending'},{name:'impacto',status:'pending'},{name:'propuesta',status:'pending'},{name:'6 criterios',status:'pending'},{name:'aprobación',status:'pending'}];events.forEach((it,i)=>{const y=ys[i],x=xpoints[i],state=it.status==='done'?'done':it.status==='wait'?'wait':'';if(i<events.length-1)svg.append(svgEl('path',{d:'M'+(x+94)+' '+(y+10)+' C'+(x+110)+' '+(y+10)+' '+(xpoints[i+1]-18)+' '+(ys[i+1]+10)+' '+xpoints[i+1]+' '+(ys[i+1]+10),class:'trace-connector '+(it.status==='done'?'done':'')}));const rect=svgEl('rect',{x,y,width:i===5?77:96,height:21,rx:5,class:'trace-event '+state});rect.setAttribute('tabindex','0');rect.setAttribute('role','img');rect.setAttribute('aria-label',lanes[i]+': '+it.name+'. '+(it.time||'pendiente'));rect.append(svgEl('title',{},lanes[i]+': '+it.name+' · '+(it.time||'pendiente')));svg.append(rect);svg.append(svgEl('text',{x:x+7,y:y+9,class:'trace-event-label'},it.name));svg.append(svgEl('text',{x:x+7,y:y+18,class:'trace-event-time'},it.time||'pendiente'))})}
 function selectPlan(id){selectedPlan=id;const p=plans.find(x=>x.id===id);if(!p)return;setText('plan-name',p.name);setText('plan-copy',p.copy);el('plan-detail').style.borderColor=p.color+'55';el('plan-detail').style.background=p.color+'0d';el('plan-detail').querySelector('.plan-mark').style.background=p.color;el('plan-detail').querySelector('.plan-mark').style.boxShadow='0 0 10px '+p.color;document.querySelector('.recommended').textContent=p.label;document.querySelector('.recommended').style.color=p.color;const unsafe=id==='forward';setText('approval-note',unsafe?'Bloqueado por política: el agente no imputará valores al origen.':runStatus==='done'?'Disponible para revisión; solo opera en la copia temporal.':'Disponible al terminar la investigación y las pruebas.');el('approve-button').disabled=runStatus!=='done'||approved||unsafe;el('reject-button').disabled=runStatus!=='done'||approved;document.querySelectorAll('.pc-hit').forEach(node=>node.setAttribute('aria-pressed',String(node.dataset.plan===id)));drawParallel();drawHeatmap()}
-function updateScenario(){SERVER_RUNS.clear();window.__dicReiniciarConsulta&&window.__dicReiniciarConsulta();const s=scenarios[current];setText('incident-title',s.title);setText('incident-description',s.description);setText('severity',s.severity);setText('rule-name',s.rule);setText('expected-value',s.expected);setText('actual-value',s.actual);setText('quality-value',s.quality);setText('quality-delta',s.delta);setText('impact-value',s.impact);setText('impact-delta',s.products);setText('proposal-title',s.proposal);setText('proposal-desc',s.proposalDesc);el('rule-progress').style.width=s.rulePct+'%';el('approve-button').disabled=true;el('reject-button').disabled=true;approved=false;runStatus='pending';traceItems=[];setText('incident-state','Investigación pendiente');setText('incident-sub','No se han ejecutado herramientas');el('incident-orb').className='status-orb';setText('duration-value','—');setText('duration-delta','estimado 42 s');setText('trace-state','LISTA PARA INICIAR');el('trace-state').className='trace-state';setText('trace-details','');const icon=document.createElement('span');icon.className='trace-icon';icon.textContent='⌁';const div=document.createElement('div');div.innerHTML='<b>Sin ejecución todavía</b><p>Inicia una investigación para ver los pasos del orquestador, las herramientas de solo lectura y las pruebas del plan.</p>';const runtime=document.createElement('span');runtime.className='trace-runtime';runtime.textContent='—';el('trace-details').append(icon,div,runtime);setText('approval-note','Disponible al terminar la investigación y las pruebas.');el('approve-button').disabled=true;setText('edge-count','1');setText('incident-sub','No se han ejecutado herramientas');setText('artifact-json',JSON.stringify(makeArtifact(),null,2));drawSankey();drawParallel();drawHeatmap();drawTrace()}
+function updateScenario(){SERVER_RUNS.clear();window.__dicReiniciarConsulta&&window.__dicReiniciarConsulta();window.__dicReiniciarAgente&&window.__dicReiniciarAgente();const s=scenarios[current];setText('incident-title',s.title);setText('incident-description',s.description);setText('severity',s.severity);setText('rule-name',s.rule);setText('expected-value',s.expected);setText('actual-value',s.actual);setText('quality-value',s.quality);setText('quality-delta',s.delta);setText('impact-value',s.impact);setText('impact-delta',s.products);setText('proposal-title',s.proposal);setText('proposal-desc',s.proposalDesc);el('rule-progress').style.width=s.rulePct+'%';el('approve-button').disabled=true;el('reject-button').disabled=true;approved=false;runStatus='pending';traceItems=[];setText('incident-state','Investigación pendiente');setText('incident-sub','No se han ejecutado herramientas');el('incident-orb').className='status-orb';setText('duration-value','—');setText('duration-delta','estimado 42 s');setText('trace-state','LISTA PARA INICIAR');el('trace-state').className='trace-state';setText('trace-details','');const icon=document.createElement('span');icon.className='trace-icon';icon.textContent='⌁';const div=document.createElement('div');div.innerHTML='<b>Sin ejecución todavía</b><p>Inicia una investigación para ver los pasos del orquestador, las herramientas de solo lectura y las pruebas del plan.</p>';const runtime=document.createElement('span');runtime.className='trace-runtime';runtime.textContent='—';el('trace-details').append(icon,div,runtime);setText('approval-note','Disponible al terminar la investigación y las pruebas.');el('approve-button').disabled=true;setText('edge-count','1');setText('incident-sub','No se han ejecutado herramientas');setText('artifact-json',JSON.stringify(makeArtifact(),null,2));drawSankey();drawParallel();drawHeatmap();drawTrace()}
 function makeArtifact(){const s=scenarios[current],p=plans.find(x=>x.id===selectedPlan);return{run_id:SERVER_RUNS.get('run_id')||'DI-2026-0417',scenario:current,mode:'local_simulation',source:'World Bank WDI · '+SNAPSHOT.observations.length+' observaciones reales · corte '+SNAPSHOT.snapshot_date,injected_fault:s.facts,agent_mode:'deterministic_workflow_demo',write_authority:'none',tools:['read_only_profiler','lineage_lookup_fixture','contract_validator','sandbox_replay'],selected_plan:p.name,status:approved?'sandbox_simulation_completed':runStatus,tests:runStatus==='done'?{passed:12,failed:0,scope:'in_memory_copy'}:{status:'not_run'},human_approval:approved,external_writes:0}}
 function showToast(msg){const t=el('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)}
 function wait(ms){return new Promise(r=>setTimeout(r,ms))}
-async function runInvestigation(){if(runStatus==='running')return;runStatus='running';runStarted=performance.now();el('run-button').disabled=true;try{if(!FORCE_LOCAL){const res=await fetch(apiUrl('/runs'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({scenario_id:current})});if(res.ok){const payload=await res.json();SERVER_RUNS.set('run_id',payload.run_id);window.__dicHabilitarConsulta&&window.__dicHabilitarConsulta();}}}catch{}el('run-button').textContent='Investigando…';setText('incident-state','Investigación en curso');setText('incident-sub','5 pasos · herramientas de solo lectura');el('incident-orb').className='status-orb running';el('trace-state').className='trace-state active';setText('trace-state','EJECUCIÓN EN CURSO');const labels=['abrir run','perfilado SQL','impacto de linaje','plan versionado','12 validaciones','aprobación humana'],notes=['Run local creado; autoridad de escritura = ninguna.',(SNAPSHOT.observations.length+(current==='missing'?-1:current==='duplicate'?3:0))+' filas en copia; defecto reproducido en fixture.','3 dependencias rastreadas; 2 productos requieren verificación.','Propuesta con datos de entrada y alcance acotado.','Contrato, unicidad, rollback y trazabilidad aprobados.','El flujo se pausa hasta la decisión de una persona.'];for(let i=0;i<labels.length-1;i++){traceItems=labels.map((name,j)=>({name,status:j<i?'done':j===i?'wait':'pending',time:j<i?'00:'+String((j+1)*4).padStart(2,'0'):j===i?'activo':'—'}));drawTrace();setText('trace-details','');const icon=document.createElement('span');icon.className='trace-icon';icon.textContent='↳';const div=document.createElement('div');div.innerHTML='<b>'+labels[i]+': '+(i===0?'iniciado':'completado')+'</b><p>'+notes[i]+'</p>';const runtime=document.createElement('span');runtime.className='trace-runtime';runtime.textContent='paso '+(i+1)+' / 5';el('trace-details').append(icon,div,runtime);await wait(470)}traceItems=labels.map((name,j)=>({name,status:j<5?'done':'wait',time:j<5?'00:'+String((j+1)*4).padStart(2,'0'):'paused'}));drawTrace();runStatus='done';const sec=((performance.now()-runStarted)/1000).toFixed(1);setText('duration-value',sec);setText('duration-delta','6 pasos trazados');setText('incident-state','Diagnóstico completo');setText('incident-sub','Pausado antes de cualquier escritura');el('incident-orb').className='status-orb done';el('trace-state').className='trace-state complete';setText('trace-state','HUMAN-IN-THE-LOOP · PAUSADO');setText('trace-details','');const ic=document.createElement('span');ic.className='trace-icon';ic.textContent='✓';const dv=document.createElement('div');dv.innerHTML='<b>Plan listo para revisión humana</b><p>'+scenarios[current].proposal+' · 12 validaciones pasan · sin escritura externa.</p>';const rt=document.createElement('span');rt.className='trace-runtime';rt.textContent=sec+' s';el('trace-details').append(ic,dv,rt);el('approve-button').disabled=selectedPlan==='forward';el('reject-button').disabled=false;setText('approval-note',selectedPlan==='forward'?'Bloqueado por política: el agente no imputará valores al origen.':'La autoridad del agente sigue limitada a la copia de demostración.');setText('artifact-json',JSON.stringify(makeArtifact(),null,2));el('run-button').disabled=false;el('run-button').innerHTML='Investigación completada <span>✓</span>'}
+async function runInvestigation(){if(runStatus==='running')return;runStatus='running';runStarted=performance.now();el('run-button').disabled=true;try{if(!FORCE_LOCAL){const res=await fetch(apiUrl('/runs'),{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({scenario_id:current})});if(res.ok){const payload=await res.json();SERVER_RUNS.set('run_id',payload.run_id);window.__dicHabilitarConsulta&&window.__dicHabilitarConsulta();window.__dicHabilitarAgente&&window.__dicHabilitarAgente();}}}catch{}el('run-button').textContent='Investigando…';setText('incident-state','Investigación en curso');setText('incident-sub','5 pasos · herramientas de solo lectura');el('incident-orb').className='status-orb running';el('trace-state').className='trace-state active';setText('trace-state','EJECUCIÓN EN CURSO');const labels=['abrir run','perfilado SQL','impacto de linaje','plan versionado','12 validaciones','aprobación humana'],notes=['Run local creado; autoridad de escritura = ninguna.',(SNAPSHOT.observations.length+(current==='missing'?-1:current==='duplicate'?3:0))+' filas en copia; defecto reproducido en fixture.','3 dependencias rastreadas; 2 productos requieren verificación.','Propuesta con datos de entrada y alcance acotado.','Contrato, unicidad, rollback y trazabilidad aprobados.','El flujo se pausa hasta la decisión de una persona.'];for(let i=0;i<labels.length-1;i++){traceItems=labels.map((name,j)=>({name,status:j<i?'done':j===i?'wait':'pending',time:j<i?'00:'+String((j+1)*4).padStart(2,'0'):j===i?'activo':'—'}));drawTrace();setText('trace-details','');const icon=document.createElement('span');icon.className='trace-icon';icon.textContent='↳';const div=document.createElement('div');div.innerHTML='<b>'+labels[i]+': '+(i===0?'iniciado':'completado')+'</b><p>'+notes[i]+'</p>';const runtime=document.createElement('span');runtime.className='trace-runtime';runtime.textContent='paso '+(i+1)+' / 5';el('trace-details').append(icon,div,runtime);await wait(470)}traceItems=labels.map((name,j)=>({name,status:j<5?'done':'wait',time:j<5?'00:'+String((j+1)*4).padStart(2,'0'):'paused'}));drawTrace();runStatus='done';const sec=((performance.now()-runStarted)/1000).toFixed(1);setText('duration-value',sec);setText('duration-delta','6 pasos trazados');setText('incident-state','Diagnóstico completo');setText('incident-sub','Pausado antes de cualquier escritura');el('incident-orb').className='status-orb done';el('trace-state').className='trace-state complete';setText('trace-state','HUMAN-IN-THE-LOOP · PAUSADO');setText('trace-details','');const ic=document.createElement('span');ic.className='trace-icon';ic.textContent='✓';const dv=document.createElement('div');dv.innerHTML='<b>Plan listo para revisión humana</b><p>'+scenarios[current].proposal+' · 12 validaciones pasan · sin escritura externa.</p>';const rt=document.createElement('span');rt.className='trace-runtime';rt.textContent=sec+' s';el('trace-details').append(ic,dv,rt);el('approve-button').disabled=selectedPlan==='forward';el('reject-button').disabled=false;setText('approval-note',selectedPlan==='forward'?'Bloqueado por política: el agente no imputará valores al origen.':'La autoridad del agente sigue limitada a la copia de demostración.');setText('artifact-json',JSON.stringify(makeArtifact(),null,2));el('run-button').disabled=false;el('run-button').innerHTML='Investigación completada <span>✓</span>'}
 async function approve(){
  el('approval-modal').hidden=true;let receipt='RCPT-0417';
  if(selectedPlan==='forward'){showToast('La política bloqueó la imputación; no se ejecutó.');return}
@@ -228,4 +228,170 @@ el('run-button').addEventListener('click',runInvestigation);el('approve-button')
   window.__dicHabilitarConsulta = habilitarConsulta;
   window.__dicReiniciarConsulta = reiniciarConsulta;
   boton.addEventListener('click', consultarOpenAI);
+})();
+
+
+/* ============================================================================
+   AGENTE DE SOLO LECTURA · /agent
+   ----------------------------------------------------------------------------
+   Acción explícita: no se llama al cargar la página. Usa el mismo origen /api,
+   no maneja credenciales y presenta la recomendación como consultiva. El botón
+   solo se habilita después de crear un run en la API.
+   ========================================================================== */
+(() => {
+  const boton = el('agent-button');
+  if (!boton) return;
+
+  const AVISOS = {
+    404: 'El run ya no existe en el servicio; inicia otra investigación.',
+    422: 'El agente bloqueó la petición por política. No se ejecutó nada.',
+    429: 'Se alcanzó el límite de consultas de IA para este visitante.',
+    502: 'El agente o el proveedor no devolvieron una respuesta válida.',
+    503: 'El agente no está configurado en este despliegue.',
+  };
+  let limiteHasta = 0;
+  let temporizador = null;
+
+  function detalle(datos) {
+    const crudo = datos && (datos.detail ?? datos.mensaje ?? datos.message);
+    if (typeof crudo === 'string' && crudo.trim()) return crudo.trim();
+    if (crudo && typeof crudo.detail === 'string') return crudo.detail.trim();
+    return '';
+  }
+
+  function espera(segundos) {
+    const total = Math.max(0, Math.ceil(segundos));
+    if (total < 60) return total + (total === 1 ? ' segundo' : ' segundos');
+    const minutos = Math.floor(total / 60);
+    const resto = total % 60;
+    return resto ? minutos + ' min ' + resto + ' s' : minutos + ' min';
+  }
+
+  function segundosLimite() {
+    return Math.max(0, Math.ceil((limiteHasta - Date.now()) / 1000));
+  }
+
+  function limpiarTemporizador() {
+    if (temporizador) {
+      clearInterval(temporizador);
+      temporizador = null;
+    }
+  }
+
+  function bloquear(segundos) {
+    const total = Number.isFinite(segundos) && segundos > 0 ? Math.ceil(segundos) : 0;
+    limiteHasta = Date.now() + total * 1000;
+    limpiarTemporizador();
+    if (!total) return;
+    const refrescar = () => {
+      const restante = segundosLimite();
+      if (restante > 0) {
+        boton.disabled = true;
+        boton.textContent = 'Reintenta en ' + espera(restante);
+        return;
+      }
+      limpiarTemporizador();
+      limiteHasta = 0;
+      boton.textContent = '▶ Ejecutar agente';
+      boton.disabled = !SERVER_RUNS.get('run_id');
+    };
+    temporizador = setInterval(refrescar, 1000);
+    refrescar();
+  }
+
+  function reiniciar() {
+    limpiarTemporizador();
+    limiteHasta = 0;
+    el('agent-result').hidden = true;
+    boton.disabled = true;
+    boton.textContent = '▶ Ejecutar agente';
+    el('agent-note').textContent = 'Disponible al iniciar un run conectado a la API. La recomendación es consultiva: no aprueba, no ejecuta y no escribe. Consume la cuota de IA del visitante.';
+  }
+
+  function habilitar() {
+    if (!SERVER_RUNS.get('run_id') || segundosLimite() > 0) return;
+    boton.disabled = false;
+    el('agent-note').textContent = 'Run conectado. El agente solo lee y recomienda; no aprueba, no ejecuta y no escribe. Consume la cuota de IA del visitante.';
+  }
+
+  function lista(id, valores) {
+    el(id).replaceChildren(...(valores || []).map((texto) => {
+      const item = document.createElement('li');
+      item.textContent = String(texto);
+      return item;
+    }));
+  }
+
+  function pintar(datos) {
+    const rec = datos.recomendacion || {};
+    el('agent-result').hidden = false;
+    const insignia = el('agent-badge');
+    insignia.textContent = rec.plan || '—';
+    insignia.dataset.plan = rec.plan || '';
+    setText('agent-plan', rec.name || 'Recomendación del agente');
+    const pasos = datos.pasos == null ? '—' : datos.pasos;
+    const tokens = datos.tokens_consumidos == null ? '—' : datos.tokens_consumidos;
+    const presupuesto = datos.presupuesto_tokens == null ? '—' : datos.presupuesto_tokens;
+    setText('agent-meta', (datos.modelo || 'proveedor') + ' · ' + pasos + ' pasos · ' + tokens + '/' + presupuesto + ' tokens · 0 escrituras');
+    setText('agent-justification', datos.justificacion || '');
+    lista('agent-evidence', datos.evidencia);
+    lista('agent-risks', datos.riesgos);
+    const traza = Array.isArray(datos.traza) ? datos.traza : [];
+    el('agent-trace').replaceChildren(...traza.map((paso) => {
+      const item = document.createElement('li');
+      const nombre = paso.herramienta || paso.plan || paso.tipo || 'paso';
+      item.textContent = 'Paso ' + (paso.paso == null ? '—' : paso.paso) + ': ' + nombre;
+      return item;
+    }));
+    setText('agent-disclaimer', 'Recomendación consultiva del agente de solo lectura. No aprueba, no ejecuta y no modifica la copia; la aprobación humana sigue siendo la única vía. Escrituras externas: 0.');
+    setText('agent-note', 'Ejecución completada. La recomendación es consultiva y no cambió el estado.');
+    boton.disabled = true;
+    boton.textContent = 'Agente ejecutado';
+  }
+
+  async function ejecutar() {
+    const runId = SERVER_RUNS.get('run_id');
+    if (!runId) {
+      showToast('Inicia un run conectado a la API para ejecutar el agente.');
+      return;
+    }
+    boton.disabled = true;
+    boton.textContent = 'Ejecutando agente…';
+    setText('agent-note', 'El agente está leyendo el run con herramientas de solo lectura…');
+    try {
+      const res = await fetch(apiUrl('/runs/' + encodeURIComponent(runId) + '/agent'), {
+        method: 'POST',
+        headers: { Accept: 'application/json' },
+      });
+      const datos = await res.json().catch(() => null);
+      if (!res.ok || !datos) {
+        const extra = detalle(datos);
+        if (res.status === 429) {
+          const valor = res.headers.get('Retry-After');
+          const segundos = Number(valor);
+          const esperaS = Number.isFinite(segundos) && segundos > 0 ? segundos : 3;
+          bloquear(esperaS);
+          setText('agent-note', 'Límite de IA alcanzado.' + (extra ? ' ' + extra : '') + ' Reintenta en ' + espera(esperaS) + '.');
+          showToast('Límite de IA alcanzado.');
+          return;
+        }
+        setText('agent-note', (AVISOS[res.status] || 'No se pudo ejecutar el agente.') + (extra ? ' ' + extra : ''));
+        showToast(AVISOS[res.status] || 'No se pudo ejecutar el agente.');
+        boton.textContent = '▶ Ejecutar agente';
+        boton.disabled = false;
+        return;
+      }
+      pintar(datos);
+      showToast('Agente completado: ' + ((datos.recomendacion && datos.recomendacion.plan) || 'recomendación recibida') + '.');
+    } catch (error) {
+      setText('agent-note', 'La ejecución falló; no se modificó nada. Puedes reintentar.');
+      showToast('La ejecución falló; no se modificó nada.');
+      boton.textContent = '▶ Ejecutar agente';
+      boton.disabled = false;
+    }
+  }
+
+  window.__dicHabilitarAgente = habilitar;
+  window.__dicReiniciarAgente = reiniciar;
+  boton.addEventListener('click', ejecutar);
 })();
