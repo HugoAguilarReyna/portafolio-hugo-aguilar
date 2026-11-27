@@ -1,6 +1,6 @@
 # Portafolio de datos · Hugo Aguilar
 
-Sitio integrador del portafolio: **19 fichas** de proyecto organizadas en **cinco
+Sitio integrador del portafolio: **18 fichas** de proyecto organizadas en **cuatro
 categorías oficiales**, cada una con su estado, su categoría visible y el enlace a
 su repositorio público.
 
@@ -41,15 +41,7 @@ su repositorio público.
 | 4 | Gaza · Vidas y territorio | Publicado | Observatorio humanitario | [`gaza-humanitarian-observatory`](https://github.com/HugoAguilarReyna/gaza-humanitarian-observatory) |
 | 5 | RetailOps Unified | Publicado | Machine Learning | [`retailops-unified`](https://github.com/Dev-HugoAguilar/retailops-unified) |
 
-## 03 · Ingeniería de datos
-
-`Etiqueta: Ingeniería de datos`
-
-| # | Proyecto | Estado | Categoría | Repositorio |
-|---|---|---|---|---|
-| 1 | Modernización SAS → Python | Próximamente | Arquitectura & ETL | Sin repositorio (Roadmap) |
-
-## 04 · IA generativa y LLMs
+## 03 · IA generativa y LLMs
 
 `Etiqueta: IA generativa`
 
@@ -58,7 +50,7 @@ su repositorio público.
 | 1 | Briefing con evidencia · Banco de México | En desarrollo | RAG / Finanzas | [`banxico-evidence-briefing`](https://github.com/HugoAguilarReyna/banxico-evidence-briefing) |
 | 2 | Copiloto NL-to-SQL · indicadores económicos de México | En desarrollo | NL-to-SQL | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) |
 
-## 05 · Agentes y sistemas de decisión
+## 04 · Agentes y sistemas de decisión
 
 `Etiqueta: Agentes`
 
@@ -87,9 +79,8 @@ repositorios de infraestructura responden **HTTP 200** y son públicos —
 se volvió a comprobar en esa fecha; si alguno cambia de nombre o deja de ser público,
 el enlace falla y la ficha se queda sin destino hasta corregirlo.
 
-Los dos casos **Próximamente** —Modernización
-SAS → Python y Analista asistido por IA— no tienen repositorio todavía: solo
-tienen caso definido. Cuando se publiquen se añadirá su enlace a la tabla y su
+El caso **Próximamente** —Analista asistido por IA— no tiene repositorio todavía:
+solo tiene caso definido. Cuando se publique se añadirá su enlace a la tabla y su
 `codigoUrl` en el contenido; el sitio solo dibuja un enlace cuando el repositorio
 existe, de modo que una fila nunca apunta a un destino inexistente.
 
@@ -125,7 +116,6 @@ existe, de modo que una fila nunca apunta a un destino inexistente.
 
 | Tecnología | Nivel | Dónde se demuestra |
 |---|---|---|
-| SAS → Python: macros y reportes regulatorios (CNBV / banca) | ◐ | Caso de roadmap *Modernización SAS → Python* (sin repositorio) |
 | SQL | ✅ | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) (plantillas parametrizadas sobre SQLite en solo lectura), [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (agregaciones y consultas) |
 | MongoDB Atlas | ✅ | [`portfolio-api`](https://github.com/HugoAguilarReyna/portfolio-api) (pymongo, índices, importadores idempotentes con revisiones por hash), [`demand-forecasting-m5`](https://github.com/HugoAguilarReyna/demand-forecasting-m5) |
 | SQLite | ✅ | [`nl2sql-economic-copilot`](https://github.com/Dev-HugoAguilar/nl2sql-economic-copilot) (base derivada abierta en modo lectura) |
@@ -214,13 +204,13 @@ tools/
 node tools/verificar-taxonomia.mjs
 ```
 
-La taxonomía se verifica en un navegador real: orden de las cinco áreas, sus etiquetas, el
+La taxonomía se verifica en un navegador real: orden de las cuatro áreas, sus etiquetas, el
 recuento de casos por estado, las fichas de cada área, los 17 enlaces a
 repositorio, los 12 enlaces a demo, el tratamiento de *roadmap* y la ausencia de
 desbordes a 390 px. La última ejecución local se hizo sobre el commit indicado en el PR, no en GitHub Actions.
 
 La integración continua ejecuta la comprobación de sintaxis del JavaScript del
-sitio, la validación de la taxonomía (5 áreas, etiquetas, estados y URL de
+sitio, la validación de la taxonomía (4 áreas, etiquetas, estados y URL de
 repositorio) y el escaneo de credenciales.
 
 ## Evidencia por repositorio
@@ -333,7 +323,7 @@ npm run verificar:real            # + fase real aislada (requiere API y datos)
 ```
 
 `npm run verificar` administra su servidor estático en el puerto 8000 (`PORT`
-para cambiarlo) y verifica las 19 fichas en escritorio y móvil, la navegación
+para cambiarlo) y verifica las 18 fichas en escritorio y móvil, la navegación
 SPA y los estados de error, vacío y reintento de los cuatro tableros. La batería
 predeterminada usa respuestas interceptadas con contratos explícitos y se
 informa como **simulada**; no certifica la API real.

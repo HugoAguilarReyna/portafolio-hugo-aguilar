@@ -7,7 +7,7 @@
    app.js se encarga de la presentación, la navegación y las interacciones.
 
    NAVEGACIÓN (rutas hash)
-     #portafolio                          galería con las cinco áreas
+     #portafolio                          galería con las cuatro áreas
      #/area/<id>                          proyectos del área
      #/area/<id>/<proyecto>               proyecto integrado y su aplicación
 
@@ -741,42 +741,8 @@ window.PORTAFOLIO = {
     },
 
     {
-      id: 'ingenieria-de-datos',
-      numero: '03',
-      nombre: 'Ingeniería de datos',
-      etiqueta: 'Ingeniería de datos',
-      descripcion: 'Pipelines y modelos de datos con trazabilidad verificable.',
-      resumen: 'Ingesta, transformación y modelado con calidad y trazabilidad verificables.',
-      alcance: ['SAS → Python', 'SQL', 'MongoDB Atlas', 'Neo4j · Cypher', 'Spark', 'Kafka', 'HDFS', 'Snowflake', 'BigQuery', 'Docker', 'Docker Compose', 'FastAPI', 'Pydantic', 'REST APIs', 'Git', 'Ingesta', 'Calidad', 'Trazabilidad'],
-      ilustracion: 'pipeline',
-      escenaAlt: 'Ilustración conceptual: fuentes, transformación, validación y almacenamiento conectados, con una línea de trazabilidad.',
-      proyectos: [
-        {
-          id: 'modernizacion-sas-python',
-          titulo: 'Modernización SAS → Python',
-          estado: 'previsto',
-          resumen: 'Caso previsto: migrar procesos de SAS a Python conservando el resultado numérico, con reconciliación automática entre el proceso original y el migrado.',
-          categoria: 'Arquitectura & ETL',
-          descripcion: 'Caso previsto y no implementado: un arnés que ejecute el proceso heredado y su versión en Python sobre la misma entrada, compare los resultados celda por celda y documente los tiempos y las reglas sin equivalente directo. Todavía no hay proceso migrado ni conciliación ejecutada, así que el espacio reservado de la ficha está vacío a propósito.',
-          destinatario: 'Pensado para equipos que mantienen procesos heredados y necesitan migrarlos sin perder trazabilidad.',
-          problema: 'Los procesos regulatorios escritos en SAS acumulan reglas que solo viven en el código; migrarlos sin una comparación reproducible contra el original cambia cifras sin que nadie lo note.',
-          contribucion: 'Alcance previsto, no implementado: no existe arnés ni proceso migrado; el repositorio del sitio solo reserva el lugar de la aplicación. Entregable siguiente, concreto: un generador de datos sintéticos con el contrato de entrada, el proceso migrado en Python y un comparador que informe diferencias por campo y por regla con la tolerancia declarada, sin código SAS propietario ni datos confidenciales.',
-          fuentes: 'Fuentes candidatas, ninguna integrada: los conjuntos de entrada del proceso original y sus salidas históricas. No se publican datos; la verificación futura usará datos sintéticos y una muestra autorizada.',
-          metodo: 'Criterio previsto: comparación celda por celda contra la salida vigente, tolerancia declarada para decimales y fallo explícito cuando una regla no tenga equivalente directo. Ninguna regla se cambia sin registrar el motivo.',
-          resultados: 'No hay resultados: el caso está definido y pendiente de desarrollo. No se ejecutó ninguna migración ni se declaran tiempos ni ahorros.',
-          limitaciones: 'Caso previsto: no existe un proceso migrado ni una conciliación ejecutada, de modo que no hay nada que reproducir todavía. La licencia de SAS impide redistribuir el código original; el arnés solo puede publicarse con datos sintéticos y una muestra autorizada, nunca con código SAS propietario ni datos confidenciales.',
-          tecnologias: ['SAS', 'Python', 'SQL', 'ETL'],
-          capturas: [],
-          demoUrl: null,
-          codigoUrl: null,
-          enlaces: []
-        }
-      ]
-    },
-
-    {
       id: 'ia-generativa',
-      numero: '04',
+      numero: '03',
       nombre: 'IA generativa y LLMs',
       etiqueta: 'IA generativa',
       descripcion: 'Búsqueda documental, RAG y consultas SQL en lenguaje natural con trazabilidad.',
@@ -896,7 +862,7 @@ window.PORTAFOLIO = {
 
     {
       id: 'agentes',
-      numero: '05',
+      numero: '04',
       nombre: 'Agentes y sistemas de decisión',
       etiqueta: 'Agentes',
       descripcion: 'Herramientas coordinadas, respuesta a incidentes y supervisión humana.',

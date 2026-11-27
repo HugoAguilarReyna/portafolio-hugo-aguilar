@@ -42,7 +42,7 @@ jobs:
           node --check dist/config.js
           echo "Sintaxis correcta"
 
-      - name: Verificar que las cinco categorías estén declaradas
+      - name: Verificar que las cuatro categorías estén declaradas
         run: |
           set -eu
           node -e '
@@ -54,11 +54,10 @@ jobs:
           const esperadas = [
             ["01", "dashboards", "Visualización"],
             ["02", "ciencia-de-datos", "Ciencia de datos"],
-            ["03", "ingenieria-de-datos", "Ingeniería de datos"],
-            ["04", "ia-generativa", "IA generativa"],
-            ["05", "agentes", "Agentes"]
+            ["03", "ia-generativa", "IA generativa"],
+            ["04", "agentes", "Agentes"]
           ];
-          if (P.areas.length !== 5) throw new Error("se esperaban 5 áreas, hay " + P.areas.length);
+          if (P.areas.length !== 4) throw new Error("se esperaban 4 áreas, hay " + P.areas.length);
           esperadas.forEach(([numero, id, etiqueta], i) => {
             const a = P.areas[i];
             if (a.numero !== numero) throw new Error(`posición ${i + 1}: número ${a.numero}`);
@@ -75,7 +74,7 @@ jobs:
             }
           });
           const fichas = P.areas.reduce((n, a) => n + a.proyectos.length, 0);
-          console.log("Taxonomía correcta: 5 áreas y " + fichas + " fichas");
+          console.log("Taxonomía correcta: 4 áreas y " + fichas + " fichas");
           '
 
       - name: Verificar que no se publiquen credenciales

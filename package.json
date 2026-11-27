@@ -2,7 +2,7 @@
   "name": "portafolio-verificacion",
   "private": true,
   "version": "1.0.0",
-  "description": "Verificación de las 20 fichas del portafolio con Playwright.",
+  "description": "Verificación de las 18 fichas del portafolio con Playwright.",
   "type": "module",
   "scripts": {
     "verificar": "node tools/ejecutar-verificacion.mjs",

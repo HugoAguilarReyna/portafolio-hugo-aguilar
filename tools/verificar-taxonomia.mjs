@@ -4,7 +4,7 @@
  *   node tools/verificar-taxonomia.mjs
  *
  * Comprueba, contra el sitio servido:
- *   1. las cinco áreas, en orden, con su número, nombre y etiqueta;
+ *   1. las cuatro áreas, en orden, con su número, nombre y etiqueta;
  *   2. que la galería declare recuento de casos y categorías por área;
  *   3. el número de fichas esperado en cada área y que cada una muestre estado
  *      y categoría visible;
@@ -39,9 +39,8 @@ mkdirSync(SALIDA, { recursive: true });
 const AREAS = [
   { numero: '01', id: 'dashboards', nombre: 'Dashboards y visualización', etiqueta: 'Visualización', casos: 6 },
   { numero: '02', id: 'ciencia-de-datos', nombre: 'Ciencia de datos y Machine Learning', etiqueta: 'Ciencia de datos', casos: 5 },
-  { numero: '03', id: 'ingenieria-de-datos', nombre: 'Ingeniería de datos', etiqueta: 'Ingeniería de datos', casos: 1 },
-  { numero: '04', id: 'ia-generativa', nombre: 'IA generativa y LLMs', etiqueta: 'IA generativa', casos: 2 },
-  { numero: '05', id: 'agentes', nombre: 'Agentes y sistemas de decisión', etiqueta: 'Agentes', casos: 5 }
+  { numero: '03', id: 'ia-generativa', nombre: 'IA generativa y LLMs', etiqueta: 'IA generativa', casos: 2 },
+  { numero: '04', id: 'agentes', nombre: 'Agentes y sistemas de decisión', etiqueta: 'Agentes', casos: 5 }
 ];
 
 const CON_REPO = [
@@ -55,7 +54,7 @@ const CON_DEMO = [
   'gaza-observatorio', 'retailops', 'asistente-investigacion', 'copiloto-nl-sql',
   'data-incident-commander', 'the-ripple-room', 'kilometro-cero', 'dockmind'
 ];
-const PREVISTOS = ['modernizacion-sas-python', 'analista-asistido'];
+const PREVISTOS = ['analista-asistido'];
 const ESTADOS = ['Publicado', 'En desarrollo', 'Próximamente'];
 
 const fallos = [];
@@ -84,7 +83,7 @@ const tarjetas = await pagina.$$eval('#projects .card[data-category]', (nodos) =
   cats: [...n.querySelectorAll('.card-cats .tag')].map((t) => t.textContent.trim())
 })));
 
-comprobar(tarjetas.length === 5, `la galería debe mostrar 5 áreas, muestra ${tarjetas.length}`);
+comprobar(tarjetas.length === 4, `la galería debe mostrar 4 áreas, muestra ${tarjetas.length}`);
 AREAS.forEach((area, i) => {
   const t = tarjetas[i];
   if (!t) { fallos.push(`falta la tarjeta del área ${area.numero}`); return; }
@@ -121,10 +120,10 @@ await galeria390.close();
 
 await recorrer(pagina);
 
-/* Las cinco portadas de área son escenas conceptuales: deben haberse montado. */
+/* Las cuatro portadas de área son escenas conceptuales: deben haberse montado. */
 const escenas = await pagina.$$eval('#projects .card[data-category] .cover', (nodos) =>
   nodos.map((n) => !!n.querySelector('svg')));
-comprobar(escenas.length === 5, `se esperaban 5 portadas de área, hay ${escenas.length}`);
+comprobar(escenas.length === 4, `se esperaban 4 portadas de área, hay ${escenas.length}`);
 escenas.forEach((tiene, i) => comprobar(tiene, `la portada del área ${i + 1} no montó su escena`));
 
 await pagina.screenshot({ path: path.join(SALIDA, 'galeria-1440.png') });
@@ -171,7 +170,7 @@ for (const area of AREAS) {
     comprobar(ESTADOS.includes(f.chip), `${area.numero}/${f.id}: estado no reconocido «${f.chip}»`);
     comprobar(!!f.categoria, `${area.numero}/${f.id}: falta la categoría visible`);
 
-    const repo = f.enlaces.filter((e) => (e.href || '').startsWith('https://github.com/Dev-HugoAguilar/'));
+    const repo = f.enlaces.filter((e) => /^https:\/\/github\.com\/(Dev-HugoAguilar|HugoAguilarReyna)\//.test(e.href || ''));
     const demo = f.enlaces.filter((e) => (e.href || '').startsWith('dashboards/'));
     totalRepo += repo.length;
     totalDemo += demo.length;
